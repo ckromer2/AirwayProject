@@ -35,5 +35,12 @@
         }
 
         #endregion
+
+        private TextBox LoginIDBox;
+        private Label Air3550;
+        private Label LoginIDLabel;
+        private TextBox LoginPasswordBox;
+        private Label LoginPasswordLabel;
+        private Button LoginButton;
     }
 }
