@@ -49,6 +49,11 @@
             label9 = new Label();
             SignUpButton = new Button();
             LoginButton = new Button();
+            splitContainer1 = new SplitContainer();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
             SuspendLayout();
             // 
             // Title
@@ -58,7 +63,7 @@
             Title.ImageAlign = ContentAlignment.TopCenter;
             Title.Location = new Point(0, 0);
             Title.Name = "Title";
-            Title.Size = new Size(807, 89);
+            Title.Size = new Size(800, 89);
             Title.TabIndex = 0;
             Title.Text = "AIR 3550";
             Title.TextAlign = ContentAlignment.MiddleCenter;
@@ -66,63 +71,64 @@
             // 
             // CreditCardTextBox
             // 
-            CreditCardTextBox.Location = new Point(631, 299);
+            CreditCardTextBox.Location = new Point(245, 186);
             CreditCardTextBox.Name = "CreditCardTextBox";
             CreditCardTextBox.Size = new Size(100, 23);
             CreditCardTextBox.TabIndex = 2;
             // 
             // AddressTextBox
             // 
-            AddressTextBox.Location = new Point(487, 299);
+            AddressTextBox.Location = new Point(101, 186);
             AddressTextBox.Name = "AddressTextBox";
             AddressTextBox.Size = new Size(100, 23);
             AddressTextBox.TabIndex = 3;
             // 
             // AgeTextBox
             // 
-            AgeTextBox.Location = new Point(631, 253);
+            AgeTextBox.Location = new Point(245, 140);
             AgeTextBox.Name = "AgeTextBox";
             AgeTextBox.Size = new Size(100, 23);
             AgeTextBox.TabIndex = 4;
             // 
             // LastNameTextBox
             // 
-            LastNameTextBox.Location = new Point(487, 253);
+            LastNameTextBox.Location = new Point(101, 140);
             LastNameTextBox.Name = "LastNameTextBox";
             LastNameTextBox.Size = new Size(100, 23);
             LastNameTextBox.TabIndex = 5;
             // 
             // PhoneNumberTextBox
             // 
-            PhoneNumberTextBox.Location = new Point(631, 206);
+            PhoneNumberTextBox.Location = new Point(245, 96);
             PhoneNumberTextBox.Name = "PhoneNumberTextBox";
             PhoneNumberTextBox.Size = new Size(100, 23);
             PhoneNumberTextBox.TabIndex = 6;
             // 
             // FirstNameTextBox
             // 
-            FirstNameTextBox.Location = new Point(487, 206);
+            FirstNameTextBox.Location = new Point(101, 96);
             FirstNameTextBox.Name = "FirstNameTextBox";
             FirstNameTextBox.Size = new Size(100, 23);
             FirstNameTextBox.TabIndex = 7;
             // 
             // PasswordTextBox
             // 
-            PasswordTextBox.Location = new Point(82, 289);
+            PasswordTextBox.Location = new Point(138, 187);
             PasswordTextBox.Name = "PasswordTextBox";
             PasswordTextBox.Size = new Size(100, 23);
             PasswordTextBox.TabIndex = 8;
             // 
             // IDTextBox
             // 
-            IDTextBox.Location = new Point(82, 242);
+            IDTextBox.Anchor = AnchorStyles.None;
+            IDTextBox.Location = new Point(138, 140);
             IDTextBox.Name = "IDTextBox";
             IDTextBox.Size = new Size(100, 23);
             IDTextBox.TabIndex = 9;
             // 
             // PasswordSignUpTextBox
             // 
-            PasswordSignUpTextBox.Location = new Point(487, 341);
+            PasswordSignUpTextBox.Location = new Point(101, 228);
             PasswordSignUpTextBox.Name = "PasswordSignUpTextBox";
             PasswordSignUpTextBox.Size = new Size(100, 23);
             PasswordSignUpTextBox.TabIndex = 10;
@@ -130,7 +136,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(82, 268);
+            label1.Location = new Point(138, 166);
             label1.Name = "label1";
             label1.Size = new Size(18, 15);
             label1.TabIndex = 11;
@@ -139,7 +145,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(631, 325);
+            label2.Location = new Point(245, 212);
             label2.Name = "label2";
             label2.Size = new Size(67, 15);
             label2.TabIndex = 12;
@@ -149,7 +155,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(631, 279);
+            label3.Location = new Point(245, 166);
             label3.Name = "label3";
             label3.Size = new Size(28, 15);
             label3.TabIndex = 13;
@@ -158,7 +164,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(631, 229);
+            label4.Location = new Point(245, 122);
             label4.Name = "label4";
             label4.Size = new Size(88, 15);
             label4.TabIndex = 14;
@@ -167,7 +173,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(487, 367);
+            label5.Location = new Point(101, 254);
             label5.Name = "label5";
             label5.Size = new Size(57, 15);
             label5.TabIndex = 15;
@@ -176,7 +182,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(487, 325);
+            label6.Location = new Point(101, 212);
             label6.Name = "label6";
             label6.Size = new Size(49, 15);
             label6.TabIndex = 16;
@@ -185,7 +191,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(487, 279);
+            label7.Location = new Point(101, 166);
             label7.Name = "label7";
             label7.Size = new Size(63, 15);
             label7.TabIndex = 17;
@@ -194,7 +200,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(487, 229);
+            label8.Location = new Point(101, 122);
             label8.Name = "label8";
             label8.Size = new Size(64, 15);
             label8.TabIndex = 18;
@@ -204,7 +210,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(82, 315);
+            label9.Location = new Point(138, 213);
             label9.Name = "label9";
             label9.Size = new Size(57, 15);
             label9.TabIndex = 19;
@@ -212,7 +218,7 @@
             // 
             // SignUpButton
             // 
-            SignUpButton.Location = new Point(584, 403);
+            SignUpButton.Location = new Point(198, 301);
             SignUpButton.Name = "SignUpButton";
             SignUpButton.Size = new Size(75, 23);
             SignUpButton.TabIndex = 21;
@@ -221,44 +227,67 @@
             // 
             // LoginButton
             // 
-            LoginButton.Location = new Point(93, 403);
+            LoginButton.Location = new Point(150, 301);
             LoginButton.Name = "LoginButton";
             LoginButton.Size = new Size(75, 23);
             LoginButton.TabIndex = 22;
             LoginButton.Text = "Login";
             LoginButton.UseVisualStyleBackColor = true;
             // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = DockStyle.Bottom;
+            splitContainer1.Location = new Point(0, 107);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(LoginButton);
+            splitContainer1.Panel1.Controls.Add(IDTextBox);
+            splitContainer1.Panel1.Controls.Add(label1);
+            splitContainer1.Panel1.Controls.Add(label9);
+            splitContainer1.Panel1.Controls.Add(PasswordTextBox);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(SignUpButton);
+            splitContainer1.Panel2.Controls.Add(PhoneNumberTextBox);
+            splitContainer1.Panel2.Controls.Add(label7);
+            splitContainer1.Panel2.Controls.Add(label8);
+            splitContainer1.Panel2.Controls.Add(label6);
+            splitContainer1.Panel2.Controls.Add(FirstNameTextBox);
+            splitContainer1.Panel2.Controls.Add(label5);
+            splitContainer1.Panel2.Controls.Add(label4);
+            splitContainer1.Panel2.Controls.Add(label3);
+            splitContainer1.Panel2.Controls.Add(AgeTextBox);
+            splitContainer1.Panel2.Controls.Add(label2);
+            splitContainer1.Panel2.Controls.Add(CreditCardTextBox);
+            splitContainer1.Panel2.Controls.Add(PasswordSignUpTextBox);
+            splitContainer1.Panel2.Controls.Add(AddressTextBox);
+            splitContainer1.Panel2.Controls.Add(LastNameTextBox);
+            splitContainer1.Panel2.Paint += splitContainer1_Panel2_Paint;
+            splitContainer1.Size = new Size(800, 343);
+            splitContainer1.SplitterDistance = 394;
+            splitContainer1.TabIndex = 23;
+            // 
             // LoginForm
             // 
             AccessibleRole = AccessibleRole.None;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(807, 450);
-            Controls.Add(LoginButton);
-            Controls.Add(SignUpButton);
-            Controls.Add(label9);
-            Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(label6);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(PasswordSignUpTextBox);
-            Controls.Add(IDTextBox);
-            Controls.Add(PasswordTextBox);
-            Controls.Add(FirstNameTextBox);
-            Controls.Add(PhoneNumberTextBox);
-            Controls.Add(LastNameTextBox);
-            Controls.Add(AgeTextBox);
-            Controls.Add(AddressTextBox);
-            Controls.Add(CreditCardTextBox);
+            ClientSize = new Size(800, 450);
             Controls.Add(Title);
+            Controls.Add(splitContainer1);
             Name = "LoginForm";
             Text = "LoginForm";
+            Load += LoginForm_Load;
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel1.PerformLayout();
+            splitContainer1.Panel2.ResumeLayout(false);
+            splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -289,5 +318,6 @@
         private Label label9;
         private Button SignUpButton;
         private Button LoginButton;
+        private SplitContainer splitContainer1;
     }
 }
