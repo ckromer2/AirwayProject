@@ -1,7 +1,8 @@
 ﻿namespace GROUP9Project.DataBase;
 
 //Used to make sure the lists dont overrun the buffer size.
-enum AirportEnum {
+enum AirportEnum 
+{
     CLE,
     BNA,
     TPA,
@@ -15,6 +16,13 @@ enum AirportEnum {
     DEN,
     LAS,
     DTW
+}
+
+enum PlaneEnum 
+{ 
+    B737,
+    B787,
+    B777
 }
 
 
@@ -52,7 +60,11 @@ public class PlanesAirportsDistances
     public PlanesAirportsDistances() 
     {
         //Constructs the list of Planes
-        Planes = new List<Plane> {   };
+        Planes = new List<Plane> {  new Plane("Boeing 737", 186),
+                                    new Plane("Boeing 787", 351),
+                                    new Plane("Boeing 777", 513)
+                                    };
+
         //Constructs the list of Airports
         Airports = new List<Airport> {  new Airport("Cleveland Hopkins International Airport", "CLE"),
                                         new Airport("Nashville International Airport", "BNA"),
