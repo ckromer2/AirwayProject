@@ -1,3 +1,5 @@
+using GROUP9Project.UI;
+
 namespace GROUP9Project
 {
     internal static class Program
@@ -11,7 +13,7 @@ namespace GROUP9Project
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new ManifestForm());
         }
     }
 }
