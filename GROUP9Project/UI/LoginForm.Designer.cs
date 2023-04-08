@@ -120,7 +120,6 @@
             // 
             // IDTextBox
             // 
-            IDTextBox.Anchor = AnchorStyles.None;
             IDTextBox.Location = new Point(138, 140);
             IDTextBox.Name = "IDTextBox";
             IDTextBox.Size = new Size(100, 23);
