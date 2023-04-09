@@ -7,8 +7,8 @@ public class Route
 {
     [PrimaryKey, AutoIncrement]
     public int RouteId { get; private set; }
-    public int Start { get; private set; }
-    public int End { get; private set; }
+    public AirportEnum Start { get; private set; }
+    public AirportEnum End { get; private set; }
     public DayOfWeek SchedualDate { get; private set; }
     public int SchedualTime { get; private set; }
 
@@ -20,7 +20,7 @@ public class Route
         SchedualTime = 0;
     }
 
-    public Route(int s, int e, DayOfWeek sDay, int sTime)
+    public Route(AirportEnum s, AirportEnum e, DayOfWeek sDay, int sTime)
     { 
         Start = s;
         End = e;
@@ -35,32 +35,29 @@ public class Flight
 {
     [PrimaryKey, AutoIncrement]
     public int FlightId { get; private set; }
-    public int PlainId { get; private set; }
+    public PlaneEnum PlainId { get; private set; }
     public int RouteId { get; private set; }
     public DateTime FlightDate { get; private set; }
+    public bool Departed { get; private set; }
 
     public Flight()
     {
         PlainId = 0;
         RouteId = 0;
         FlightDate = DateTime.MinValue;
+        Departed = false;
     }
 
-    public Flight(int pId, int rId, DateTime fDate)
+    public Flight(PlaneEnum pId, int rId, DateTime fDate)
     {
         PlainId = pId;
         RouteId = rId;
         FlightDate = fDate;
     }
 
+    public void ChangePlane(PlaneEnum pId) { PlainId = pId; }
 
-    public void ChangePlane()
-    { 
-    
-    
-
-    }
-
+    public void DepartFlight() { Departed = true; }
 
 }
 

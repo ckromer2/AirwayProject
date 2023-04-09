@@ -121,4 +121,13 @@ public class User
     public uint AddPoints(uint nPoints) { Points += nPoints; return Points; }
     public uint SubPoints(uint nPoints) { Points -= nPoints; return Points; }
 
+    public int Login(string pWord)
+    {
+        var cPassHash = SHA512.Create();
+        cPassHash.ComputeHash(Encoding.UTF8.GetBytes(pWord));
+
+        if (cPassHash.Equals(Password)) { return 0; }//If the current password is incorect the opperation fails
+        else return 1; //If the current password checks out then 1 is retunred.
+    }
+
 }

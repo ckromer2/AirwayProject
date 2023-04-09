@@ -19,22 +19,22 @@ public class BookingRecord
     //Default constructor used by the database this should never be called by the main program.
     public BookingRecord()
     { 
-        this.FlightId = 0;
-        this.UserId = 0;
-        this.Points = 0;
-        this.Dollars = 0;
-        this.PayedInPoints = false;
-        this.Canceled = false;
+        FlightId = 0;
+        UserId = 0;
+        Points = 0;
+        Dollars = 0;
+        PayedInPoints = false;
+        Canceled = false;
     }
     //Full constructor used by the program. Points and Dollars are left optional as one of them will be zero deppending on the purchase method.
     public BookingRecord(int fId, int uId, uint P, uint D, bool payedP)
     {
-        this.FlightId = fId;
-        this.UserId = uId;
-        this.Points = P;
-        this.Dollars = D;
-        this.PayedInPoints = payedP;
-        this.Canceled = false;
+        FlightId = fId;
+        UserId = uId;
+        Points = P;
+        Dollars = D;
+        PayedInPoints = payedP;
+        Canceled = false;
     }
 
 }

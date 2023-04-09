@@ -1,7 +1,7 @@
 ﻿namespace GROUP9Project.DataBase;
 
 //Used to make sure the lists dont overrun the buffer size.
-enum AirportEnum 
+public enum AirportEnum 
 {
     CLE,
     BNA,
@@ -18,7 +18,7 @@ enum AirportEnum
     DTW
 }
 
-enum PlaneEnum 
+public enum PlaneEnum 
 { 
     B737,
     B787,
