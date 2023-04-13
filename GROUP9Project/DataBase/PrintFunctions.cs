@@ -12,9 +12,10 @@ public static class PrintFunctions
         Flight rFlight = ApplicationData.Connection.GetFlight(Record.FlightId);
         Route pRoute = ApplicationData.Connection.GetRoute(rFlight.RouteId);
 
-        string Output = Record.FlightId.ToString() + ": " + PlanesAirportsDistances.Airports[pRoute.Start];
+        string Output = Record.FlightId.ToString() + ": " + PlanesAirportsDistances.Airports.ElementAt((int)pRoute.Start) + 
+            " to " + PlanesAirportsDistances.Airports.ElementAt((int)pRoute.End) + " Leaving at " + rFlight.FlightDate.ToString();
 
-        return "hello";
+        return Output;
     }
 
 }

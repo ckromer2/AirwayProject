@@ -19,7 +19,6 @@ public class DataBase
 {
     private SQLiteConnection db;
     private Random UIdGenerator = new Random();
-    private PlanesAirportsDistances Info = new PlanesAirportsDistances();
 
     //called when the server starts to initialize the database
     public DataBase()
@@ -141,9 +140,47 @@ public class DataBase
      *      
      * This function will output a list of all bookings made by a given user. 
      */
-    public List<BookingRecord> GetRecordsByUser(int uId) 
+    public List<BookingRecord> GetRecordsByUserNotCancelledUndeparted(int uId) 
     { 
-        var Output = db.Table<BookingRecord>().Where(t => t.UserId == uId).ToList();
+        var Output = db.Table<BookingRecord>().Where(t => t.UserId == uId && t.Canceled == false && t.Departed == false).ToList();
+        return Output;
+    }
+
+    /*
+     * By: Spencer P. Lowery
+     *
+     * Date: 4/13/23
+     * 
+     * In: 
+     *      uId: The Id of the use whose flight records are being pulled.
+     *      
+     * Out:
+     *      A list of all the bookings made by a given user.
+     *      
+     * This function will output a list of all bookings made by a given user. 
+     */
+    public List<BookingRecord> GetRecordsByUserNotCancelledDeparted(int uId)
+    {
+        var Output = db.Table<BookingRecord>().Where(t => t.UserId == uId && t.Canceled == false && t.Departed == true).ToList();
+        return Output;
+    }
+
+    /*
+     * By: Spencer P. Lowery
+     *
+     * Date: 4/13/23
+     * 
+     * In: 
+     *      uId: The Id of the use whose flight records are being pulled.
+     *      
+     * Out:
+     *      A list of all the bookings made by a given user.
+     *      
+     * This function will output a list of all bookings made by a given user. 
+     */
+    public List<BookingRecord> GetRecordsByUserCancelled(int uId)
+    {
+        var Output = db.Table<BookingRecord>().Where(t => t.UserId == uId && t.Canceled == true).ToList();
         return Output;
     }
 

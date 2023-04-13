@@ -14,7 +14,8 @@ public class BookingRecord
     public uint Points { get; private set; }//Amount of points payed for the flight.
     public uint Dollars { get; private set; }//Dollar amount payed * 10 to avoid floating point issues.
     public bool PayedInPoints { get; private set; }//Decies which currency to refund as well as what to count for accounting purposes.
-    public bool Canceled { get; set; }//Removes the record from the accounting but leaves it on the user's dashboard.
+    public bool Canceled { get; private set; }//Removes the record from the accounting but leaves it on the user's dashboard.
+    public bool Departed { get; private set; }//Checks if the associated flight has departed
                                        
     //Default constructor used by the database this should never be called by the main program.
     public BookingRecord()
@@ -37,5 +38,9 @@ public class BookingRecord
         Canceled = false;
     }
 
+    public void Cancel()
+    {
+        Canceled = true;
+    }
 }
 

@@ -3,26 +3,26 @@
 //Used to make sure the lists dont overrun the buffer size.
 public enum AirportEnum 
 {
-    CLE,
-    BNA,
-    TPA,
-    IAD,
-    LAX,
-    SEA,
-    JFK,
-    ORD,
-    MSP,
-    DFW,
-    DEN,
-    LAS,
-    DTW
+    CLE = 0,
+    BNA = 1,
+    TPA = 2,
+    IAD = 3,
+    LAX = 4,
+    SEA = 5,
+    JFK = 6,
+    ORD = 7,
+    MSP = 8,
+    DFW = 9,
+    DEN = 10,
+    LAS = 11,
+    DTW = 12
 }
 
 public enum PlaneEnum 
 { 
-    B737,
-    B787,
-    B777
+    B737 = 0,
+    B787 = 1,
+    B777 = 2
 }
 
 
