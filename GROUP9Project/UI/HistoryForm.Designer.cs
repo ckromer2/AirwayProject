@@ -140,13 +140,6 @@ namespace GROUP9Project.UI
             this.BookedFlightsListBox.Name = "BookedFlightsListBox";
             this.BookedFlightsListBox.Size = new System.Drawing.Size(186, 244);
             this.BookedFlightsListBox.TabIndex = 20;
-            //Adds entries to the list box
-            this.BookedFlights = ApplicationData.Connection.GetRecordsByUserNotCancelledUndeparted(ApplicationData.AppUser.UserId);
-            foreach (DataBase.BookingRecord entry in this.BookedFlights)
-            { 
-                this.BookedFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
-            }
-
             // 
             // TakenFlightsListBox
             // 
@@ -157,13 +150,6 @@ namespace GROUP9Project.UI
             this.TakenFlightsListBox.Name = "TakenFlightsListBox";
             this.TakenFlightsListBox.Size = new System.Drawing.Size(186, 244);
             this.TakenFlightsListBox.TabIndex = 21;
-            //Adds entries to the list box
-            this.TakenFlights = ApplicationData.Connection.GetRecordsByUserNotCancelledDeparted(ApplicationData.AppUser.UserId);
-            foreach (DataBase.BookingRecord entry in this.TakenFlights)
-            {
-                this.TakenFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
-            }
-
             // 
             // CancelledFlightsListBox
             // 
@@ -174,13 +160,6 @@ namespace GROUP9Project.UI
             this.CancelledFlightsListBox.Name = "CancelledFlightsListBox";
             this.CancelledFlightsListBox.Size = new System.Drawing.Size(186, 244);
             this.CancelledFlightsListBox.TabIndex = 22;
-            //Adds entries to the list box
-            this.CancelledFlights = ApplicationData.Connection.GetRecordsByUserCancelled(ApplicationData.AppUser.UserId);
-            foreach (DataBase.BookingRecord entry in this.CancelledFlights)
-            {
-                this.CancelledFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
-            }
-
             // 
             // PrintPassButton
             // 
@@ -224,7 +203,6 @@ namespace GROUP9Project.UI
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -245,13 +223,6 @@ namespace GROUP9Project.UI
         private List<DataBase.BookingRecord> BookedFlights;
         private List<DataBase.BookingRecord> TakenFlights;
         private List<DataBase.BookingRecord> CancelledFlights;
-
-        private void CancelFlightButtonClick(object sender, EventArgs e)
-        {
-            this.BookedFlights.ElementAt(this.BookedFlightsListBox.SelectedIndex).Cancel();
-
-        }
-
 
     }
 }

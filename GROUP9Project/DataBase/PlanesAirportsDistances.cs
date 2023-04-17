@@ -53,21 +53,38 @@ public class Plane
 
 public static class PlanesAirportsDistances
 {
-    public static readonly List<Airport> Airports = new List<Airport> 
+    public static readonly List<string> AirportsName = new List<string> 
     {  
-        new Airport("Cleveland Hopkins International Airport", "CLE"),
-        new Airport("Nashville International Airport", "BNA"),
-        new Airport("Tampa International Airport", "TPA"),
-        new Airport("Washington Dulles Intl airport", "IAD"),
-        new Airport("Los Angeles International Airport", "LAX"),
-        new Airport("Seattle-Tacoma International Airport", "SEA"),
-        new Airport("John F. Kennedy International Airport", "JFK"),
-        new Airport("Chicago O'Hare International Airport", "ORD"),
-        new Airport("Minneapolis−Saint Paul International Airport", "MSP"),
-        new Airport("Dallas Fort Worth International Airport", "DFW"),
-        new Airport("Denver International Airport", "DEN"),
-        new Airport("Las Vegas International Airport", "LAS"),
-        new Airport("Detroit Metropolitan Wayne County Airport", "DTW")
+        "Cleveland Hopkins International Airport",
+        "Nashville International Airport",
+        "Tampa International Airport",
+        "Washington Dulles Intl airport",
+        "Los Angeles International Airport",
+        "Seattle-Tacoma International Airport",
+        "John F. Kennedy International Airport",
+        "Chicago O'Hare International Airport",
+        "Minneapolis−Saint Paul International Airport",
+        "Dallas Fort Worth International Airport",
+        "Denver International Airport",
+        "Las Vegas International Airport",
+        "Detroit Metropolitan Wayne County Airport"
+    };
+
+    public static readonly List<string> AirportsCode = new List<string>
+    {
+        "CLE",
+        "BNA",
+        "TPA",
+        "IAD",
+        "LAX",
+        "SEA",
+        "JFK",
+        "ORD",
+        "MSP",
+        "DFW",
+        "DEN",
+        "LAS",
+        "DTW"
     };
 
     public static List<Plane> Planes = new List<Plane> 
@@ -92,4 +109,11 @@ public static class PlanesAirportsDistances
         new List<float> { 1821, 1584, 1981, 2061, 237, 867, 2263, 1511, 1298, 1054, 626.85f, 0, 1745.17f },
         new List<float> { 96, 457, 985, 383, 1975, 1922, 508, 234, 528, 986, 1120.5f, 1745.17f, 0 }
     };
+
+    public static int GetRouteTime(Route route)
+    {
+        float FlightTime = 0.5f + (Distances.ElementAt((int)route.Start).ElementAt((int)route.End))/500.0f;
+        return (int)Math.Ceiling(FlightTime);
+    }
+
 }

@@ -1,5 +1,5 @@
 ﻿using SQLite;
-using System;
+using System.DirectoryServices.ActiveDirectory;
 
 namespace GROUP9Project.DataBase;
 
@@ -9,14 +9,14 @@ public class Route
     public int RouteId { get; private set; }
     public AirportEnum Start { get; private set; }
     public AirportEnum End { get; private set; }
-    public DayOfWeek SchedualDate { get; private set; }
+    public DayOfWeek ScheduleDate { get; private set; }
     public int SchedualTime { get; private set; }
 
     public Route() 
     {
         Start = 0;
         End = 0;
-        SchedualDate = 0;
+        ScheduleDate = 0;
         SchedualTime = 0;
     }
 
@@ -24,7 +24,7 @@ public class Route
     { 
         Start = s;
         End = e;
-        SchedualDate = sDay;
+        ScheduleDate = sDay;
         SchedualTime = sTime;
     }
 
@@ -38,14 +38,12 @@ public class Flight
     public PlaneEnum PlainId { get; private set; }
     public int RouteId { get; private set; }
     public DateTime FlightDate { get; private set; }
-    public bool Departed { get; private set; }
 
     public Flight()
     {
         PlainId = 0;
         RouteId = 0;
         FlightDate = DateTime.MinValue;
-        Departed = false;
     }
 
     public Flight(PlaneEnum pId, int rId, DateTime fDate)
@@ -57,7 +55,6 @@ public class Flight
 
     public void ChangePlane(PlaneEnum pId) { PlainId = pId; }
 
-    public void DepartFlight() { Departed = true; }
 
 }
 

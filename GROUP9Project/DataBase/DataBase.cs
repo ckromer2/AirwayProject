@@ -8,6 +8,7 @@
  * 
  * March 8: Initial creation and construction.
  * March 9: Added support to change user passwords.
+ * April 9: Added many other database funcitons
  */
 
 using SQLite;
@@ -253,7 +254,7 @@ public class DataBase
      *      
      * This function upadates a supplied record in the databse
      */
-    public int GetRecordsByFlightPoints(BookingRecord uRecord)
+    public int UpdateRecord(BookingRecord uRecord)
     {
         return db.Update(uRecord);
     }
