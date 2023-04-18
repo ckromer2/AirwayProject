@@ -142,9 +142,17 @@ public class DataBase
      * This function will output a list of all bookings made by a given user. 
      */
     public List<BookingRecord> GetRecordsByUserNotCancelledUndeparted(int uId) 
-    { 
-        var Output = db.Table<BookingRecord>().Where(t => t.UserId == uId && t.Canceled == false && t.Departed == false).ToList();
-        return Output;
+    {
+        try
+        {
+            var Output = db.Table<BookingRecord>().Where(t => t.UserId == uId && t.Canceled == false && t.Departed == false).ToList();
+            return Output;
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<BookingRecord> { ApplicationData.nullRecord };
+            return nOut;
+        }
     }
 
     /*
@@ -162,8 +170,16 @@ public class DataBase
      */
     public List<BookingRecord> GetRecordsByUserNotCancelledDeparted(int uId)
     {
-        var Output = db.Table<BookingRecord>().Where(t => t.UserId == uId && t.Canceled == false && t.Departed == true).ToList();
-        return Output;
+        try
+        {
+            var Output = db.Table<BookingRecord>().Where(t => t.UserId == uId && t.Canceled == false && t.Departed == true).ToList();
+            return Output;
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<BookingRecord>{ ApplicationData.nullRecord };
+            return nOut;
+        }
     }
 
     /*
@@ -181,8 +197,16 @@ public class DataBase
      */
     public List<BookingRecord> GetRecordsByUserCancelled(int uId)
     {
-        var Output = db.Table<BookingRecord>().Where(t => t.UserId == uId && t.Canceled == true).ToList();
-        return Output;
+        try
+        {
+            var Output = db.Table<BookingRecord>().Where(t => t.UserId == uId && t.Canceled == true).ToList();
+            return Output;
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<BookingRecord> { ApplicationData.nullRecord };
+            return nOut;
+        }
     }
 
     /*
@@ -197,8 +221,16 @@ public class DataBase
      */
     public List<BookingRecord> GetRecordsNotCancelled()
     {
-        var Output = db.Table<BookingRecord>().Where(t => t.Canceled == false).ToList();
-        return Output;
+        try
+        {
+            var Output = db.Table<BookingRecord>().Where(t => t.Canceled == false).ToList();
+            return Output;
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<BookingRecord> { ApplicationData.nullRecord };
+            return nOut;
+        }
     }
 
     /*
@@ -216,8 +248,16 @@ public class DataBase
      */
     public List<BookingRecord> GetRecordsByFlight(int fId)
     {
-        var Output = db.Table<BookingRecord>().Where(t => t.FlightId == fId && t.Canceled == false).ToList();
-        return Output;
+        try
+        {
+            var Output = db.Table<BookingRecord>().Where(t => t.FlightId == fId && t.Canceled == false).ToList();
+            return Output;
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<BookingRecord> { ApplicationData.nullRecord };
+            return nOut;
+        }
     }
 
     /*
@@ -236,8 +276,16 @@ public class DataBase
      */
     public List<BookingRecord> GetRecordsByFlightPoints(int fId)
     {
-        var Output = db.Table<BookingRecord>().Where(t => t.FlightId == fId && t.PayedInPoints == true && t.Canceled == false).ToList();
-        return Output;
+        try
+        {
+            var Output = db.Table<BookingRecord>().Where(t => t.FlightId == fId && t.PayedInPoints == true && t.Canceled == false).ToList();
+            return Output;
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<BookingRecord> { ApplicationData.nullRecord };
+            return nOut;
+        }
     }
 
     /*

@@ -37,25 +37,31 @@ public partial class HistoryForm : Form
 
         //Adds entries to the booked flights list box
         BookedFlights = ApplicationData.Connection.GetRecordsByUserNotCancelledUndeparted(ApplicationData.AppUser.UserId);
-        foreach (DataBase.BookingRecord entry in BookedFlights)
+        if (BookedFlights.ElementAt(0) != ApplicationData.nullRecord)
         {
-            BookedFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
+            foreach (DataBase.BookingRecord entry in BookedFlights)
+            {
+                BookedFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
+            }
         }
-
         //Adds entries to the taken flights list box
         TakenFlights = ApplicationData.Connection.GetRecordsByUserNotCancelledDeparted(ApplicationData.AppUser.UserId);
-        foreach (DataBase.BookingRecord entry in TakenFlights)
+        if (TakenFlights.ElementAt(0) != ApplicationData.nullRecord)
         {
-            TakenFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
+            foreach (DataBase.BookingRecord entry in TakenFlights)
+            {
+                TakenFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
+            }
         }
-
         //Adds entries to the cancelled flights list box
         CancelledFlights = ApplicationData.Connection.GetRecordsByUserCancelled(ApplicationData.AppUser.UserId);
-        foreach (DataBase.BookingRecord entry in CancelledFlights)
+        if (CancelledFlights.ElementAt(0) != ApplicationData.nullRecord)
         {
-            CancelledFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
+            foreach (DataBase.BookingRecord entry in CancelledFlights)
+            {
+                CancelledFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
+            }
         }
-
         //Re-enables printing of the list boxes
         BookedFlightsListBox.EndUpdate();
         TakenFlightsListBox.EndUpdate();
@@ -65,9 +71,12 @@ public partial class HistoryForm : Form
 
     private void CancelFlightButtonClick(object sender, EventArgs e)
     {
-        BookedFlights.ElementAt(BookedFlightsListBox.SelectedIndex).Cancel();
-        ApplicationData.Connection.UpdateRecord(BookedFlights.ElementAt(BookedFlightsListBox.SelectedIndex));
-        FillListBoxes();
+        if (BookedFlightsListBox.SelectedIndex != -1)
+        {
+            BookedFlights.ElementAt(BookedFlightsListBox.SelectedIndex).Cancel();
+            ApplicationData.Connection.UpdateRecord(BookedFlights.ElementAt(BookedFlightsListBox.SelectedIndex));
+            FillListBoxes();
+        }
     }
 
     private void FlightsTab_Click(object sender, EventArgs e)

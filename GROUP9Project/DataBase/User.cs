@@ -46,7 +46,7 @@ public class User
     //Default constructor used by the database this should never be called by the main program.
     public User()
     {
-        UserId = -1;
+        UserId = 0;
         FisrtName = string.Empty;
         LastName = string.Empty;
         Password = SHA512.Create();
