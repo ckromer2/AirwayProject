@@ -25,15 +25,19 @@ public partial class FlightsForm : Form
         if (PossibleRoutes1 != null)
             PossibleRoutes1.Clear();
 
-        if(ListBoxToRoute1 != null)
+        if (ListBoxToRoute1 != null)
             ListBoxToRoute1.Clear();
+        else
+            ListBoxToRoute1 = new List<int>();
 
         if (PossibleRoutes2 != null)
             PossibleRoutes2.Clear();
         
         if (ListBoxToRoute2 != null)
             ListBoxToRoute2.Clear();
-        
+        else
+            ListBoxToRoute2 = new List<int>();
+
         FirstFlightListBox.Items.Clear();
         SecondFlightListBox.Items.Clear();
 
@@ -57,33 +61,36 @@ public partial class FlightsForm : Form
                     i++;
                 }
             }
-        }
-        if (RoundTripCheckBox.Checked == true)
-        {
-            //Finds all the routes that match the criteria
-            PossibleRoutes2 = FindRoutes((AirportEnum)ArriveComboBox.SelectedIndex, (AirportEnum)DepartComboBox.SelectedIndex, ReturnDatePicker.Value.DayOfWeek);
-            //Loops through the list printing the string for the single case as well as the dual case
-            if (PossibleRoutes2.Count != 0)
+
+            if (RoundTripCheckBox.Checked == true)
             {
-                for (int i = 0; i < PossibleRoutes2.Count; i++)
+                //Finds all the routes that match the criteria
+                PossibleRoutes2 = FindRoutes((AirportEnum)ArriveComboBox.SelectedIndex, (AirportEnum)DepartComboBox.SelectedIndex, ReturnDatePicker.Value.DayOfWeek);
+                //Loops through the list printing the string for the single case as well as the dual case
+                if (PossibleRoutes2.Count != 0)
                 {
-                    var tmp = PossibleRoutes2.ElementAt(i);
-                    if (tmp.End == (AirportEnum)DepartComboBox.SelectedIndex)
+                    for (int i = 0; i < PossibleRoutes2.Count; i++)
                     {
-                        SecondFlightListBox.Items.Add(PrintFunctions.PrintRoute(tmp));
-                        ListBoxToRoute2.Add(i);
-                    }
-                    else
-                    {
-                        SecondFlightListBox.Items.Add(PrintFunctions.PrintRouteDual(tmp, PossibleRoutes2.ElementAt(i + 1)));
-                        ListBoxToRoute2.Add(i);
-                        i++;
+                        var tmp = PossibleRoutes2.ElementAt(i);
+                        if (tmp.End == (AirportEnum)DepartComboBox.SelectedIndex)
+                        {
+                            SecondFlightListBox.Items.Add(PrintFunctions.PrintRoute(tmp));
+                            ListBoxToRoute2.Add(i);
+                        }
+                        else
+                        {
+                            SecondFlightListBox.Items.Add(PrintFunctions.PrintRouteDual(tmp, PossibleRoutes2.ElementAt(i + 1)));
+                            ListBoxToRoute2.Add(i);
+                            i++;
+                        }
                     }
                 }
+                else
+                    MessageBox.Show("No flights availible for the selected return date.");
             }
         }
-
-
+        else
+            MessageBox.Show("No flights availible for the selected departure date.");
         FirstFlightListBox.EndUpdate();
     }
 
@@ -248,5 +255,10 @@ public partial class FlightsForm : Form
         UI.HistoryForm historyForm = new UI.HistoryForm();
         historyForm.Closed += (s, args) => this.Close();
         historyForm.Show();
+    }
+
+    private void PurchaseButton_Click(object sender, EventArgs e)
+    {
+        
     }
 }

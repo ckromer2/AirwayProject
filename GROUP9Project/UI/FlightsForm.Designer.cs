@@ -188,6 +188,7 @@
             this.PurchaseButton.TabIndex = 32;
             this.PurchaseButton.Text = "Purchase Selected Flights";
             this.PurchaseButton.UseVisualStyleBackColor = true;
+            this.PurchaseButton.Click += new System.EventHandler(this.PurchaseButton_Click);
             // 
             // PointsCheckBox
             // 
