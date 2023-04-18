@@ -85,6 +85,8 @@ public partial class HistoryForm : Form
         UI.FlightsForm flightsForm = new UI.FlightsForm();
         flightsForm.Closed += (s, args) => this.Close();
         flightsForm.Show();
+        flightsForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+
     }
 
     private void RewardsTab_Click(object sender, EventArgs e)
@@ -93,6 +95,8 @@ public partial class HistoryForm : Form
         UI.RewardsForm rewardsForm = new UI.RewardsForm();
         rewardsForm.Closed += (s, args) => this.Close();
         rewardsForm.Show();
+        rewardsForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+
     }
 
     private void PrintPassButton_Click(object sender, EventArgs e)

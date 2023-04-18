@@ -38,6 +38,8 @@ namespace GROUP9Project
             UI.FlightsForm flightsForm = new UI.FlightsForm();
             flightsForm.Closed += (s, args) => this.Close();
             flightsForm.Show();
+            flightsForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+
 
         }
     }

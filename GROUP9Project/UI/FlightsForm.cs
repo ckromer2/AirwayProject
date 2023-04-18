@@ -247,6 +247,8 @@ public partial class FlightsForm : Form
         UI.RewardsForm rewardsForm = new UI.RewardsForm();
         rewardsForm.Closed += (s, args) => this.Close();
         rewardsForm.Show();
+        rewardsForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+
     }
 
     private void HistoryTab_Click(object sender, EventArgs e)
@@ -255,6 +257,8 @@ public partial class FlightsForm : Form
         UI.HistoryForm historyForm = new UI.HistoryForm();
         historyForm.Closed += (s, args) => this.Close();
         historyForm.Show();
+        historyForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+
     }
 
     private void PurchaseButton_Click(object sender, EventArgs e)
