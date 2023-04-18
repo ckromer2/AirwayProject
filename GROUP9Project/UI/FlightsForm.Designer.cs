@@ -199,7 +199,6 @@
             this.PointsCheckBox.TabIndex = 33;
             this.PointsCheckBox.Text = "Use Points";
             this.PointsCheckBox.UseVisualStyleBackColor = true;
-            this.PointsCheckBox.CheckedChanged += new System.EventHandler(this.PointsCheckBox_CheckedChanged);
             // 
             // ArriveComboBox
             // 

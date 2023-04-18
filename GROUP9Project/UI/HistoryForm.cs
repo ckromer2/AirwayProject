@@ -35,7 +35,7 @@ public partial class HistoryForm : Form
             CancelledFlights.Clear();
         }
 
-        //Adds entries to the booked flights list box
+        //Adds entries to the booked flights list box checking to make sure something was returned by the query
         BookedFlights = ApplicationData.Connection.GetRecordsByUserNotCancelledUndeparted(ApplicationData.AppUser.UserId);
         if (BookedFlights.ElementAt(0) != ApplicationData.nullRecord)
         {
@@ -44,7 +44,7 @@ public partial class HistoryForm : Form
                 BookedFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
             }
         }
-        //Adds entries to the taken flights list box
+        //Adds entries to the taken flights list box checking to make sure something was returned by the query
         TakenFlights = ApplicationData.Connection.GetRecordsByUserNotCancelledDeparted(ApplicationData.AppUser.UserId);
         if (TakenFlights.ElementAt(0) != ApplicationData.nullRecord)
         {
@@ -53,7 +53,7 @@ public partial class HistoryForm : Form
                 TakenFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
             }
         }
-        //Adds entries to the cancelled flights list box
+        //Adds entries to the cancelled flights list box checking to make sure something was returned by the query
         CancelledFlights = ApplicationData.Connection.GetRecordsByUserCancelled(ApplicationData.AppUser.UserId);
         if (CancelledFlights.ElementAt(0) != ApplicationData.nullRecord)
         {
@@ -93,5 +93,13 @@ public partial class HistoryForm : Form
         UI.RewardsForm rewardsForm = new UI.RewardsForm();
         rewardsForm.Closed += (s, args) => this.Close();
         rewardsForm.Show();
+    }
+
+    private void PrintPassButton_Click(object sender, EventArgs e)
+    {
+        if (BookedFlightsListBox.SelectedIndex != -1)
+        {
+           
+        }
     }
 }

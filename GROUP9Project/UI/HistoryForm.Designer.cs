@@ -172,6 +172,7 @@ namespace GROUP9Project.UI
             this.PrintPassButton.TabIndex = 23;
             this.PrintPassButton.Text = "Print Boarding Pass";
             this.PrintPassButton.UseVisualStyleBackColor = true;
+            this.PrintPassButton.Click += new System.EventHandler(this.PrintPassButton_Click);
             // 
             // CancelFlightButton
             // 

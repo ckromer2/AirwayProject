@@ -11,24 +11,6 @@ public partial class FlightsForm : Form
         PopulateBoxes();
     }
 
-    private void radioButton1_CheckedChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void label6_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-    }
-
-    private void PointsCheckBox_CheckedChanged(object sender, EventArgs e)
-    {
-    }
-
     /*
      * By: Spencer P. Lowery
      *
@@ -41,57 +23,62 @@ public partial class FlightsForm : Form
     {
         FirstFlightListBox.BeginUpdate();
         if (PossibleRoutes1 != null)
-        {
             PossibleRoutes1.Clear();
+
+        if(ListBoxToRoute1 != null)
             ListBoxToRoute1.Clear();
-        }
 
         if (PossibleRoutes2 != null)
-        {
             PossibleRoutes2.Clear();
+        
+        if (ListBoxToRoute2 != null)
             ListBoxToRoute2.Clear();
-        }
-
+        
         FirstFlightListBox.Items.Clear();
         SecondFlightListBox.Items.Clear();
 
         //Finds all the routes that match the criteria
         PossibleRoutes1 = FindRoutes((AirportEnum)DepartComboBox.SelectedIndex, (AirportEnum)ArriveComboBox.SelectedIndex, DepartureDatePicker.Value.DayOfWeek);
         //Loops through the list printing the string for the single case as well as the dual case
-        for (int i = 0; i < PossibleRoutes1.Count; i++)
-        { 
-            var tmp = PossibleRoutes1.ElementAt(i);
-            if (tmp.End == (AirportEnum)ArriveComboBox.SelectedIndex)
+        if (PossibleRoutes1.Count != 0)
+        {
+            for (int i = 0; i < PossibleRoutes1.Count; i++)
             {
-                FirstFlightListBox.Items.Add(PrintFunctions.PrintRoute(tmp));
-                ListBoxToRoute1.Add(i);
-            }
-            else
-            {
-                FirstFlightListBox.Items.Add(PrintFunctions.PrintRouteDual(tmp, PossibleRoutes1.ElementAt(i+1)));
-                ListBoxToRoute1.Add(i);
-                i++;
+                var tmp = PossibleRoutes1.ElementAt(i);
+                if (tmp.End == (AirportEnum)ArriveComboBox.SelectedIndex)
+                {
+                    FirstFlightListBox.Items.Add(PrintFunctions.PrintRoute(tmp));
+                    ListBoxToRoute1.Add(i);
+                }
+                else
+                {
+                    FirstFlightListBox.Items.Add(PrintFunctions.PrintRouteDual(tmp, PossibleRoutes1.ElementAt(i + 1)));
+                    ListBoxToRoute1.Add(i);
+                    i++;
+                }
             }
         }
-
         if (RoundTripCheckBox.Checked == true)
         {
             //Finds all the routes that match the criteria
             PossibleRoutes2 = FindRoutes((AirportEnum)ArriveComboBox.SelectedIndex, (AirportEnum)DepartComboBox.SelectedIndex, ReturnDatePicker.Value.DayOfWeek);
             //Loops through the list printing the string for the single case as well as the dual case
-            for (int i = 0; i < PossibleRoutes2.Count; i++)
+            if (PossibleRoutes2.Count != 0)
             {
-                var tmp = PossibleRoutes2.ElementAt(i);
-                if (tmp.End == (AirportEnum)DepartComboBox.SelectedIndex)
+                for (int i = 0; i < PossibleRoutes2.Count; i++)
                 {
-                    SecondFlightListBox.Items.Add(PrintFunctions.PrintRoute(tmp));
-                    ListBoxToRoute2.Add(i);
-                }
-                else
-                {
-                    SecondFlightListBox.Items.Add(PrintFunctions.PrintRouteDual(tmp, PossibleRoutes2.ElementAt(i + 1)));
-                    ListBoxToRoute2.Add(i);
-                    i++;
+                    var tmp = PossibleRoutes2.ElementAt(i);
+                    if (tmp.End == (AirportEnum)DepartComboBox.SelectedIndex)
+                    {
+                        SecondFlightListBox.Items.Add(PrintFunctions.PrintRoute(tmp));
+                        ListBoxToRoute2.Add(i);
+                    }
+                    else
+                    {
+                        SecondFlightListBox.Items.Add(PrintFunctions.PrintRouteDual(tmp, PossibleRoutes2.ElementAt(i + 1)));
+                        ListBoxToRoute2.Add(i);
+                        i++;
+                    }
                 }
             }
         }
@@ -171,62 +158,79 @@ public partial class FlightsForm : Form
         List<Route> OutputRoutes = new List<Route>();
         OutputRoutes.AddRange(ApplicationData.Connection.GetRouteStartEnd(Start, End));
         //Loops through the direct routes and removes ones that dont match the day of week supplied.
-        foreach (Route route in OutputRoutes)
+        if (OutputRoutes.ElementAt(0) != ApplicationData.nullRoute)
         {
-            if (route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour)
-            { 
-                OutputRoutes.Remove(route);
+            foreach (Route route in OutputRoutes)
+            {
+                if (route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour)
+                {
+                    OutputRoutes.Remove(route);
+                }
             }
+        }
+        else
+        {
+            OutputRoutes.Remove(ApplicationData.nullRoute);
         }
         //Now Comes the hard part
         //Gets the routes from the departure airport removeing the direct routes
         List<Route> IDRoutes = ApplicationData.Connection.GetRouteStart(Start);
+        List<int> RemovalTracker = new List<int>();
+        int rIndex = 0;
         foreach (Route route in IDRoutes)
         {
-            if (route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour)
+            if ((route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour) || route.End == End || route == ApplicationData.nullRoute)
             {
-                IDRoutes.Remove(route);
+                RemovalTracker.Add(rIndex);
             }
-            if (route.End == End)
-            {
-                IDRoutes.Remove(route);
-            }
+            rIndex++;
         }
+        foreach (int i in RemovalTracker)
+        {
+            IDRoutes.Remove(IDRoutes.ElementAt(i));
+        }
+
+   
 
         //Gets all the routes to the destination airport removing the direct routes
         List<Route> IARoutes = ApplicationData.Connection.GetRouteStart(End);
+        RemovalTracker.Clear();
+        rIndex = 0;
         foreach (Route route in IARoutes)
         {
             //removes all the fligths not schedualled for this day or the next
-            if (route.ScheduleDate != Day || route.ScheduleDate != Day+1)
+            if ((route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour) || route.ScheduleDate != Day+1 || route.Start == Start || route == ApplicationData.nullRoute)
             {
-                IARoutes.Remove(route);
+                RemovalTracker.Add(rIndex);
             } 
-            if (route.Start == Start)
-            {
-                IDRoutes.Remove(route);
-            }
+            rIndex++;
+        }
+        foreach (int i in RemovalTracker)
+        {
+            IDRoutes.Remove(IARoutes.ElementAt(i));
         }
 
         //Loops through all the routs from the departure airport and to the destination if any share an intermediate link
-        foreach (Route DRoute in IDRoutes)
+        if (IDRoutes.Count != 0 && IARoutes.Count != 0)
         {
-            foreach (Route ARoute in IARoutes)
+            foreach (Route DRoute in IDRoutes)
             {
-                //Checks if the routs have the same midpoint and that there is enough time for the first flight to finish and with extra time added in
-                if (DRoute.End == ARoute.Start && 
-                    ((DRoute.ScheduleDate == ARoute.ScheduleDate && DRoute.SchedualTime+PlanesAirportsDistances.GetRouteTime(DRoute)+1 < ARoute.SchedualTime)
-                    || (DRoute.ScheduleDate < ARoute.ScheduleDate)))
+                foreach (Route ARoute in IARoutes)
                 {
-                    //Adds the found routes to the system while removing the selected secondary routes.
-                    OutputRoutes.Add(DRoute);
-                    OutputRoutes.Add(ARoute);
-                    IARoutes.Remove(ARoute);
-                    break;
+                    //Checks if the routs have the same midpoint and that there is enough time for the first flight to finish and with extra time added in
+                    if (DRoute.End == ARoute.Start &&
+                        ((DRoute.ScheduleDate == ARoute.ScheduleDate && DRoute.SchedualTime + PlanesAirportsDistances.GetRouteTime(DRoute) + 1 < ARoute.SchedualTime)
+                        || (DRoute.ScheduleDate < ARoute.ScheduleDate)))
+                    {
+                        //Adds the found routes to the system while removing the selected secondary routes.
+                        OutputRoutes.Add(DRoute);
+                        OutputRoutes.Add(ARoute);
+                        IARoutes.Remove(ARoute);
+                        break;
+                    }
                 }
             }
         }
-
         return OutputRoutes;
     }
 

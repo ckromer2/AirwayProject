@@ -84,9 +84,15 @@ public class DataBase
      */
     public User GetUser(int uId)
     {
-        var Output = db.Table<User>().Where(t => t.UserId == uId).ToList()[0];//There will only ever be 1 element in this list so this action is safe.
-
-        return Output; //Returns the user pulled form the database with the given number.
+        try
+        {
+            var Output = db.Table<User>().Where(t => t.UserId == uId).Single();//There will only ever be 1 element in this list so this action is safe.
+            return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            return ApplicationData.nullUser;
+        }
     }
     /*
      * By: Spencer P. Lowery
@@ -343,8 +349,15 @@ public class DataBase
      */
     public Flight GetFlight(int fId)
     {
-        var Output = db.Table<Flight>().Where(t => t.FlightId == fId).ToList()[0];//There will only ever be 1 element in this list so this action is safe.
-        return Output; //Returns the user pulled form the database with the given number.
+        try
+        {
+            var Output = db.Table<Flight>().Where(t => t.FlightId == fId).Single();//There will only ever be 1 element in this list so this action is safe.
+            return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            return ApplicationData.nullFlight;
+        }
     }
 
     /*
@@ -362,8 +375,16 @@ public class DataBase
      */
     public List<Flight> GetFlightRoute(int rId)
     {
+        try
+        {
         var Output = db.Table<Flight>().Where(t => t.RouteId == rId).ToList();
         return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<Flight> { ApplicationData.nullFlight };
+            return nOut;
+        }
     }
 
     /*
@@ -381,8 +402,16 @@ public class DataBase
      */
     public List<Flight> GetFlightDeparted(DateTime Time)
     {
-        var Output = db.Table<Flight>().Where(t => t.FlightDate <= Time).ToList();
-        return Output; //Returns the user pulled form the database with the given number.
+        try
+        {
+            var Output = db.Table<Flight>().Where(t => t.FlightDate <= Time).ToList();
+            return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<Flight> { ApplicationData.nullFlight };
+            return nOut;
+        }
     }
 
     /*
@@ -441,8 +470,15 @@ public class DataBase
      */
     public Route GetRoute(int rId)
     {
-        var Output = db.Table<Route>().Where(t => t.RouteId == rId).ToList()[0];//There will only ever be 1 element in this list so this action is safe.
-        return Output; //Returns the user pulled form the database with the given number.
+        try
+        {
+            var Output = db.Table<Route>().Where(t => t.RouteId == rId).Single();//There will only ever be 1 element in this list so this action is safe.
+            return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            return ApplicationData.nullRoute;
+        }
     }
 
     /*
@@ -461,8 +497,16 @@ public class DataBase
      */
     public List<Route> GetRouteStartEnd(AirportEnum sId, AirportEnum eId)
     {
-        var Output = db.Table<Route>().Where(t => t.Start == sId && t.End == eId).ToList();
-        return Output; //Returns the user pulled form the database with the given number.
+        try
+        {
+            var Output = db.Table<Route>().Where(t => t.Start == sId && t.End == eId).ToList();
+            return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<Route> { ApplicationData.nullRoute };
+            return nOut;
+        }
     }
 
     /*
@@ -480,8 +524,16 @@ public class DataBase
      */
     public List<Route> GetRouteStart(AirportEnum sId)
     {
-        var Output = db.Table<Route>().Where(t => t.Start == sId).ToList();
-        return Output; //Returns the user pulled form the database with the given number.
+        try
+        {
+            var Output = db.Table<Route>().Where(t => t.Start == sId).ToList();
+            return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<Route> { ApplicationData.nullRoute };
+            return nOut;
+        }
     }
 
     /*
@@ -499,8 +551,16 @@ public class DataBase
      */
     public List<Route> GetRouteEnd(AirportEnum eId)
     {
-        var Output = db.Table<Route>().Where(t => t.End == eId).ToList();
-        return Output; //Returns the user pulled form the database with the given number.
+        try
+        { 
+            var Output = db.Table<Route>().Where(t => t.End == eId).ToList();
+            return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<Route> { ApplicationData.nullRoute };
+            return nOut;
+        }
     }
 
     /*
