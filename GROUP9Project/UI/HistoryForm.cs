@@ -70,4 +70,19 @@ public partial class HistoryForm : Form
         FillListBoxes();
     }
 
+    private void FlightsTab_Click(object sender, EventArgs e)
+    {
+        this.Hide();
+        UI.FlightsForm flightsForm = new UI.FlightsForm();
+        flightsForm.Closed += (s, args) => this.Close();
+        flightsForm.Show();
+    }
+
+    private void RewardsTab_Click(object sender, EventArgs e)
+    {
+        this.Hide();
+        UI.RewardsForm rewardsForm = new UI.RewardsForm();
+        rewardsForm.Closed += (s, args) => this.Close();
+        rewardsForm.Show();
+    }
 }

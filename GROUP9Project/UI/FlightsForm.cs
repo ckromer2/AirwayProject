@@ -230,4 +230,19 @@ public partial class FlightsForm : Form
         return OutputRoutes;
     }
 
+    private void RewardsTab_Click(object sender, EventArgs e)
+    {
+        this.Hide();
+        UI.RewardsForm rewardsForm = new UI.RewardsForm();
+        rewardsForm.Closed += (s, args) => this.Close();
+        rewardsForm.Show();
+    }
+
+    private void HistoryTab_Click(object sender, EventArgs e)
+    {
+        this.Hide();
+        UI.HistoryForm historyForm = new UI.HistoryForm();
+        historyForm.Closed += (s, args) => this.Close();
+        historyForm.Show();
+    }
 }

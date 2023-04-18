@@ -87,6 +87,7 @@ namespace GROUP9Project.UI
             this.FlightsTab.Size = new System.Drawing.Size(75, 30);
             this.FlightsTab.TabIndex = 5;
             this.FlightsTab.Text = "Flights";
+            this.FlightsTab.Click += new System.EventHandler(this.FlightsTab_Click);
             // 
             // RewardsTab
             // 
@@ -97,6 +98,7 @@ namespace GROUP9Project.UI
             this.RewardsTab.Size = new System.Drawing.Size(94, 30);
             this.RewardsTab.TabIndex = 8;
             this.RewardsTab.Text = "Rewards";
+            this.RewardsTab.Click += new System.EventHandler(this.RewardsTab_Click);
             // 
             // label1
             // 
@@ -203,6 +205,7 @@ namespace GROUP9Project.UI
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

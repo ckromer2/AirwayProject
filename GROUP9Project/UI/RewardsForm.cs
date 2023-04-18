@@ -45,5 +45,31 @@ namespace GROUP9Project.UI
         private void HistoryTab_Click(object sender, EventArgs e)
         {
         }
+
+        private void FlightsTab_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            UI.FlightsForm flightsForm = new UI.FlightsForm();
+            flightsForm.Closed += (s, args) => this.Close();
+            flightsForm.Show();
+        }
+
+        private void RewardsTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HistoryTab_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            UI.HistoryForm historyForm = new UI.HistoryForm();
+            historyForm.Closed += (s, args) => this.Close();
+            historyForm.Show();
+        }
+
+        private void EmployeeTab_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

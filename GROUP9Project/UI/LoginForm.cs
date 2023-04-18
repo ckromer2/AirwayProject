@@ -31,5 +31,14 @@ namespace GROUP9Project
         {
 
         }
+
+        private void LoginButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            UI.FlightsForm flightsForm = new UI.FlightsForm();
+            flightsForm.Closed += (s, args) => this.Close();
+            flightsForm.Show();
+
+        }
     }
 }

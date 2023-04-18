@@ -83,6 +83,7 @@
             this.HistoryTab.Size = new System.Drawing.Size(82, 30);
             this.HistoryTab.TabIndex = 7;
             this.HistoryTab.Text = "History";
+            this.HistoryTab.Click += new System.EventHandler(this.HistoryTab_Click);
             // 
             // FlightsTab
             // 
@@ -103,6 +104,7 @@
             this.RewardsTab.Size = new System.Drawing.Size(94, 30);
             this.RewardsTab.TabIndex = 8;
             this.RewardsTab.Text = "Rewards";
+            this.RewardsTab.Click += new System.EventHandler(this.RewardsTab_Click);
             // 
             // label1
             // 
