@@ -1,4 +1,6 @@
 ﻿
+using GROUP9Project.DataBase;
+
 namespace GROUP9Project.UI;
 
 public partial class HistoryForm : Form
@@ -7,6 +9,7 @@ public partial class HistoryForm : Form
     {
         InitializeComponent();
         FillListBoxes();
+        ShowEmployeeTab();
     }
 
     /*
@@ -69,6 +72,14 @@ public partial class HistoryForm : Form
 
     }
 
+    private void ShowEmployeeTab()
+    {
+        if (ApplicationData.AppUser.UserType == UserDesignation.Customer)
+        {
+            EmployeeTab.Visible = false;
+        }
+    }
+
     private void CancelFlightButtonClick(object sender, EventArgs e)
     {
         if (BookedFlightsListBox.SelectedIndex != -1)
@@ -103,7 +114,47 @@ public partial class HistoryForm : Form
     {
         if (BookedFlightsListBox.SelectedIndex != -1)
         {
-           
+            this.Hide();
+            UI.BoardingPassForm boardingPassForm = new UI.BoardingPassForm();
+            boardingPassForm.Closed += (s, args) => this.Close();
+            boardingPassForm.Show();
+            boardingPassForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+        }
+    }
+
+    private void EmployeeTab_Click(object sender, EventArgs e)
+    {
+        if (ApplicationData.AppUser.UserType == UserDesignation.Accountant)
+        {
+            this.Hide();
+            UI.AccountantForm accountantForm = new UI.AccountantForm();
+            accountantForm.Closed += (s, args) => this.Close();
+            accountantForm.Show();
+            accountantForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+        }
+        else if (ApplicationData.AppUser.UserType == UserDesignation.FlightManager)
+        {
+            this.Hide();
+            UI.FlightManagerForm flightManagerForm = new UI.FlightManagerForm();
+            flightManagerForm.Closed += (s, args) => this.Close();
+            flightManagerForm.Show();
+            flightManagerForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+        }
+        else if (ApplicationData.AppUser.UserType == UserDesignation.LoadEngineer)
+        {
+            this.Hide();
+            UI.LoadManagerForm loadManagerForm = new UI.LoadManagerForm();
+            loadManagerForm.Closed += (s, args) => this.Close();
+            loadManagerForm.Show();
+            loadManagerForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+        }
+        else if (ApplicationData.AppUser.UserType == UserDesignation.MarketingManager)
+        {
+            this.Hide();
+            UI.MarketingManagerForm marketingManagerForm = new UI.MarketingManagerForm();
+            marketingManagerForm.Closed += (s, args) => this.Close();
+            marketingManagerForm.Show();
+            marketingManagerForm.SetDesktopLocation(this.Location.X, this.Location.Y);
         }
     }
 }

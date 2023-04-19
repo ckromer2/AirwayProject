@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GROUP9Project.DataBase;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,11 +11,20 @@ using System.Windows.Forms;
 
 namespace GROUP9Project.UI
 {
-    public partial class MarketingMangerForm : Form
+    public partial class MarketingManagerForm : Form
     {
-        public MarketingMangerForm()
+        public MarketingManagerForm()
         {
             InitializeComponent();
+            ShowEmployeeTab();
+        }
+
+        private void ShowEmployeeTab()
+        {
+            if (ApplicationData.AppUser.UserType == UserDesignation.Customer)
+            {
+                EmployeeTab.Visible = false;
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)

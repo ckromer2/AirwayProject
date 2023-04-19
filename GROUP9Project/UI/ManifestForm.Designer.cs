@@ -59,6 +59,7 @@
             this.EmployeeTab.Size = new System.Drawing.Size(109, 30);
             this.EmployeeTab.TabIndex = 6;
             this.EmployeeTab.Text = "Employee";
+            this.EmployeeTab.Click += new System.EventHandler(this.EmployeeTab_Click);
             // 
             // HistoryTab
             // 

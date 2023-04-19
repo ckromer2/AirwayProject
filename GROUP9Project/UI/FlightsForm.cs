@@ -9,6 +9,7 @@ public partial class FlightsForm : Form
     {
         InitializeComponent();
         PopulateBoxes();
+        ShowEmployeeTab();
     }
 
     /*
@@ -139,6 +140,14 @@ public partial class FlightsForm : Form
         }
     }
 
+    private void ShowEmployeeTab()
+    {
+        if (ApplicationData.AppUser.UserType == UserDesignation.Customer)
+        {
+            EmployeeTab.Visible = false;
+        }
+    }
+
 
     /*
      * By: Spencer P. Lowery
@@ -264,5 +273,41 @@ public partial class FlightsForm : Form
     private void PurchaseButton_Click(object sender, EventArgs e)
     {
         
+    }
+
+    private void EmployeeTab_Click(object sender, EventArgs e)
+    {
+        if (ApplicationData.AppUser.UserType == UserDesignation.Accountant)
+        {
+            this.Hide();
+            UI.AccountantForm accountantForm = new UI.AccountantForm();
+            accountantForm.Closed += (s, args) => this.Close();
+            accountantForm.Show();
+            accountantForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+        }
+        else if (ApplicationData.AppUser.UserType == UserDesignation.FlightManager)
+        {
+            this.Hide();
+            UI.FlightManagerForm flightManagerForm = new UI.FlightManagerForm();
+            flightManagerForm.Closed += (s, args) => this.Close();
+            flightManagerForm.Show();
+            flightManagerForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+        }
+        else if (ApplicationData.AppUser.UserType == UserDesignation.LoadEngineer)
+        {
+            this.Hide();
+            UI.LoadManagerForm loadManagerForm = new UI.LoadManagerForm();
+            loadManagerForm.Closed += (s, args) => this.Close();
+            loadManagerForm.Show();
+            loadManagerForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+        }
+        else if (ApplicationData.AppUser.UserType == UserDesignation.MarketingManager)
+        {
+            this.Hide();
+            UI.MarketingManagerForm marketingManagerForm = new UI.MarketingManagerForm();
+            marketingManagerForm.Closed += (s, args) => this.Close();
+            marketingManagerForm.Show();
+            marketingManagerForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+        }
     }
 }

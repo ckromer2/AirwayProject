@@ -1,6 +1,6 @@
 ﻿namespace GROUP9Project.UI
 {
-    partial class MarketingMangerForm
+    partial class MarketingManagerForm
     {
         /// <summary>
         /// Required designer variable.

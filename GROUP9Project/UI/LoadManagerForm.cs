@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GROUP9Project.DataBase;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,15 @@ namespace GROUP9Project.UI
         public LoadManagerForm()
         {
             InitializeComponent();
+            ShowEmployeeTab();
+        }
+
+        private void ShowEmployeeTab()
+        {
+            if (ApplicationData.AppUser.UserType == UserDesignation.Customer)
+            {
+                EmployeeTab.Visible = false;
+            }
         }
 
         private void FlightsTab_Click(object sender, EventArgs e)
