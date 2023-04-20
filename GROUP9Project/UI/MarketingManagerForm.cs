@@ -48,6 +48,7 @@ namespace GROUP9Project.UI
             UI.FlightsForm flightsForm = new UI.FlightsForm();
             flightsForm.Closed += (s, args) => this.Close();
             flightsForm.Show();
+            flightsForm.SetDesktopLocation(this.Location.X, this.Location.Y);
         }
 
         private void RewardsTab_Click(object sender, EventArgs e)
@@ -56,6 +57,7 @@ namespace GROUP9Project.UI
             UI.RewardsForm rewardsForm = new UI.RewardsForm();
             rewardsForm.Closed += (s, args) => this.Close();
             rewardsForm.Show();
+            rewardsForm.SetDesktopLocation(this.Location.X, this.Location.Y);
         }
 
         private void HistoryTab_Click(object sender, EventArgs e)
@@ -64,6 +66,7 @@ namespace GROUP9Project.UI
             UI.HistoryForm historyForm = new UI.HistoryForm();
             historyForm.Closed += (s, args) => this.Close();
             historyForm.Show();
+            historyForm.SetDesktopLocation(this.Location.X, this.Location.Y);
         }
     }
 }
