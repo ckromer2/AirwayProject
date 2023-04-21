@@ -11,6 +11,7 @@
  */
 
 using SQLite;
+using System.Runtime.Intrinsics.Arm;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -87,9 +88,18 @@ public class User
         
         FisrtName = fName;
         LastName = lName;
-        SHA512 NPassword = SHA512.Create();
-        NPassword.ComputeHash(Encoding.UTF8.GetBytes(pWord));
-        Password = NPassword.Hash.ToString();
+
+        // Generate sha512 and assign it to Password
+        SHA512 sha512 = SHA512.Create(); 
+        byte[] inputBytes = Encoding.UTF8.GetBytes(pWord);
+        byte[] hashBytes = sha512.ComputeHash(inputBytes);
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < hashBytes.Length; i++)
+        {
+            builder.Append(hashBytes[i].ToString("x2"));
+        }
+        Password = builder.ToString();
+
         Address = addr;
         Age = ag;
         PhoneNumber = pn;
@@ -150,12 +160,18 @@ public class User
 
     public bool Validate(string cPass)
     {
-        //Transferes the current password into its hash
-        var cPassHash = SHA512.Create();
-        cPassHash.ComputeHash(Encoding.UTF8.GetBytes(cPass));
-        var cPassHashB = cPassHash.Hash.ToString();
+        //Transferes the current password into its hash then checks if it is equal
+        SHA512 sha512 = SHA512.Create();
+        byte[] inputBytes = Encoding.UTF8.GetBytes(cPass);
+        byte[] hashBytes = sha512.ComputeHash(inputBytes);
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < hashBytes.Length; i++)
+        {
+            builder.Append(hashBytes[i].ToString("x2"));
+        }
+        string passwordHashed = builder.ToString();
 
-        if (!cPassHashB.Equals(Password)) { return false; }//If the current password is incorect the opperation fails
+        if (!passwordHashed.Equals(Password)) { return false; }//If the current password is incorect the opperation fails
         else { return true; }
     }
 
