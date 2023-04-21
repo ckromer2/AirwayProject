@@ -24,10 +24,28 @@ public static class PrintFunctions
         return output;
     }
 
-    internal static object PrintRouteDual(Route pDRoute, Route pARoute)
+    internal static string PrintRouteDual(Route pDRoute, Route pARoute)
     {
         string output = PlanesAirportsDistances.AirportsCode.ElementAt((int)pDRoute.Start) + " -> " + PlanesAirportsDistances.AirportsCode.ElementAt((int)pDRoute.End) 
             + " -> " + PlanesAirportsDistances.AirportsCode.ElementAt((int)pARoute.Start);
         return output;
+    }
+
+    public static string PrintFlightData(Route pDRoute, Route? pARoute = null)
+    {
+        if (pARoute != null)
+        {
+            string output = PrintRoute(pDRoute) + "\n Departing at " + pDRoute.SchedualTime + ":00, Ariving at " 
+                + (pDRoute.SchedualTime + PlanesAirportsDistances.GetRouteTime(pDRoute)) + ":00 " + 
+                PrintRoute(pARoute) + "\n Departing at " + pARoute.SchedualTime + ":00, Ariving at "
+                + (pARoute.SchedualTime + PlanesAirportsDistances.GetRouteTime(pARoute)) + ":00\nPrice: $";
+            return output;
+        }
+        else
+        {
+            string output = PrintRoute(pDRoute) + "\n Departing at " + pDRoute.SchedualTime + ":00, Ariving at "
+                + (pDRoute.SchedualTime + PlanesAirportsDistances.GetRouteTime(pDRoute)) + ":00 ";
+            return output;
+        }
     }
 }

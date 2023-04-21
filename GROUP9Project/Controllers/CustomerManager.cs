@@ -68,8 +68,11 @@ namespace GROUP9Project.Controllers
         {
         }
 
-        public static void Booking()
+        public static void Booking( )
         {
+
+
+
         }
 
         public static void Cancellation()

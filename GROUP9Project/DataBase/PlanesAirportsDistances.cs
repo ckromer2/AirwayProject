@@ -116,4 +116,12 @@ public static class PlanesAirportsDistances
         return (int)Math.Ceiling(FlightTime);
     }
 
+    public static int CalculatePrice(List<Route> flights)
+    {
+        int Price = 0;
+
+
+        return Price;
+    }
+
 }

@@ -22,6 +22,10 @@ public partial class FlightsForm : Form
      */
     private void SearchButtonClick(object sender, EventArgs e)
     {
+        st = (AirportEnum)DepartComboBox.SelectedIndex;
+        ed = (AirportEnum)ArriveComboBox.SelectedIndex;
+
+
         FirstFlightListBox.BeginUpdate();
         if (PossibleRoutes1 != null)
             PossibleRoutes1.Clear();
@@ -43,7 +47,7 @@ public partial class FlightsForm : Form
         SecondFlightListBox.Items.Clear();
 
         //Finds all the routes that match the criteria
-        PossibleRoutes1 = FindRoutes((AirportEnum)DepartComboBox.SelectedIndex, (AirportEnum)ArriveComboBox.SelectedIndex, DepartureDatePicker.Value.DayOfWeek);
+        PossibleRoutes1 = FindRoutes(st, ed, DepartureDatePicker.Value.DayOfWeek);
         //Loops through the list printing the string for the single case as well as the dual case
         if (PossibleRoutes1.Count != 0)
         {
@@ -170,23 +174,17 @@ public partial class FlightsForm : Form
      */
     private List<Route> FindRoutes(AirportEnum Start, AirportEnum End, DayOfWeek Day)
     {
+
         //Generates a list of fligths to show the user
         List<Route> OutputRoutes = new List<Route>();
         OutputRoutes.AddRange(ApplicationData.Connection.GetRouteStartEnd(Start, End));
         //Loops through the direct routes and removes ones that dont match the day of week supplied.
-        if (OutputRoutes.ElementAt(0) != ApplicationData.nullRoute)
+        foreach (Route route in OutputRoutes)
         {
-            foreach (Route route in OutputRoutes)
+            if (route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour)
             {
-                if (route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour)
-                {
-                    OutputRoutes.Remove(route);
-                }
+                OutputRoutes.Remove(route);
             }
-        }
-        else
-        {
-            OutputRoutes.Remove(ApplicationData.nullRoute);
         }
         //Now Comes the hard part
         //Gets the routes from the departure airport removeing the direct routes
@@ -276,7 +274,7 @@ public partial class FlightsForm : Form
     }
 
     private void EmployeeTab_Click(object sender, EventArgs e)
-    {
+    {   
         if (ApplicationData.AppUser.UserType == UserDesignation.Accountant)
         {
             this.Hide();
@@ -308,6 +306,36 @@ public partial class FlightsForm : Form
             marketingManagerForm.Closed += (s, args) => this.Close();
             marketingManagerForm.Show();
             marketingManagerForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+        }
+    }
+
+    private void FirstFlightListBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //iF this is not a one leg flight the selecte index plus the next is added to the print function.
+        if (PossibleRoutes1.ElementAt(ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex)).End != ed)
+        {
+            Flight1Info.Text = PrintFunctions.PrintFlightData(PossibleRoutes1.ElementAt(ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex)),
+                PossibleRoutes1.ElementAt(1 + ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex)));
+        }
+        //If it is a one leg flight just the selected is printed.
+        else 
+        {
+            Flight1Info.Text = PrintFunctions.PrintFlightData(PossibleRoutes1.ElementAt(ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex)));
+        }
+    }
+
+    private void SecondFlightListBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //iF this is not a one leg flight the selecte index plus the next is added to the print function.
+        if (PossibleRoutes2.ElementAt(ListBoxToRoute2.ElementAt(SecondFlightListBox.SelectedIndex)).End != ed)
+        {
+            Flight2Info.Text = PrintFunctions.PrintFlightData(PossibleRoutes2.ElementAt(ListBoxToRoute2.ElementAt(SecondFlightListBox.SelectedIndex)),
+                PossibleRoutes2.ElementAt(1 + ListBoxToRoute2.ElementAt(SecondFlightListBox.SelectedIndex)));
+        }
+        //If it is a one leg flight just the selected is printed.
+        else
+        {
+            Flight2Info.Text = PrintFunctions.PrintFlightData(PossibleRoutes2.ElementAt(ListBoxToRoute2.ElementAt(SecondFlightListBox.SelectedIndex)));
         }
     }
 }

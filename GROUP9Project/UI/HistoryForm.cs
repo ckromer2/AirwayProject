@@ -40,30 +40,21 @@ public partial class HistoryForm : Form
 
         //Adds entries to the booked flights list box checking to make sure something was returned by the query
         BookedFlights = ApplicationData.Connection.GetRecordsByUserNotCancelledUndeparted(ApplicationData.AppUser.UserId);
-        if (BookedFlights.ElementAt(0) != ApplicationData.nullRecord)
+        foreach (DataBase.BookingRecord entry in BookedFlights)
         {
-            foreach (DataBase.BookingRecord entry in BookedFlights)
-            {
-                BookedFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
-            }
+            BookedFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
         }
         //Adds entries to the taken flights list box checking to make sure something was returned by the query
         TakenFlights = ApplicationData.Connection.GetRecordsByUserNotCancelledDeparted(ApplicationData.AppUser.UserId);
-        if (TakenFlights.ElementAt(0) != ApplicationData.nullRecord)
+        foreach (DataBase.BookingRecord entry in TakenFlights)
         {
-            foreach (DataBase.BookingRecord entry in TakenFlights)
-            {
-                TakenFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
-            }
+            TakenFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
         }
         //Adds entries to the cancelled flights list box checking to make sure something was returned by the query
         CancelledFlights = ApplicationData.Connection.GetRecordsByUserCancelled(ApplicationData.AppUser.UserId);
-        if (CancelledFlights.ElementAt(0) != ApplicationData.nullRecord)
+        foreach (DataBase.BookingRecord entry in CancelledFlights)
         {
-            foreach (DataBase.BookingRecord entry in CancelledFlights)
-            {
-                CancelledFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
-            }
+            CancelledFlightsListBox.Items.Add(DataBase.PrintFunctions.PrintFlightInfo(entry));
         }
         //Re-enables printing of the list boxes
         BookedFlightsListBox.EndUpdate();

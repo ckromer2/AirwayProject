@@ -1,4 +1,6 @@
-﻿namespace GROUP9Project.UI
+﻿using GROUP9Project.DataBase;
+
+namespace GROUP9Project.UI
 {
     partial class FlightsForm
     {
@@ -49,6 +51,9 @@
             this.RoundTripCheckBox = new System.Windows.Forms.CheckBox();
             this.DepartureDatePicker = new System.Windows.Forms.DateTimePicker();
             this.ReturnDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.Flight1Info = new System.Windows.Forms.Label();
+            this.Flight2Info = new System.Windows.Forms.Label();
+            this.PriceBox = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -183,7 +188,7 @@
             // PurchaseButton
             // 
             this.PurchaseButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.PurchaseButton.Location = new System.Drawing.Point(428, 332);
+            this.PurchaseButton.Location = new System.Drawing.Point(614, 415);
             this.PurchaseButton.Name = "PurchaseButton";
             this.PurchaseButton.Size = new System.Drawing.Size(174, 23);
             this.PurchaseButton.TabIndex = 32;
@@ -195,7 +200,7 @@
             // 
             this.PointsCheckBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.PointsCheckBox.AutoSize = true;
-            this.PointsCheckBox.Location = new System.Drawing.Point(476, 307);
+            this.PointsCheckBox.Location = new System.Drawing.Point(659, 390);
             this.PointsCheckBox.Name = "PointsCheckBox";
             this.PointsCheckBox.Size = new System.Drawing.Size(81, 19);
             this.PointsCheckBox.TabIndex = 33;
@@ -230,6 +235,7 @@
             this.FirstFlightListBox.Name = "FirstFlightListBox";
             this.FirstFlightListBox.Size = new System.Drawing.Size(234, 184);
             this.FirstFlightListBox.TabIndex = 36;
+            this.FirstFlightListBox.SelectedIndexChanged += new System.EventHandler(this.FirstFlightListBox_SelectedIndexChanged);
             // 
             // SecondFlightListBox
             // 
@@ -240,6 +246,7 @@
             this.SecondFlightListBox.Name = "SecondFlightListBox";
             this.SecondFlightListBox.Size = new System.Drawing.Size(234, 184);
             this.SecondFlightListBox.TabIndex = 37;
+            this.SecondFlightListBox.SelectedIndexChanged += new System.EventHandler(this.SecondFlightListBox_SelectedIndexChanged);
             // 
             // RoundTripCheckBox
             // 
@@ -267,11 +274,41 @@
             this.ReturnDatePicker.Size = new System.Drawing.Size(200, 23);
             this.ReturnDatePicker.TabIndex = 42;
             // 
+            // Flight1Info
+            // 
+            this.Flight1Info.AutoSize = true;
+            this.Flight1Info.Location = new System.Drawing.Point(262, 307);
+            this.Flight1Info.Name = "Flight1Info";
+            this.Flight1Info.Size = new System.Drawing.Size(38, 15);
+            this.Flight1Info.TabIndex = 43;
+            this.Flight1Info.Text = "label6";
+            // 
+            // Flight2Info
+            // 
+            this.Flight2Info.AutoSize = true;
+            this.Flight2Info.Location = new System.Drawing.Point(531, 304);
+            this.Flight2Info.Name = "Flight2Info";
+            this.Flight2Info.Size = new System.Drawing.Size(38, 15);
+            this.Flight2Info.TabIndex = 44;
+            this.Flight2Info.Text = "label6";
+            // 
+            // PriceBox
+            // 
+            this.PriceBox.AutoSize = true;
+            this.PriceBox.Location = new System.Drawing.Point(750, 373);
+            this.PriceBox.Name = "PriceBox";
+            this.PriceBox.Size = new System.Drawing.Size(38, 15);
+            this.PriceBox.TabIndex = 45;
+            this.PriceBox.Text = "label6";
+            // 
             // FlightsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.PriceBox);
+            this.Controls.Add(this.Flight2Info);
+            this.Controls.Add(this.Flight1Info);
             this.Controls.Add(this.ReturnDatePicker);
             this.Controls.Add(this.DepartureDatePicker);
             this.Controls.Add(this.RoundTripCheckBox);
@@ -321,9 +358,14 @@
         private CheckBox RoundTripCheckBox;
         private DateTimePicker DepartureDatePicker;
         private DateTimePicker ReturnDatePicker;
-        private List<DataBase.Route> PossibleRoutes1;
+        private List<Route> PossibleRoutes1;
         private List<int> ListBoxToRoute1;
-        private List<DataBase.Route> PossibleRoutes2;
+        private List<Route> PossibleRoutes2;
         private List<int> ListBoxToRoute2;
+        private AirportEnum st;
+        private AirportEnum ed;
+        private Label Flight1Info;
+        private Label Flight2Info;
+        private Label PriceBox;
     }
 }
