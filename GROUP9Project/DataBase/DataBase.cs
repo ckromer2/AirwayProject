@@ -94,6 +94,22 @@ public class DataBase
             return ApplicationData.nullUser;
         }
     }
+
+    // Method to determine if a user id is already in use
+    public bool ContainsUserId(int uId)
+    {
+        try
+        {
+            User output = db.Table<User>().Where(t => t.UserId == uId).Single();
+            if (output == null)
+                return false;
+            return true;
+        }
+        catch 
+        { 
+            return false; 
+        }
+    }
     /*
      * By: Spencer P. Lowery
      *
