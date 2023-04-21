@@ -7,15 +7,15 @@ public class BookingRecord
 {
     //Defines the collums of the tables.
     [PrimaryKey, AutoIncrement]
-    public int RecordId { get; private set; }//Generic Id of this record, internal use only.
-    public int FlightId { get; private set; }//Id of the flight this recored involves.
-    public int LinkedId { get; private set; }
-    public int UserId { get; private set; }//Id of the user to whome this record belongs.
-    public uint Points { get; private set; }//Amount of points payed for the flight.
-    public uint Dollars { get; private set; }//Dollar amount payed * 10 to avoid floating point issues.
-    public bool PayedInPoints { get; private set; }//Decies which currency to refund as well as what to count for accounting purposes.
-    public bool Canceled { get; private set; }//Removes the record from the accounting but leaves it on the user's dashboard.
-    public bool Departed { get; private set; }//Checks if the associated flight has departed
+    public int RecordId { get; set; }//Generic Id of this record, internal use only.
+    public int FlightId { get; set; }//Id of the flight this recored involves.
+    public int LinkedId { get; set; }
+    public int UserId { get; set; }//Id of the user to whome this record belongs.
+    public uint Points { get; set; }//Amount of points payed for the flight.
+    public uint Dollars { get; set; }//Dollar amount payed * 10 to avoid floating point issues.
+    public bool PayedInPoints { get; set; }//Decies which currency to refund as well as what to count for accounting purposes.
+    public bool Canceled { get; set; }//Removes the record from the accounting but leaves it on the user's dashboard.
+    public bool Departed { get; set; }//Checks if the associated flight has departed
                                        
     //Default constructor used by the database this should never be called by the main program.
     public BookingRecord()

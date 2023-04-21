@@ -6,11 +6,11 @@ namespace GROUP9Project.DataBase;
 public class Route
 {
     [PrimaryKey, AutoIncrement]
-    public int RouteId { get; private set; }
-    public AirportEnum Start { get; private set; }
-    public AirportEnum End { get; private set; }
-    public DayOfWeek ScheduleDate { get; private set; }
-    public int SchedualTime { get; private set; }
+    public int RouteId { get; set; }
+    public AirportEnum Start { get; set; }
+    public AirportEnum End { get; set; }
+    public DayOfWeek ScheduleDate { get; set; }
+    public int SchedualTime { get; set; }
 
     public Route() 
     {
@@ -34,10 +34,10 @@ public class Route
 public class Flight
 {
     [PrimaryKey, AutoIncrement]
-    public int FlightId { get; private set; }
-    public PlaneEnum PlainId { get; private set; }
-    public int RouteId { get; private set; }
-    public DateTime FlightDate { get; private set; }
+    public int FlightId { get; set; }
+    public PlaneEnum PlainId { get; set; }
+    public int RouteId { get; set; }
+    public DateTime FlightDate { get; set; }
 
     public Flight()
     {

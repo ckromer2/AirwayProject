@@ -34,7 +34,7 @@ public class User
     public int UserId { get; set; }//6 Digit number between 100000 and 999999
     public string FisrtName { get; set; }//First name of the user
     public string LastName { get; set; }//Last name of the user
-    public SHA512 Password { get; set; }//Password transfered into a SHA-512 hash from a given string, no plain text passwords :(
+    public string Password { get; set; }//Password transfered into a SHA-512 hash from a given string, no plain text passwords :(
     public string Address { get; set; }//User's adress
     public uint Age { get; set; }//User's Age
     public string PhoneNumber { get; set; }//User's phone number
@@ -49,8 +49,9 @@ public class User
         UserId = 0;
         FisrtName = string.Empty;
         LastName = string.Empty;
-        Password = SHA512.Create();
-        Password.ComputeHash(Encoding.UTF8.GetBytes(""));
+        var NPassword = SHA512.Create();
+        NPassword.ComputeHash(Encoding.UTF8.GetBytes(""));
+        Password = NPassword.Hash.ToString();
         Address = string.Empty;
         Age = 0;
         PhoneNumber = string.Empty;
@@ -64,8 +65,9 @@ public class User
         UserId = uId; 
         FisrtName = fName;
         LastName = lName;
-        Password = SHA512.Create();
-        Password.ComputeHash(Encoding.UTF8.GetBytes(pWord));
+        SHA512 NPassword = SHA512.Create();
+        NPassword.ComputeHash(Encoding.UTF8.GetBytes(pWord));
+        Password = NPassword.Hash.ToString();
         Address = addr;
         Age = ag;
         PhoneNumber = pn;
@@ -85,8 +87,9 @@ public class User
         
         FisrtName = fName;
         LastName = lName;
-        Password = SHA512.Create();
-        Password.ComputeHash(Encoding.UTF8.GetBytes(pWord));
+        SHA512 NPassword = SHA512.Create();
+        NPassword.ComputeHash(Encoding.UTF8.GetBytes(pWord));
+        Password = NPassword.Hash.ToString();
         Address = addr;
         Age = ag;
         PhoneNumber = pn;
@@ -118,10 +121,13 @@ public class User
         //Transferes the current password into its hash
         var cPassHash = SHA512.Create();
         cPassHash.ComputeHash(Encoding.UTF8.GetBytes(cPass));
+        var cPassHashB = cPassHash.Hash.ToString;
 
-        if (!cPassHash.Equals(Password)) { return 1; }//If the current password is incorect the opperation fails
+        if (!cPassHashB.Equals(Password)) { return 1; }//If the current password is incorect the opperation fails
 
-        Password.ComputeHash(Encoding.UTF8.GetBytes(nPass));//Sets the user's password to the new password.
+        SHA512 NPassword = SHA512.Create();
+        NPassword.ComputeHash(Encoding.UTF8.GetBytes(nPass));//Sets the user's password to the new password.
+        Password = NPassword.Hash.ToString();
 
         return 0;
 
@@ -142,6 +148,15 @@ public class User
     public uint AddPoints(uint nPoints) { Points += nPoints; return Points; }
     public uint SubPoints(uint nPoints) { Points -= nPoints; return Points; }
 
-   
+    public bool Validate(string cPass)
+    {
+        //Transferes the current password into its hash
+        var cPassHash = SHA512.Create();
+        cPassHash.ComputeHash(Encoding.UTF8.GetBytes(cPass));
+        var cPassHashB = cPassHash.Hash.ToString();
+
+        if (!cPassHashB.Equals(Password)) { return false; }//If the current password is incorect the opperation fails
+        else { return true; }
+    }
 
 }
