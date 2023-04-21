@@ -10,7 +10,7 @@ public partial class FlightsForm : Form
         InitializeComponent();
         PopulateBoxes();
         ShowEmployeeTab();
-        LogedInLable.Text = "Loged in as: " + ApplicationData.AppUser.FisrtName + " " + ApplicationData.AppUser.LastName + "\nUser ID: " + ApplicationData.AppUser.UserId;
+        LogedInLable.Text = "Logged in as: " + ApplicationData.AppUser.FisrtName + " " + ApplicationData.AppUser.LastName + "\nUser ID: " + ApplicationData.AppUser.UserId;
     }
 
     /*
