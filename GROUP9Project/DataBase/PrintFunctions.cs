@@ -36,15 +36,15 @@ public static class PrintFunctions
         if (pARoute != null)
         {
             string output = PrintRoute(pDRoute) + "\n Departing at " + pDRoute.SchedualTime + ":00, Ariving at " 
-                + (pDRoute.SchedualTime + PlanesAirportsDistances.GetRouteTime(pDRoute)) + ":00 " + 
+                + (pDRoute.SchedualTime + PlanesAirportsDistances.GetRouteTime(pDRoute)) + ":00\nPrice: $" + PlanesAirportsDistances.CalculatePrice(pDRoute) +
                 PrintRoute(pARoute) + "\n Departing at " + pARoute.SchedualTime + ":00, Ariving at "
-                + (pARoute.SchedualTime + PlanesAirportsDistances.GetRouteTime(pARoute)) + ":00\nPrice: $";
+                + (pARoute.SchedualTime + PlanesAirportsDistances.GetRouteTime(pARoute)) + ":00\nPrice: $" + PlanesAirportsDistances.CalculatePrice(pARoute);
             return output;
         }
         else
         {
             string output = PrintRoute(pDRoute) + "\n Departing at " + pDRoute.SchedualTime + ":00, Ariving at "
-                + (pDRoute.SchedualTime + PlanesAirportsDistances.GetRouteTime(pDRoute)) + ":00 ";
+                + (pDRoute.SchedualTime + PlanesAirportsDistances.GetRouteTime(pDRoute)) + ":00\nPrice: $" + PlanesAirportsDistances.CalculatePrice(pDRoute);
             return output;
         }
     }

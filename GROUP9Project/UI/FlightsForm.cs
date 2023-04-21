@@ -10,6 +10,7 @@ public partial class FlightsForm : Form
         InitializeComponent();
         PopulateBoxes();
         ShowEmployeeTab();
+        LogedInLable.Text = "Loged in as: " + ApplicationData.AppUser.FisrtName + " " + ApplicationData.AppUser.LastName + "\nUser ID: " + ApplicationData.AppUser.UserId;
     }
 
     /*
@@ -25,6 +26,11 @@ public partial class FlightsForm : Form
         st = (AirportEnum)DepartComboBox.SelectedIndex;
         ed = (AirportEnum)ArriveComboBox.SelectedIndex;
 
+        Flight1Price = 0;
+        Flight2Price = 0;
+        Flight3Price = 0;
+        Flight4Price = 0;
+        PriceBox.Text = "Toal Price: $0.00";
 
         FirstFlightListBox.BeginUpdate();
         if (PossibleRoutes1 != null)
@@ -316,12 +322,18 @@ public partial class FlightsForm : Form
         {
             Flight1Info.Text = PrintFunctions.PrintFlightData(PossibleRoutes1.ElementAt(ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex)),
                 PossibleRoutes1.ElementAt(1 + ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex)));
+            Flight1Price = PlanesAirportsDistances.CalculatePrice(PossibleRoutes1.ElementAt(ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex)));
+            Flight2Price = PlanesAirportsDistances.CalculatePrice(PossibleRoutes1.ElementAt(1 + ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex)));
         }
         //If it is a one leg flight just the selected is printed.
         else 
         {
             Flight1Info.Text = PrintFunctions.PrintFlightData(PossibleRoutes1.ElementAt(ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex)));
+            Flight1Price = PlanesAirportsDistances.CalculatePrice(PossibleRoutes1.ElementAt(ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex)));
+            Flight2Price = 0;
         }
+        PriceBox.Text = "Toal Price: $" + (Flight1Price + Flight2Price + Flight3Price + Flight4Price);
+
     }
 
     private void SecondFlightListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -331,11 +343,16 @@ public partial class FlightsForm : Form
         {
             Flight2Info.Text = PrintFunctions.PrintFlightData(PossibleRoutes2.ElementAt(ListBoxToRoute2.ElementAt(SecondFlightListBox.SelectedIndex)),
                 PossibleRoutes2.ElementAt(1 + ListBoxToRoute2.ElementAt(SecondFlightListBox.SelectedIndex)));
+            Flight3Price = PlanesAirportsDistances.CalculatePrice(PossibleRoutes2.ElementAt(ListBoxToRoute2.ElementAt(FirstFlightListBox.SelectedIndex)));
+            Flight4Price = PlanesAirportsDistances.CalculatePrice(PossibleRoutes2.ElementAt(1 + ListBoxToRoute2.ElementAt(FirstFlightListBox.SelectedIndex)));
         }
         //If it is a one leg flight just the selected is printed.
         else
         {
             Flight2Info.Text = PrintFunctions.PrintFlightData(PossibleRoutes2.ElementAt(ListBoxToRoute2.ElementAt(SecondFlightListBox.SelectedIndex)));
+            Flight3Price = PlanesAirportsDistances.CalculatePrice(PossibleRoutes2.ElementAt(ListBoxToRoute2.ElementAt(FirstFlightListBox.SelectedIndex)));
+            Flight4Price = 0;
         }
+        PriceBox.Text = "Toal Price: $" + (Flight1Price + Flight2Price + Flight3Price + Flight4Price);
     }
 }

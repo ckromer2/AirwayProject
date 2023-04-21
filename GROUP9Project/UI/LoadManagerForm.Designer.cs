@@ -38,6 +38,7 @@
             this.AddRouteButton = new System.Windows.Forms.Button();
             this.RemoveRouteButton = new System.Windows.Forms.Button();
             this.ModifyRouteButton = new System.Windows.Forms.Button();
+            this.LogedInLable = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +58,7 @@
             // 
             this.EmployeeTab.AutoSize = true;
             this.EmployeeTab.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.EmployeeTab.Location = new System.Drawing.Point(553, 9);
+            this.EmployeeTab.Location = new System.Drawing.Point(314, 9);
             this.EmployeeTab.Name = "EmployeeTab";
             this.EmployeeTab.Size = new System.Drawing.Size(109, 30);
             this.EmployeeTab.TabIndex = 6;
@@ -67,7 +68,7 @@
             // 
             this.HistoryTab.AutoSize = true;
             this.HistoryTab.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.HistoryTab.Location = new System.Drawing.Point(385, 9);
+            this.HistoryTab.Location = new System.Drawing.Point(226, 9);
             this.HistoryTab.Name = "HistoryTab";
             this.HistoryTab.Size = new System.Drawing.Size(82, 30);
             this.HistoryTab.TabIndex = 7;
@@ -89,7 +90,7 @@
             // 
             this.RewardsTab.AutoSize = true;
             this.RewardsTab.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RewardsTab.Location = new System.Drawing.Point(213, 9);
+            this.RewardsTab.Location = new System.Drawing.Point(126, 9);
             this.RewardsTab.Name = "RewardsTab";
             this.RewardsTab.Size = new System.Drawing.Size(94, 30);
             this.RewardsTab.TabIndex = 8;
@@ -147,11 +148,20 @@
             this.ModifyRouteButton.Text = "Modify Route";
             this.ModifyRouteButton.UseVisualStyleBackColor = true;
             // 
+            // LogedInLable
+            // 
+            this.LogedInLable.AutoSize = true;
+            this.LogedInLable.Location = new System.Drawing.Point(633, 9);
+            this.LogedInLable.Name = "LogedInLable";
+            this.LogedInLable.Size = new System.Drawing.Size(0, 15);
+            this.LogedInLable.TabIndex = 24;
+            // 
             // LoadManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.LogedInLable);
             this.Controls.Add(this.ModifyRouteButton);
             this.Controls.Add(this.RemoveRouteButton);
             this.Controls.Add(this.AddRouteButton);
@@ -179,5 +189,6 @@
         private Button AddRouteButton;
         private Button RemoveRouteButton;
         private Button ModifyRouteButton;
+        private Label LogedInLable;
     }
 }

@@ -31,6 +31,7 @@ namespace GROUP9Project.UI
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.LogedInLable = new System.Windows.Forms.Label();
             this.EmployeeTab = new System.Windows.Forms.Label();
             this.HistoryTab = new System.Windows.Forms.Label();
             this.FlightsTab = new System.Windows.Forms.Label();
@@ -59,6 +60,7 @@ namespace GROUP9Project.UI
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.LogedInLable);
             this.panel1.Controls.Add(this.EmployeeTab);
             this.panel1.Controls.Add(this.HistoryTab);
             this.panel1.Controls.Add(this.FlightsTab);
@@ -69,11 +71,20 @@ namespace GROUP9Project.UI
             this.panel1.Size = new System.Drawing.Size(800, 62);
             this.panel1.TabIndex = 17;
             // 
+            // LogedInLable
+            // 
+            this.LogedInLable.AutoSize = true;
+            this.LogedInLable.Location = new System.Drawing.Point(633, 9);
+            this.LogedInLable.Name = "LogedInLable";
+            this.LogedInLable.Size = new System.Drawing.Size(76, 30);
+            this.LogedInLable.TabIndex = 9;
+            this.LogedInLable.Text = "";
+            // 
             // EmployeeTab
             // 
             this.EmployeeTab.AutoSize = true;
             this.EmployeeTab.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.EmployeeTab.Location = new System.Drawing.Point(553, 9);
+            this.EmployeeTab.Location = new System.Drawing.Point(314, 9);
             this.EmployeeTab.Name = "EmployeeTab";
             this.EmployeeTab.Size = new System.Drawing.Size(109, 30);
             this.EmployeeTab.TabIndex = 6;
@@ -84,7 +95,7 @@ namespace GROUP9Project.UI
             // 
             this.HistoryTab.AutoSize = true;
             this.HistoryTab.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.HistoryTab.Location = new System.Drawing.Point(385, 9);
+            this.HistoryTab.Location = new System.Drawing.Point(226, 9);
             this.HistoryTab.Name = "HistoryTab";
             this.HistoryTab.Size = new System.Drawing.Size(82, 30);
             this.HistoryTab.TabIndex = 7;
@@ -105,7 +116,7 @@ namespace GROUP9Project.UI
             // 
             this.RewardsTab.AutoSize = true;
             this.RewardsTab.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RewardsTab.Location = new System.Drawing.Point(213, 9);
+            this.RewardsTab.Location = new System.Drawing.Point(126, 9);
             this.RewardsTab.Name = "RewardsTab";
             this.RewardsTab.Size = new System.Drawing.Size(94, 30);
             this.RewardsTab.TabIndex = 8;
@@ -279,27 +290,27 @@ namespace GROUP9Project.UI
             this.Flight1Info.AutoSize = true;
             this.Flight1Info.Location = new System.Drawing.Point(262, 307);
             this.Flight1Info.Name = "Flight1Info";
-            this.Flight1Info.Size = new System.Drawing.Size(38, 15);
+            this.Flight1Info.Size = new System.Drawing.Size(0, 15);
             this.Flight1Info.TabIndex = 43;
-            this.Flight1Info.Text = "label6";
             // 
             // Flight2Info
             // 
             this.Flight2Info.AutoSize = true;
             this.Flight2Info.Location = new System.Drawing.Point(531, 304);
             this.Flight2Info.Name = "Flight2Info";
-            this.Flight2Info.Size = new System.Drawing.Size(38, 15);
+            this.Flight2Info.Size = new System.Drawing.Size(0, 15);
             this.Flight2Info.TabIndex = 44;
-            this.Flight2Info.Text = "label6";
             // 
             // PriceBox
             // 
             this.PriceBox.AutoSize = true;
-            this.PriceBox.Location = new System.Drawing.Point(750, 373);
+            this.PriceBox.Location = new System.Drawing.Point(659, 372);
             this.PriceBox.Name = "PriceBox";
-            this.PriceBox.Size = new System.Drawing.Size(38, 15);
+            this.PriceBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.PriceBox.Size = new System.Drawing.Size(64, 15);
             this.PriceBox.TabIndex = 45;
-            this.PriceBox.Text = "label6";
+            this.PriceBox.Text = "Total Price:";
+            this.PriceBox.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // FlightsForm
             // 
@@ -367,5 +378,10 @@ namespace GROUP9Project.UI
         private Label Flight1Info;
         private Label Flight2Info;
         private Label PriceBox;
+        private float Flight1Price;
+        private float Flight2Price;
+        private float Flight3Price;
+        private float Flight4Price;
+        private Label LogedInLable;
     }
 }

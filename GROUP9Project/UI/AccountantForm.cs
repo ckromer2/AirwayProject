@@ -17,6 +17,8 @@ namespace GROUP9Project.UI
         {
             InitializeComponent();
             ShowEmployeeTab();
+            LogedInLable.Text = "Loged in as: " + ApplicationData.AppUser.FisrtName + " " + ApplicationData.AppUser.LastName + "\nUser ID: " + ApplicationData.AppUser.UserId;
+
         }
 
         private void ShowEmployeeTab()

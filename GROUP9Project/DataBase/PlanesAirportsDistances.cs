@@ -116,12 +116,20 @@ public static class PlanesAirportsDistances
         return (int)Math.Ceiling(FlightTime);
     }
 
-    public static int CalculatePrice(List<Route> flights)
+    //Calculates the price for a given route
+    public static float CalculatePrice(Route flight)
     {
-        int Price = 0;
+        //Fixed Cost + TSA fee + 12c*distance.
+        float Price = 50 + 8 + 0.12f * Distances.ElementAt((int)flight.Start).ElementAt((int)flight.End);
 
+        //Red eye discount if the flight leaves before five or arives after midnight
+        if (flight.SchedualTime <= 5 || (flight.SchedualTime+GetRouteTime(flight)) > 24)
+            Price -= Price * 0.2f;
+        //Off peak discount if the flight leaves after 5Am but before 8Am or if the flight arives after 7PM but before midnight.
+        else if ((5 < flight.SchedualTime && flight.SchedualTime <= 8) || (19 < flight.SchedualTime && flight.SchedualTime <= 24))
+            Price -= Price * 0.1f;
 
-        return Price;
+        return (float)Math.Round(Price, 2);
     }
 
 }

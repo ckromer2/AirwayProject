@@ -10,6 +10,7 @@ public partial class HistoryForm : Form
         InitializeComponent();
         FillListBoxes();
         ShowEmployeeTab();
+        LogedInLable.Text = "Loged in as: " + ApplicationData.AppUser.FisrtName + " " + ApplicationData.AppUser.LastName + "\nUser ID: " + ApplicationData.AppUser.UserId;
     }
 
     /*

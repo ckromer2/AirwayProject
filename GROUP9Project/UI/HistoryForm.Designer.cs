@@ -43,11 +43,13 @@ namespace GROUP9Project.UI
             this.CancelledFlightsListBox = new System.Windows.Forms.ListBox();
             this.PrintPassButton = new System.Windows.Forms.Button();
             this.CancelFlightButton = new System.Windows.Forms.Button();
+            this.LogedInLable = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.LogedInLable);
             this.panel1.Controls.Add(this.EmployeeTab);
             this.panel1.Controls.Add(this.HistoryTab);
             this.panel1.Controls.Add(this.FlightsTab);
@@ -62,7 +64,7 @@ namespace GROUP9Project.UI
             // 
             this.EmployeeTab.AutoSize = true;
             this.EmployeeTab.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.EmployeeTab.Location = new System.Drawing.Point(553, 9);
+            this.EmployeeTab.Location = new System.Drawing.Point(314, 9);
             this.EmployeeTab.Name = "EmployeeTab";
             this.EmployeeTab.Size = new System.Drawing.Size(109, 30);
             this.EmployeeTab.TabIndex = 6;
@@ -73,7 +75,7 @@ namespace GROUP9Project.UI
             // 
             this.HistoryTab.AutoSize = true;
             this.HistoryTab.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.HistoryTab.Location = new System.Drawing.Point(385, 9);
+            this.HistoryTab.Location = new System.Drawing.Point(226, 9);
             this.HistoryTab.Name = "HistoryTab";
             this.HistoryTab.Size = new System.Drawing.Size(82, 30);
             this.HistoryTab.TabIndex = 7;
@@ -94,7 +96,7 @@ namespace GROUP9Project.UI
             // 
             this.RewardsTab.AutoSize = true;
             this.RewardsTab.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RewardsTab.Location = new System.Drawing.Point(213, 9);
+            this.RewardsTab.Location = new System.Drawing.Point(126, 9);
             this.RewardsTab.Name = "RewardsTab";
             this.RewardsTab.Size = new System.Drawing.Size(94, 30);
             this.RewardsTab.TabIndex = 8;
@@ -187,6 +189,14 @@ namespace GROUP9Project.UI
             this.CancelFlightButton.UseVisualStyleBackColor = true;
             this.CancelFlightButton.Click += new System.EventHandler(this.CancelFlightButtonClick);
             // 
+            // LogedInLable
+            // 
+            this.LogedInLable.AutoSize = true;
+            this.LogedInLable.Location = new System.Drawing.Point(633, 9);
+            this.LogedInLable.Name = "LogedInLable";
+            this.LogedInLable.Size = new System.Drawing.Size(0, 15);
+            this.LogedInLable.TabIndex = 25;
+            // 
             // HistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -228,6 +238,6 @@ namespace GROUP9Project.UI
         private List<DataBase.BookingRecord> BookedFlights;
         private List<DataBase.BookingRecord> TakenFlights;
         private List<DataBase.BookingRecord> CancelledFlights;
-
+        private Label LogedInLable;
     }
 }
