@@ -26,7 +26,10 @@ public partial class FlightsForm : Form
     {
         //Setsup data to be used later in the program
         st = (AirportEnum)DepartComboBox.SelectedIndex;
-        ed = (AirportEnum)ArriveComboBox.SelectedIndex;
+        if(DepartComboBox.SelectedIndex > ArriveComboBox.SelectedIndex)
+            ed = (AirportEnum)ArriveComboBox.SelectedIndex;
+        else
+            ed = (AirportEnum)ArriveComboBox.SelectedIndex+1;
 
         Flight1Price = 0;
         Flight2Price = 0;
@@ -38,6 +41,10 @@ public partial class FlightsForm : Form
         Flight2 = null;
         Flight3 = null;
         Flight4 = null;
+
+        Flight1Info.Text = "";
+        Flight2Info.Text = "";
+
 
         FirstFlightListBox.BeginUpdate();
         if (PossibleRoutes1 != null)
@@ -67,7 +74,7 @@ public partial class FlightsForm : Form
             for (int i = 0; i < PossibleRoutes1.Count; i++)
             {
                 var tmp = PossibleRoutes1.ElementAt(i);
-                if (tmp.End == (AirportEnum)ArriveComboBox.SelectedIndex)
+                if (tmp.End == ed)
                 {
                     FirstFlightListBox.Items.Add(PrintFunctions.PrintRoute(tmp));
                     ListBoxToRoute1.Add(i);
@@ -83,7 +90,7 @@ public partial class FlightsForm : Form
             if (RoundTripCheckBox.Checked == true)
             {
                 //Finds all the routes that match the criteria
-                PossibleRoutes2 = FindRoutes((AirportEnum)ArriveComboBox.SelectedIndex, (AirportEnum)DepartComboBox.SelectedIndex, ReturnDatePicker.Value.DayOfWeek);
+                PossibleRoutes2 = FindRoutes(ed, st, ReturnDatePicker.Value.DayOfWeek);
                 //Loops through the list printing the string for the single case as well as the dual case
                 if (PossibleRoutes2.Count != 0)
                 {
@@ -191,54 +198,60 @@ public partial class FlightsForm : Form
         //Generates a list of fligths to show the user
         List<Route> OutputRoutes = new List<Route>();
         OutputRoutes.AddRange(ApplicationData.Connection.GetRouteStartEnd(Start, End));
+
+        List<int> RemovalTracker = new List<int>();
+        int rIndex = 0;
+
         //Loops through the direct routes and removes ones that dont match the day of week supplied.
         foreach (Route route in OutputRoutes)
         {
             if (route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour)
             {
-                OutputRoutes.Remove(route);
+                RemovalTracker.Add(rIndex-RemovalTracker.Count());
             }
+            rIndex++;
         }
+        foreach(int i in RemovalTracker)
+            if(i >= 0)
+                OutputRoutes.Remove(OutputRoutes.ElementAt(i));
+
         //Now Comes the hard part
         //Gets the routes from the departure airport removeing the direct routes
         List<Route> IDRoutes = ApplicationData.Connection.GetRouteStart(Start);
-        List<int> RemovalTracker = new List<int>();
-        int rIndex = 0;
+        RemovalTracker = new List<int>();
+        rIndex = 0;
         foreach (Route route in IDRoutes)
         {
             if ((route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour) || route.End == End || route == ApplicationData.nullRoute)
             {
-                RemovalTracker.Add(rIndex);
+                RemovalTracker.Add(rIndex-RemovalTracker.Count());
             }
             rIndex++;
         }
         foreach (int i in RemovalTracker)
-        {
-            IDRoutes.Remove(IDRoutes.ElementAt(i));
-        }
-
+            if (i >= 0)
+                IDRoutes.Remove(IDRoutes.ElementAt(i));
    
 
         //Gets all the routes to the destination airport removing the direct routes
-        List<Route> IARoutes = ApplicationData.Connection.GetRouteStart(End);
-        RemovalTracker.Clear();
+        List<Route> IARoutes = ApplicationData.Connection.GetRouteEnd(End);
+        RemovalTracker = new List<int>();
         rIndex = 0;
+        
         foreach (Route route in IARoutes)
         {
             //removes all the fligths not schedualled for this day or the next
-            if ((route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour) || route.ScheduleDate != Day+1 || route.Start == Start || route == ApplicationData.nullRoute)
+            if ((route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour && route.ScheduleDate != Day+1) || route.Start == Start || route == ApplicationData.nullRoute)
             {
-                RemovalTracker.Add(rIndex);
+                RemovalTracker.Add(rIndex - RemovalTracker.Count());
             } 
             rIndex++;
         }
         foreach (int i in RemovalTracker)
-        {
-            IDRoutes.Remove(IARoutes.ElementAt(i));
-        }
-
+            if (i >= 0)
+                IARoutes.Remove(IARoutes.ElementAt(i));
         //Loops through all the routs from the departure airport and to the destination if any share an intermediate link
-        if (IDRoutes.Count != 0 && IARoutes.Count != 0)
+        if (IDRoutes != null && IARoutes != null)
         {
             foreach (Route DRoute in IDRoutes)
             {
@@ -286,24 +299,27 @@ public partial class FlightsForm : Form
         if (Flight1 != null)
         {
             //Gets the actual flights that will be baught
-            Flight F1 = ApplicationData.Connection.GetFlightTime(Flight1.RouteId, DepartureDatePicker.Value.AddHours(Flight1.SchedualTime));
+            Flight F1 = ApplicationData.Connection.GetFlightTime(Flight1.RouteId, DepartureDatePicker.Value.Date.AddHours(Flight1.SchedualTime));
             Flight? F2 = null;
             if (Flight2 != null)
-                F2 = ApplicationData.Connection.GetFlightTime(Flight2.RouteId, DepartureDatePicker.Value.AddHours(Flight2.SchedualTime));
+                F2 = ApplicationData.Connection.GetFlightTime(Flight2.RouteId, DepartureDatePicker.Value.Date.AddHours(Flight2.SchedualTime));
             Flight? F3 = null;
             if (Flight3 != null)
-                F3 = ApplicationData.Connection.GetFlightTime(Flight3.RouteId, DepartureDatePicker.Value.AddHours(Flight3.SchedualTime));
+                F3 = ApplicationData.Connection.GetFlightTime(Flight3.RouteId, ReturnDatePicker.Value.Date.AddHours(Flight3.SchedualTime));
             Flight? F4 = null;
             if (Flight4 != null)
-                F4 = ApplicationData.Connection.GetFlightTime(Flight4.RouteId, DepartureDatePicker.Value.AddHours(Flight4.SchedualTime));
+                F4 = ApplicationData.Connection.GetFlightTime(Flight4.RouteId, ReturnDatePicker.Value.Date.AddHours(Flight4.SchedualTime));
 
             //Checks if the points box is clicked then checks if the user has enough points
             //If not an error message is shown otherwise the propper creation function is called.
             if (PointsCheckBox.Checked)
             {
-                if ((Flight1Price + Flight2Price + Flight3Price + Flight4Price) * 100 > ApplicationData.AppUser.Points)
+                if ((Flight1Price + Flight2Price + Flight3Price + Flight4Price) * 100 < ApplicationData.AppUser.Points)
                 {
                     CustomerManager.BookingPoints(F1, Flight1Price, F2, Flight2Price, F3, Flight3Price, F4, Flight4Price);
+                    MessageBox.Show("Flights Schedualed.");
+                    ApplicationData.AppUser.SubPoints((uint)(Flight1Price + Flight2Price + Flight3Price + Flight4Price) * 100);
+                    ApplicationData.Connection.UpdateUser(ApplicationData.AppUser);
                 }
                 else
                     MessageBox.Show("Not enough points in account to purchase these flights.");
@@ -311,8 +327,9 @@ public partial class FlightsForm : Form
             else
             {
                 CustomerManager.BookingNoPoints(F1, Flight1Price, F2, Flight2Price, F3, Flight3Price, F4, Flight4Price);
+                MessageBox.Show("Flights Schedualed.");
             }
-
+            
         }
         else
             MessageBox.Show("At least one flight must be selected.");
@@ -356,75 +373,79 @@ public partial class FlightsForm : Form
 
     private void FirstFlightListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //iF this is not a one leg flight the selecte index plus the next is added to the print function.
-        if (PossibleRoutes1.ElementAt(ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex)).End != ed)
+        if (FirstFlightListBox.SelectedIndex >= 0)
         {
-            //Sets the local flight variables
-            Flight1 = PossibleRoutes1.ElementAt(ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex));
-            Flight2 = PossibleRoutes1.ElementAt(1 + ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex));
+            //iF this is not a one leg flight the selecte index plus the next is added to the print function.
+            if (PossibleRoutes1.ElementAt(ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex)).End != ed)
+            {
+                //Sets the local flight variables
+                Flight1 = PossibleRoutes1.ElementAt(ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex));
+                Flight2 = PossibleRoutes1.ElementAt(1 + ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex));
 
-            //Sets the string to the flights info
-            Flight1Info.Text = PrintFunctions.PrintFlightData(Flight1, Flight2);
+                //Sets the string to the flights info
+                Flight1Info.Text = PrintFunctions.PrintFlightData(Flight1, Flight2);
 
-            //Sets the prices for the flights in this context
-            Flight1Price = PlanesAirportsDistances.CalculatePrice(Flight1);
-            Flight2Price = PlanesAirportsDistances.CalculatePrice(Flight2);
+                //Sets the prices for the flights in this context
+                Flight1Price = PlanesAirportsDistances.CalculatePrice(Flight1);
+                Flight2Price = PlanesAirportsDistances.CalculatePrice(Flight2);
 
+            }
+            //If it is a one leg flight just the selected is printed.
+            else
+            {
+                //Sets the local flight variables
+                Flight1 = PossibleRoutes1.ElementAt(ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex));
+                Flight2 = null;
+
+                //Sets the string to the flights info
+                Flight1Info.Text = PrintFunctions.PrintFlightData(Flight1);
+
+                //Sets the prices for the flights in this context
+                Flight1Price = PlanesAirportsDistances.CalculatePrice(Flight1);
+                Flight2Price = 0;
+
+            }
+            //Sets the total price fo the slected flights
+            PriceBox.Text = "Toal Price: $" + (Flight1Price + Flight2Price + Flight3Price + Flight4Price);
         }
-        //If it is a one leg flight just the selected is printed.
-        else 
-        {
-            //Sets the local flight variables
-            Flight1 = PossibleRoutes1.ElementAt(ListBoxToRoute1.ElementAt(FirstFlightListBox.SelectedIndex));
-            Flight2 = null;
-
-            //Sets the string to the flights info
-            Flight1Info.Text = PrintFunctions.PrintFlightData(Flight1);
-            
-            //Sets the prices for the flights in this context
-            Flight1Price = PlanesAirportsDistances.CalculatePrice(Flight1);
-            Flight2Price = 0;
-
-        }
-        //Sets the total price fo the slected flights
-        PriceBox.Text = "Toal Price: $" + (Flight1Price + Flight2Price + Flight3Price + Flight4Price);
-
     }
 
     private void SecondFlightListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //iF this is not a one leg flight the selecte index plus the next is added to the print function.
-        if (PossibleRoutes2.ElementAt(ListBoxToRoute2.ElementAt(SecondFlightListBox.SelectedIndex)).End != ed)
+        if (SecondFlightListBox.SelectedIndex >= 0)
         {
-            //Sets the local flight variables
-            Flight3 = PossibleRoutes2.ElementAt(ListBoxToRoute2.ElementAt(SecondFlightListBox.SelectedIndex));
-            Flight4 = PossibleRoutes2.ElementAt(1 + ListBoxToRoute2.ElementAt(FirstFlightListBox.SelectedIndex));
+            //iF this is not a one leg flight the selecte index plus the next is added to the print function.
+            if (PossibleRoutes2.ElementAt(ListBoxToRoute2.ElementAt(SecondFlightListBox.SelectedIndex)).End != st)
+            {
+                //Sets the local flight variables
+                Flight3 = PossibleRoutes2.ElementAt(ListBoxToRoute2.ElementAt(SecondFlightListBox.SelectedIndex));
+                Flight4 = PossibleRoutes2.ElementAt(1 + ListBoxToRoute2.ElementAt(FirstFlightListBox.SelectedIndex));
 
-            //Sets the string to the flights info
-            Flight2Info.Text = PrintFunctions.PrintFlightData(Flight3, Flight4);
+                //Sets the string to the flights info
+                Flight2Info.Text = PrintFunctions.PrintFlightData(Flight3, Flight4);
 
-            //Sets the prices for the flights in this context
-            Flight3Price = PlanesAirportsDistances.CalculatePrice(Flight3);
-            Flight4Price = PlanesAirportsDistances.CalculatePrice(Flight4);
+                //Sets the prices for the flights in this context
+                Flight3Price = PlanesAirportsDistances.CalculatePrice(Flight3);
+                Flight4Price = PlanesAirportsDistances.CalculatePrice(Flight4);
 
+            }
+            //If it is a one leg flight just the selected is printed.
+            else
+            {
+                //Sets the local flight variables
+                Flight3 = PossibleRoutes2.ElementAt(ListBoxToRoute2.ElementAt(SecondFlightListBox.SelectedIndex));
+                Flight4 = null;
+
+                //Sets the string to the flights info
+                Flight2Info.Text = PrintFunctions.PrintFlightData(Flight3);
+
+                //Sets the prices for the flights in this context
+                Flight3Price = PlanesAirportsDistances.CalculatePrice(Flight3);
+                Flight4Price = 0;
+
+            }
+            //Sets the total price fo the slected flights
+            PriceBox.Text = "Toal Price: $" + (Flight1Price + Flight2Price + Flight3Price + Flight4Price);
         }
-        //If it is a one leg flight just the selected is printed.
-        else
-        {
-            //Sets the local flight variables
-            Flight3 = PossibleRoutes2.ElementAt(ListBoxToRoute2.ElementAt(SecondFlightListBox.SelectedIndex));
-            Flight4 = null;
-
-            //Sets the string to the flights info
-            Flight2Info.Text = PrintFunctions.PrintFlightData(Flight3);
-
-            //Sets the prices for the flights in this context
-            Flight3Price = PlanesAirportsDistances.CalculatePrice(Flight3);
-            Flight4Price = 0;
-
-        }
-        //Sets the total price fo the slected flights
-        PriceBox.Text = "Toal Price: $" + (Flight1Price + Flight2Price + Flight3Price + Flight4Price);
-
     }
 }

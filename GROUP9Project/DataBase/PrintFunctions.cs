@@ -12,7 +12,7 @@ public static class PrintFunctions
         Flight pFlight = ApplicationData.Connection.GetFlight(Record.FlightId);
         Route pRoute = ApplicationData.Connection.GetRoute(pFlight.RouteId);
 
-        string Output = Record.FlightId.ToString() + ": " + PlanesAirportsDistances.AirportsCode.ElementAt((int)pRoute.Start) + 
+        string Output = PlanesAirportsDistances.AirportsCode.ElementAt((int)pRoute.Start) + 
             " to " + PlanesAirportsDistances.AirportsCode.ElementAt((int)pRoute.End) + " Leaving at " + pFlight.FlightDate.ToString();
 
         return Output;
@@ -27,7 +27,7 @@ public static class PrintFunctions
     internal static string PrintRouteDual(Route pDRoute, Route pARoute)
     {
         string output = PlanesAirportsDistances.AirportsCode.ElementAt((int)pDRoute.Start) + " -> " + PlanesAirportsDistances.AirportsCode.ElementAt((int)pDRoute.End) 
-            + " -> " + PlanesAirportsDistances.AirportsCode.ElementAt((int)pARoute.Start);
+            + " -> " + PlanesAirportsDistances.AirportsCode.ElementAt((int)pARoute.End);
         return output;
     }
 
@@ -35,15 +35,15 @@ public static class PrintFunctions
     {
         if (pARoute != null)
         {
-            string output = PrintRoute(pDRoute) + "\n Departing at " + pDRoute.SchedualTime + ":00, Ariving at " 
+            string output = PrintRoute(pDRoute) + "\nDeparting at " + pDRoute.SchedualTime + ":00, Ariving at " 
                 + (pDRoute.SchedualTime + PlanesAirportsDistances.GetRouteTime(pDRoute)) + ":00\nPrice: $" + PlanesAirportsDistances.CalculatePrice(pDRoute) +
-                PrintRoute(pARoute) + "\n Departing at " + pARoute.SchedualTime + ":00, Ariving at "
+                "\n" + PrintRoute(pARoute) + "\nDeparting at " + pARoute.SchedualTime + ":00, Ariving at "
                 + (pARoute.SchedualTime + PlanesAirportsDistances.GetRouteTime(pARoute)) + ":00\nPrice: $" + PlanesAirportsDistances.CalculatePrice(pARoute);
             return output;
         }
         else
         {
-            string output = PrintRoute(pDRoute) + "\n Departing at " + pDRoute.SchedualTime + ":00, Ariving at "
+            string output = PrintRoute(pDRoute) + "\nDeparting at " + pDRoute.SchedualTime + ":00, Ariving at "
                 + (pDRoute.SchedualTime + PlanesAirportsDistances.GetRouteTime(pDRoute)) + ":00\nPrice: $" + PlanesAirportsDistances.CalculatePrice(pDRoute);
             return output;
         }
