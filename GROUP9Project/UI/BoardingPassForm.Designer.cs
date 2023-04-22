@@ -33,16 +33,17 @@
             this.HistoryTab = new System.Windows.Forms.Label();
             this.FlightsTab = new System.Windows.Forms.Label();
             this.RewardsTab = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.NameLable = new System.Windows.Forms.Label();
+            this.AccountLable = new System.Windows.Forms.Label();
+            this.ArrivalLable = new System.Windows.Forms.Label();
+            this.DepartureLable = new System.Windows.Forms.Label();
             this.DepartureLabel = new System.Windows.Forms.Label();
             this.ArrivalLabel = new System.Windows.Forms.Label();
             this.AccountNumberLabel = new System.Windows.Forms.Label();
             this.NameLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.LogedInLable = new System.Windows.Forms.Label();
+            this.TimeLable = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,21 +63,23 @@
             // 
             this.EmployeeTab.AutoSize = true;
             this.EmployeeTab.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.EmployeeTab.Location = new System.Drawing.Point(553, 9);
+            this.EmployeeTab.Location = new System.Drawing.Point(314, 9);
             this.EmployeeTab.Name = "EmployeeTab";
             this.EmployeeTab.Size = new System.Drawing.Size(109, 30);
             this.EmployeeTab.TabIndex = 6;
             this.EmployeeTab.Text = "Employee";
+            this.EmployeeTab.Click += new System.EventHandler(this.EmployeeTab_Click);
             // 
             // HistoryTab
             // 
             this.HistoryTab.AutoSize = true;
             this.HistoryTab.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.HistoryTab.Location = new System.Drawing.Point(385, 9);
+            this.HistoryTab.Location = new System.Drawing.Point(226, 9);
             this.HistoryTab.Name = "HistoryTab";
             this.HistoryTab.Size = new System.Drawing.Size(82, 30);
             this.HistoryTab.TabIndex = 7;
             this.HistoryTab.Text = "History";
+            this.HistoryTab.Click += new System.EventHandler(this.HistoryTab_Click);
             // 
             // FlightsTab
             // 
@@ -87,60 +90,62 @@
             this.FlightsTab.Size = new System.Drawing.Size(75, 30);
             this.FlightsTab.TabIndex = 5;
             this.FlightsTab.Text = "Flights";
+            this.FlightsTab.Click += new System.EventHandler(this.FlightsTab_Click);
             // 
             // RewardsTab
             // 
             this.RewardsTab.AutoSize = true;
             this.RewardsTab.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RewardsTab.Location = new System.Drawing.Point(213, 9);
+            this.RewardsTab.Location = new System.Drawing.Point(126, 9);
             this.RewardsTab.Name = "RewardsTab";
             this.RewardsTab.Size = new System.Drawing.Size(94, 30);
             this.RewardsTab.TabIndex = 8;
             this.RewardsTab.Text = "Rewards";
+            this.RewardsTab.Click += new System.EventHandler(this.RewardsTab_Click);
             // 
-            // label1
+            // NameLable
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(140, 186);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 30);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Name:";
+            this.NameLable.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.NameLable.AutoSize = true;
+            this.NameLable.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.NameLable.Location = new System.Drawing.Point(126, 186);
+            this.NameLable.Name = "NameLable";
+            this.NameLable.Size = new System.Drawing.Size(76, 30);
+            this.NameLable.TabIndex = 18;
+            this.NameLable.Text = "Name:";
             // 
-            // label2
+            // AccountLable
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(140, 230);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 30);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "Account:";
+            this.AccountLable.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.AccountLable.AutoSize = true;
+            this.AccountLable.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.AccountLable.Location = new System.Drawing.Point(126, 216);
+            this.AccountLable.Name = "AccountLable";
+            this.AccountLable.Size = new System.Drawing.Size(96, 30);
+            this.AccountLable.TabIndex = 19;
+            this.AccountLable.Text = "Account:";
             // 
-            // label3
+            // ArrivalLable
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(423, 230);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 30);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "Arrival:";
+            this.ArrivalLable.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ArrivalLable.AutoSize = true;
+            this.ArrivalLable.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ArrivalLable.Location = new System.Drawing.Point(126, 310);
+            this.ArrivalLable.Name = "ArrivalLable";
+            this.ArrivalLable.Size = new System.Drawing.Size(80, 30);
+            this.ArrivalLable.TabIndex = 20;
+            this.ArrivalLable.Text = "Arrival:";
             // 
-            // label4
+            // DepartureLable
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(423, 186);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 30);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "Departure:";
+            this.DepartureLable.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.DepartureLable.AutoSize = true;
+            this.DepartureLable.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DepartureLable.Location = new System.Drawing.Point(126, 280);
+            this.DepartureLable.Name = "DepartureLable";
+            this.DepartureLable.Size = new System.Drawing.Size(116, 30);
+            this.DepartureLable.TabIndex = 21;
+            this.DepartureLable.Text = "Departure:";
             // 
             // DepartureLabel
             // 
@@ -195,27 +200,39 @@
             // 
             // LogedInLable
             // 
-            this.LogedInLable.AutoSize = true; 
+            this.LogedInLable.AutoSize = true;
             this.LogedInLable.Location = new System.Drawing.Point(633, 9);
             this.LogedInLable.Name = "LogedInLable";
             this.LogedInLable.Size = new System.Drawing.Size(0, 15);
             this.LogedInLable.TabIndex = 27;
+            // 
+            // TimeLable
+            // 
+            this.TimeLable.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.TimeLable.AutoSize = true;
+            this.TimeLable.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TimeLable.Location = new System.Drawing.Point(126, 250);
+            this.TimeLable.Name = "TimeLable";
+            this.TimeLable.Size = new System.Drawing.Size(72, 30);
+            this.TimeLable.TabIndex = 28;
+            this.TimeLable.Text = "Time: ";
             // 
             // BoardingPassForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.TimeLable);
             this.Controls.Add(this.LogedInLable);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.DepartureLabel);
             this.Controls.Add(this.ArrivalLabel);
             this.Controls.Add(this.AccountNumberLabel);
             this.Controls.Add(this.NameLabel);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.DepartureLable);
+            this.Controls.Add(this.ArrivalLable);
+            this.Controls.Add(this.AccountLable);
+            this.Controls.Add(this.NameLable);
             this.Controls.Add(this.panel1);
             this.Name = "BoardingPassForm";
             this.Text = "BoardingPassForm";
@@ -229,19 +246,20 @@
         #endregion
 
         private Panel panel1;
-        private Label EmployeeTab;
-        private Label HistoryTab;
         private Label FlightsTab;
-        private Label RewardsTab;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
+        private Label NameLable;
+        private Label AccountLable;
+        private Label ArrivalLable;
+        private Label DepartureLable;
         private Label DepartureLabel;
         private Label ArrivalLabel;
         private Label AccountNumberLabel;
         private Label NameLabel;
         private Label label5;
         private Label LogedInLable;
+        private Label EmployeeTab;
+        private Label HistoryTab;
+        private Label RewardsTab;
+        private Label TimeLable;
     }
 }
