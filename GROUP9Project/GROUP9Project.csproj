@@ -12,4 +12,10 @@
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="UI\AddRouteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>
