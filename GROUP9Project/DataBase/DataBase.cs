@@ -394,6 +394,32 @@ public class DataBase
     /*
      * By: Spencer P. Lowery
      *
+     * Date: 4/21/23
+     * 
+     * In: 
+     *      fId: The ID of the flight to be searched.
+     *      
+     * Out:
+     *      A list of all flights matching the above criteria
+     *      
+     * Function pull the databse for a given route object 
+     */
+    public Flight GetFlightTime(int rId, DateTime fTime)
+    {
+        try
+        {
+            var Output = db.Table<Flight>().Where(t => t.RouteId == rId && t.FlightDate == fTime).Single();//There will only ever be 1 element in this list so this action is safe.
+            return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            return ApplicationData.nullFlight;
+        }
+    }
+
+    /*
+     * By: Spencer P. Lowery
+     *
      * Date: 4/09/23
      * 
      * In: 

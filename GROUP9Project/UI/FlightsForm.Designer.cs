@@ -383,5 +383,9 @@ namespace GROUP9Project.UI
         private float Flight3Price;
         private float Flight4Price;
         private Label LogedInLable;
+        private Route Flight1;
+        private Route Flight2;
+        private Route Flight3;
+        private Route Flight4;
     }
 }
