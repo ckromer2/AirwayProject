@@ -45,27 +45,16 @@ namespace GROUP9Project.Controllers
             ApplicationData.Connection.AddUser(user); 
         }
 
-        
-        //// Helper method to get SHA512
-        //private static string GetSHA512Hash(string input)
-        //{
-        //    using (SHA512 sha512 = SHA512.Create())
-        //    {
-        //        byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-        //        byte[] hashBytes = sha512.ComputeHash(inputBytes);
-        //        StringBuilder builder = new StringBuilder();
-
-        //        for (int i = 0; i < hashBytes.Length; i++)
-        //        {
-        //            builder.Append(hashBytes[i].ToString("x2"));
-        //        }
-
-        //        return builder.ToString();
-        //    }
-        //}
-
-        public static void Rewards()
+        // Method used to calculate the used points of a specific user(used on rewards page)
+        public static uint calculateUsedRewards()
         {
+            // Sum up all the records that used points and make that the used points label
+            var listOfRecordsNotCancelled = ApplicationData.Connection.GetRecordsByUserNotCancelled(ApplicationData.AppUser.UserId);
+            uint sum = 0;
+            foreach (BookingRecord rec in listOfRecordsNotCancelled)
+                if (rec.PayedInPoints == true)
+                    sum += rec.Points;
+            return sum; 
         }
 
         public static void Booking( )

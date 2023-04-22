@@ -231,6 +231,21 @@ public class DataBase
         }
     }
 
+    // This gets all the booking records of a user that have not been cancelled
+    public List<BookingRecord> GetRecordsByUserNotCancelled(int uId)
+    {
+        try
+        {
+            var Output = db.Table<BookingRecord>().Where(t => t.UserId == uId && t.Canceled == false).ToList();
+            return Output;
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<BookingRecord> { ApplicationData.nullRecord };
+            return nOut;
+        }
+    }
+
     /*
      * By: Spencer P. Lowery
      *
