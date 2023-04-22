@@ -107,7 +107,7 @@ public partial class HistoryForm : Form
         if (BookedFlightsListBox.SelectedIndex != -1)
         {
             this.Hide();
-            UI.BoardingPassForm boardingPassForm = new UI.BoardingPassForm();
+            UI.BoardingPassForm boardingPassForm = new UI.BoardingPassForm(BookedFlights.ElementAt(BookedFlightsListBox.SelectedIndex));
             boardingPassForm.Closed += (s, args) => this.Close();
             boardingPassForm.Show();
             boardingPassForm.SetDesktopLocation(this.Location.X, this.Location.Y);

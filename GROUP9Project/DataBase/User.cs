@@ -50,9 +50,16 @@ public class User
         UserId = 0;
         FisrtName = string.Empty;
         LastName = string.Empty;
-        var NPassword = SHA512.Create();
-        NPassword.ComputeHash(Encoding.UTF8.GetBytes(""));
-        Password = NPassword.Hash.ToString();
+        // Generate sha512 and assign it to Password
+        SHA512 sha512 = SHA512.Create(); 
+        byte[] inputBytes = Encoding.UTF8.GetBytes("");
+        byte[] hashBytes = sha512.ComputeHash(inputBytes);
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < hashBytes.Length; i++)
+        {
+            builder.Append(hashBytes[i].ToString("x2"));
+        }
+        Password = builder.ToString();
         Address = string.Empty;
         Age = 0;
         PhoneNumber = string.Empty;
@@ -66,9 +73,16 @@ public class User
         UserId = uId; 
         FisrtName = fName;
         LastName = lName;
-        SHA512 NPassword = SHA512.Create();
-        NPassword.ComputeHash(Encoding.UTF8.GetBytes(pWord));
-        Password = NPassword.Hash.ToString();
+        // Generate sha512 and assign it to Password
+        SHA512 sha512 = SHA512.Create();
+        byte[] inputBytes = Encoding.UTF8.GetBytes(pWord);
+        byte[] hashBytes = sha512.ComputeHash(inputBytes);
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < hashBytes.Length; i++)
+        {
+            builder.Append(hashBytes[i].ToString("x2"));
+        }
+        Password = builder.ToString();
         Address = addr;
         Age = ag;
         PhoneNumber = pn;

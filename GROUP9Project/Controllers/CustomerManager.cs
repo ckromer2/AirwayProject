@@ -10,8 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
 
-using GROUP9Project.DataBase; 
-
+using GROUP9Project.DataBase;
 namespace GROUP9Project.Controllers
 {
     
@@ -45,31 +44,61 @@ namespace GROUP9Project.Controllers
             ApplicationData.Connection.AddUser(user); 
         }
 
-        
-        //// Helper method to get SHA512
-        //private static string GetSHA512Hash(string input)
-        //{
-        //    using (SHA512 sha512 = SHA512.Create())
-        //    {
-        //        byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-        //        byte[] hashBytes = sha512.ComputeHash(inputBytes);
-        //        StringBuilder builder = new StringBuilder();
-
-        //        for (int i = 0; i < hashBytes.Length; i++)
-        //        {
-        //            builder.Append(hashBytes[i].ToString("x2"));
-        //        }
-
-        //        return builder.ToString();
-        //    }
-        //}
-
-        public static void Rewards()
+        // Method used to calculate the used points of a specific user(used on rewards page)
+        public static uint calculateUsedRewards()
         {
+            // Sum up all the records that used points and make that the used points label
+            var listOfRecordsNotCancelled = ApplicationData.Connection.GetRecordsByUserNotCancelled(ApplicationData.AppUser.UserId);
+            uint sum = 0;
+            foreach (BookingRecord rec in listOfRecordsNotCancelled)
+                if (rec.PayedInPoints == true)
+                    sum += rec.Points;
+            return sum; 
         }
 
-        public static void Booking( )
+        //Used when points are involved
+        public static void BookingPoints(Flight F1, float F1P, Flight? F2 = null, float F2P = 0, Flight? F3 = null, float F3P = 0, Flight? F4 = null, float F4P = 0)
         {
+            BookingRecord rec1 = new BookingRecord(F1.FlightId ,ApplicationData.AppUser.UserId, (uint)F1P * 100 * 100, 0, true);
+            ApplicationData.Connection.AddRecord(rec1);
+            if (F2 != null)
+            {
+                BookingRecord rec2 = new BookingRecord(F2.FlightId, ApplicationData.AppUser.UserId, (uint)F2P * 100 * 100, 0, true);
+                ApplicationData.Connection.AddRecord(rec2);
+            }
+            if (F3 != null)
+            {
+                BookingRecord rec3 = new BookingRecord(F3.FlightId, ApplicationData.AppUser.UserId, (uint)F3P * 100 * 100, 0, true);
+                ApplicationData.Connection.AddRecord(rec3);
+            }
+            if (F4 != null)
+            {
+                BookingRecord rec4 = new BookingRecord(F4.FlightId, ApplicationData.AppUser.UserId, (uint)F4P * 100 * 100, 0, true);
+                ApplicationData.Connection.AddRecord(rec4);
+            }
+        }
+        
+        //Used when points are not involved
+        public static void BookingNoPoints(Flight F1, float F1P, Flight? F2 = null, float F2P = 0, Flight? F3 = null, float F3P = 0, Flight? F4 = null, float F4P = 0)
+        {
+            BookingRecord rec1 = new BookingRecord(F1.FlightId, ApplicationData.AppUser.UserId, 0, (uint)F1P*100, false);
+            ApplicationData.Connection.AddRecord(rec1);
+
+            if (F2 != null)
+            {
+                BookingRecord rec2 = new BookingRecord(F2.FlightId, ApplicationData.AppUser.UserId, 0, (uint)F2P * 100, false);
+                ApplicationData.Connection.AddRecord(rec2);
+            }
+            if(F3 != null)
+            {
+                BookingRecord rec3 = new BookingRecord(F3.FlightId, ApplicationData.AppUser.UserId, 0, (uint)F3P * 100, false);
+                ApplicationData.Connection.AddRecord(rec3);
+            }
+            if (F4 != null)
+            {
+                BookingRecord rec4 = new BookingRecord(F4.FlightId, ApplicationData.AppUser.UserId, 0, (uint)F4P * 100, false);
+                ApplicationData.Connection.AddRecord(rec4);
+            }
 
 
 

@@ -89,7 +89,7 @@ public class DataBase
             var Output = db.Table<User>().Where(t => t.UserId == uId).Single();//There will only ever be 1 element in this list so this action is safe.
             return Output; //Returns the user pulled form the database with the given number.
         }
-        catch (NullReferenceException ex)
+        catch 
         {
             return ApplicationData.nullUser;
         }
@@ -222,6 +222,21 @@ public class DataBase
         try
         {
             var Output = db.Table<BookingRecord>().Where(t => t.UserId == uId && t.Canceled == true).ToList();
+            return Output;
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<BookingRecord> { ApplicationData.nullRecord };
+            return nOut;
+        }
+    }
+
+    // This gets all the booking records of a user that have not been cancelled
+    public List<BookingRecord> GetRecordsByUserNotCancelled(int uId)
+    {
+        try
+        {
+            var Output = db.Table<BookingRecord>().Where(t => t.UserId == uId && t.Canceled == false).ToList();
             return Output;
         }
         catch (NullReferenceException ex)
@@ -368,6 +383,32 @@ public class DataBase
         try
         {
             var Output = db.Table<Flight>().Where(t => t.FlightId == fId).Single();//There will only ever be 1 element in this list so this action is safe.
+            return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            return ApplicationData.nullFlight;
+        }
+    }
+
+    /*
+     * By: Spencer P. Lowery
+     *
+     * Date: 4/21/23
+     * 
+     * In: 
+     *      fId: The ID of the flight to be searched.
+     *      
+     * Out:
+     *      A list of all flights matching the above criteria
+     *      
+     * Function pull the databse for a given route object 
+     */
+    public Flight GetFlightTime(int rId, DateTime fTime)
+    {
+        try
+        {
+            var Output = db.Table<Flight>().Where(t => t.RouteId == rId && t.FlightDate == fTime).Single();//There will only ever be 1 element in this list so this action is safe.
             return Output; //Returns the user pulled form the database with the given number.
         }
         catch (NullReferenceException ex)

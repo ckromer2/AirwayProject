@@ -1,4 +1,5 @@
 ﻿using GROUP9Project.DataBase;
+using GROUP9Project.Controllers; 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +19,7 @@ namespace GROUP9Project.UI
             InitializeComponent();
             ShowEmployeeTab();
             LogedInLable.Text = "Logged in as: " + ApplicationData.AppUser.FisrtName + " " + ApplicationData.AppUser.LastName + "\nUser ID: " + ApplicationData.AppUser.UserId;
-
+            fillInRewardsData(); 
         }
 
         private void ShowEmployeeTab()
@@ -27,6 +28,12 @@ namespace GROUP9Project.UI
             {
                 EmployeeTab.Visible = false;
             }
+        }
+
+        private void fillInRewardsData()
+        {
+            curPointsLabel.Text = Convert.ToString(ApplicationData.AppUser.Points);
+            usedPointsLabel.Text = Convert.ToString(CustomerManager.calculateUsedRewards());
         }
 
         private void RewardsForm_Load(object sender, EventArgs e)
