@@ -89,7 +89,7 @@ public class DataBase
             var Output = db.Table<User>().Where(t => t.UserId == uId).Single();//There will only ever be 1 element in this list so this action is safe.
             return Output; //Returns the user pulled form the database with the given number.
         }
-        catch (NullReferenceException ex)
+        catch 
         {
             return ApplicationData.nullUser;
         }
