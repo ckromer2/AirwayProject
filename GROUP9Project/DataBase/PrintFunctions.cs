@@ -18,6 +18,16 @@ public static class PrintFunctions
         return Output;
     }
 
+    public static string PrintFlightInfo(Flight pFlight)
+    {
+        Route pRoute = ApplicationData.Connection.GetRoute(pFlight.RouteId);
+
+        string Output = PlanesAirportsDistances.AirportsCode.ElementAt((int)pRoute.Start) +
+            " to " + PlanesAirportsDistances.AirportsCode.ElementAt((int)pRoute.End) + " Leaving at " + pFlight.FlightDate.ToString();
+
+        return Output;
+    }
+
     public static string PrintRoute(Route pRoute)
     {
         string output = PlanesAirportsDistances.AirportsCode.ElementAt((int)pRoute.Start) + " -> " + PlanesAirportsDistances.AirportsCode.ElementAt((int)pRoute.End);

@@ -17,7 +17,7 @@ internal static class Program
         //ApplicationData.Connection.AddFlight(new DataBase.Flight(PlaneEnum.B737, 2, new DateTime(2023, 4, 28).AddHours(14)));
         //ApplicationData.Connection.AddFlight(new DataBase.Flight(PlaneEnum.B737, 5, new DateTime(2023, 4, 28).AddHours(8)));
         ApplicationConfiguration.Initialize();
-        Application.Run(new LoginForm());
+        Application.Run(new AccountantForm());
     }
 
 }

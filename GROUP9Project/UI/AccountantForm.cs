@@ -1,4 +1,5 @@
-﻿using GROUP9Project.DataBase;
+﻿using GROUP9Project.Controllers;
+using GROUP9Project.DataBase;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,16 +30,6 @@ namespace GROUP9Project.UI
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AccountantForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void FlightsTab_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -64,6 +55,28 @@ namespace GROUP9Project.UI
             historyForm.Closed += (s, args) => this.Close();
             historyForm.Show();
             historyForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+        }
+
+        private void EndDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            List<Flight> flights = EmployeeManager.FlightsForAccountant(StartDatePicker.Value, EndDatePicker.Value);
+            List<uint> income = EmployeeManager.IncomeOfFlights(flights);
+            foreach (Flight x in flights)
+            {
+                PercentFullListBox.Items.Add(x.currentCapacity / x.totalCapacity);
+                FlightsListBox.Items.Add(PrintFunctions.PrintFlightInfo(x));
+            }
+
+            uint sum = 0;
+            foreach (uint x in income)
+            {
+                IncomeListBox.Items.Add(x);
+                sum += x;
+            }
+            TotalIncome.Text = Convert.ToString(sum);
+            TotalFlights.Text = Convert.ToString(flights.Count); 
+
+
         }
     }
 }

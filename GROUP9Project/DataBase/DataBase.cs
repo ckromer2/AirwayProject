@@ -297,6 +297,21 @@ public class DataBase
         }
     }
 
+    // Gets all booking records witha specific flight id that are paid in money not points
+    public List<BookingRecord> GetRecordsByFlightPaidInMoney(int fId)
+    {
+        try
+        {
+            var Output = db.Table<BookingRecord>().Where(t => t.FlightId == fId && t.Canceled == false && t.PayedInPoints == false).ToList();
+            return Output;
+        }
+        catch
+        {
+            var nOut = new List<BookingRecord> { ApplicationData.nullRecord };
+            return nOut;
+        }
+    }
+
     /*
      * By: Spencer P. Lowery
      *
@@ -385,7 +400,7 @@ public class DataBase
             var Output = db.Table<Flight>().Where(t => t.FlightId == fId).Single();//There will only ever be 1 element in this list so this action is safe.
             return Output; //Returns the user pulled form the database with the given number.
         }
-        catch (NullReferenceException ex)
+        catch 
         {
             return ApplicationData.nullFlight;
         }
@@ -414,6 +429,21 @@ public class DataBase
         catch (NullReferenceException ex)
         {
             return ApplicationData.nullFlight;
+        }
+    }
+
+    // Get all the flights 
+    public List<Flight> GetFlights()
+    {
+        try
+        {
+        var Output = db.Table<Flight>().ToList();
+        return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch 
+        {
+            var nOut = new List<Flight> { ApplicationData.nullFlight };
+            return nOut;
         }
     }
 
@@ -532,7 +562,7 @@ public class DataBase
             var Output = db.Table<Route>().Where(t => t.RouteId == rId).Single();//There will only ever be 1 element in this list so this action is safe.
             return Output; //Returns the user pulled form the database with the given number.
         }
-        catch (NullReferenceException ex)
+        catch
         {
             return ApplicationData.nullRoute;
         }

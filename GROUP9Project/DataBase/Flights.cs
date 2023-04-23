@@ -38,12 +38,16 @@ public class Flight
     public PlaneEnum PlainId { get; set; }
     public int RouteId { get; set; }
     public DateTime FlightDate { get; set; }
+    public int currentCapacity { get; set; }
+    public int totalCapacity; 
 
     public Flight()
     {
         PlainId = 0;
         RouteId = 0;
         FlightDate = DateTime.MinValue;
+        currentCapacity = 0; 
+        totalCapacity = PlanesAirportsDistances.Planes[(int)PlainId].Capacity; 
     }
 
     public Flight(PlaneEnum pId, int rId, DateTime fDate)
@@ -51,6 +55,8 @@ public class Flight
         PlainId = pId;
         RouteId = rId;
         FlightDate = fDate;
+        currentCapacity = 0;
+        totalCapacity = PlanesAirportsDistances.Planes[(int)PlainId].Capacity;
     }
 
     public void ChangePlane(PlaneEnum pId) { PlainId = pId; }
