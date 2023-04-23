@@ -431,6 +431,20 @@ public class DataBase
             return ApplicationData.nullFlight;
         }
     }
+    public List<Flight> GetFlightAfterTime(DateTime fTime)
+    {
+        try
+        {
+            var Output = db.Table<Flight>().Where(t => t.FlightDate > fTime).ToList();//There will only ever be 1 element in this list so this action is safe.
+            return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<Flight> { ApplicationData.nullFlight };
+            return nOut;
+        }
+    }
+
 
     // Get all the flights 
     public List<Flight> GetFlights()

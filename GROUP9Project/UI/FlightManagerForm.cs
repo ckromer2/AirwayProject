@@ -17,9 +17,18 @@ namespace GROUP9Project.UI
         {
             InitializeComponent();
             ShowEmployeeTab();
+            PopulateBoxes();
             LogedInLable.Text = "Logged in as: " + ApplicationData.AppUser.FisrtName + " " + ApplicationData.AppUser.LastName + "\nUser ID: " + ApplicationData.AppUser.UserId;
 
         }
+
+        private void PopulateBoxes()
+        {
+            FlightList = ApplicationData.Connection.GetFlightAfterTime(DateTime.Now);
+            foreach (Flight f in FlightList)
+                FlightsListBox.Items.Add(PrintFunctions.PrintFlightInfo(f));
+        }
+
 
         private void ShowEmployeeTab()
         {
@@ -54,6 +63,18 @@ namespace GROUP9Project.UI
             historyForm.Closed += (s, args) => this.Close();
             historyForm.Show();
             historyForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+        }
+
+        private void PrintManifestButton_Click(object sender, EventArgs e)
+        {
+            if (FlightsListBox.SelectedIndex >= 0)
+            {
+                this.Hide();
+                UI.ManifestForm manifestForm = new UI.ManifestForm(FlightList.ElementAt(FlightsListBox.SelectedIndex));
+                manifestForm.Closed += (s, args) => this.Close();
+                manifestForm.Show();
+                manifestForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+            }
         }
     }
 }
