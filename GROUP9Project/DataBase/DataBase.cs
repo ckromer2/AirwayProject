@@ -501,6 +501,21 @@ public class DataBase
         }
     }
 
+    public List<Flight> GetFlightNoPlane()
+    {
+        try
+        {
+            var Output = db.Table<Flight>().Where(t => t.PlaneId == PlaneEnum.UNSET).ToList();
+            return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<Flight> { ApplicationData.nullFlight };
+            return nOut;
+        }
+    }
+
+
     /*
      * By: Spencer P. Lowery
      *
@@ -515,7 +530,7 @@ public class DataBase
      *      
      * Function to update a given flight in the database. 
      */
-    public int UpdateFlight(User uFlight)
+    public int UpdateFlight(Flight uFlight)
     {
         return db.Update(uFlight); //Returns the number of rows updated, should only every be 1.
     }
@@ -664,7 +679,7 @@ public class DataBase
      *      
      * Function to update a given route in the database. 
      */
-    public int UpdateRoute(User uRoute)
+    public int UpdateRoute(Route uRoute)
     {
         return db.Update(uRoute); //Returns the number of rows updated, should only every be 1.
     }
@@ -683,7 +698,7 @@ public class DataBase
      *      
      * Function to update a given route in the database. 
      */
-    public int DeleteRoute(User dRoute)
+    public int DeleteRoute(Route dRoute)
     {
         return db.Delete(dRoute); //Returns the number of rows updated, should only every be 1.
     }

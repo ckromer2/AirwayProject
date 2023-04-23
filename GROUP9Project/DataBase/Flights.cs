@@ -35,31 +35,37 @@ public class Flight
 {
     [PrimaryKey, AutoIncrement]
     public int FlightId { get; set; }
-    public PlaneEnum PlainId { get; set; }
+    public PlaneEnum PlaneId { get; set; }
     public int RouteId { get; set; }
     public DateTime FlightDate { get; set; }
     public int currentCapacity { get; set; }
-    public int totalCapacity; 
+    public int totalCapacity { get; set; }
 
     public Flight()
     {
-        PlainId = 0;
+        PlaneId = PlaneEnum.UNSET;
         RouteId = 0;
         FlightDate = DateTime.MinValue;
-        currentCapacity = 0; 
-        totalCapacity = PlanesAirportsDistances.Planes[(int)PlainId].Capacity; 
+        currentCapacity = 0;
+        if((int)PlaneId>=0)
+            totalCapacity = PlanesAirportsDistances.Planes[(int)PlaneId].Capacity; 
+        else
+            totalCapacity = 0;
     }
 
     public Flight(PlaneEnum pId, int rId, DateTime fDate)
     {
-        PlainId = pId;
+        PlaneId = pId;
         RouteId = rId;
         FlightDate = fDate;
         currentCapacity = 0;
-        totalCapacity = PlanesAirportsDistances.Planes[(int)PlainId].Capacity;
+        if ((int)PlaneId >= 0)
+            totalCapacity = PlanesAirportsDistances.Planes[(int)PlaneId].Capacity;
+        else
+            totalCapacity = 0;
     }
 
-    public void ChangePlane(PlaneEnum pId) { PlainId = pId; }
+    public void ChangePlane(PlaneEnum pId) { PlaneId = pId; }
 
 
 }

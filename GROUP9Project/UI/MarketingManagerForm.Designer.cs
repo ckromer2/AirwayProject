@@ -33,9 +33,9 @@
             this.HistoryTab = new System.Windows.Forms.Label();
             this.FlightsTab = new System.Windows.Forms.Label();
             this.RewardsTab = new System.Windows.Forms.Label();
-            this.RoutesListBox = new System.Windows.Forms.ListBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.FlightListBox = new System.Windows.Forms.ListBox();
+            this.PlaneBox = new System.Windows.Forms.ComboBox();
+            this.ChangePlaneButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.LogedInLable = new System.Windows.Forms.Label();
@@ -97,34 +97,35 @@
             this.RewardsTab.Text = "Rewards";
             this.RewardsTab.Click += new System.EventHandler(this.RewardsTab_Click);
             // 
-            // RoutesListBox
+            // FlightListBox
             // 
-            this.RoutesListBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RoutesListBox.FormattingEnabled = true;
-            this.RoutesListBox.ItemHeight = 15;
-            this.RoutesListBox.Location = new System.Drawing.Point(115, 110);
-            this.RoutesListBox.Name = "RoutesListBox";
-            this.RoutesListBox.Size = new System.Drawing.Size(334, 259);
-            this.RoutesListBox.TabIndex = 20;
+            this.FlightListBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.FlightListBox.FormattingEnabled = true;
+            this.FlightListBox.ItemHeight = 15;
+            this.FlightListBox.Location = new System.Drawing.Point(115, 110);
+            this.FlightListBox.Name = "FlightListBox";
+            this.FlightListBox.Size = new System.Drawing.Size(334, 259);
+            this.FlightListBox.TabIndex = 20;
             // 
-            // comboBox1
+            // PlaneBox
             // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(488, 134);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 23);
-            this.comboBox1.TabIndex = 21;
+            this.PlaneBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.PlaneBox.FormattingEnabled = true;
+            this.PlaneBox.Location = new System.Drawing.Point(488, 134);
+            this.PlaneBox.Name = "PlaneBox";
+            this.PlaneBox.Size = new System.Drawing.Size(121, 23);
+            this.PlaneBox.TabIndex = 21;
             // 
-            // button1
+            // ChangePlaneButton
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.Location = new System.Drawing.Point(488, 194);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 23);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "Confirm Action";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ChangePlaneButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ChangePlaneButton.Location = new System.Drawing.Point(488, 194);
+            this.ChangePlaneButton.Name = "ChangePlaneButton";
+            this.ChangePlaneButton.Size = new System.Drawing.Size(109, 23);
+            this.ChangePlaneButton.TabIndex = 22;
+            this.ChangePlaneButton.Text = "Confirm Action";
+            this.ChangePlaneButton.UseVisualStyleBackColor = true;
+            this.ChangePlaneButton.Click += new System.EventHandler(this.ChangePlaneButton_Click);
             // 
             // label1
             // 
@@ -163,9 +164,9 @@
             this.Controls.Add(this.LogedInLable);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.RoutesListBox);
+            this.Controls.Add(this.ChangePlaneButton);
+            this.Controls.Add(this.PlaneBox);
+            this.Controls.Add(this.FlightListBox);
             this.Controls.Add(this.panel1);
             this.Name = "MarketingManagerForm";
             this.Text = "MarketingMangerForm";
@@ -183,11 +184,12 @@
         private Label HistoryTab;
         private Label FlightsTab;
         private Label RewardsTab;
-        private ListBox RoutesListBox;
-        private ComboBox comboBox1;
-        private Button button1;
+        private ListBox FlightListBox;
+        private ComboBox PlaneBox;
+        private Button ChangePlaneButton;
         private Label label1;
         private Label label2;
         private Label LogedInLable;
+        private List<DataBase.Flight> FlightList;
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using GROUP9Project.DataBase;
+﻿using GROUP9Project.DataBase;
 
 namespace GROUP9Project.UI;
 
