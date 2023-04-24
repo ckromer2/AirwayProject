@@ -74,7 +74,7 @@ namespace GROUP9Project.UI
             if (FlightListBox.SelectedIndex >= 0 && PlaneBox.SelectedIndex >= 0)
             {
                 FlightList.ElementAt(FlightListBox.SelectedIndex).PlaneId = (PlaneEnum)PlaneBox.SelectedIndex;
-                FlightList.ElementAt(FlightListBox.SelectedIndex).totalCapacity = PlanesAirportsDistances.Planes.ElementAt(PlaneBox.SelectedIndex).Capacity;
+                FlightList.ElementAt(FlightListBox.SelectedIndex).TotalCapacity = PlanesAirportsDistances.Planes.ElementAt(PlaneBox.SelectedIndex).Capacity;
                 ApplicationData.Connection.UpdateFlight(FlightList.ElementAt(FlightListBox.SelectedIndex));
 
                 //Re-Prints the data in the list box

@@ -18,16 +18,19 @@ namespace GROUP9Project.Controllers
         public static List<Flight> FlightsForAccountant(DateTime date1, DateTime date2)
         {
             List<Flight> flights = ApplicationData.Connection.GetFlights();
-            List<int> RemovalTracker = new List<int>();
-            int rIndex = 0;
-            foreach (Flight flight in flights)
+            for (int i = 0; i < flights.Count; i++)
             {
-                if (flight.FlightDate > date1 || flight.FlightDate < date2)
-                    RemovalTracker.Add(rIndex-RemovalTracker.Count());
+                if (flights[i].FlightDate < date1 || flights[i].FlightDate > date2)
+                    flights[i] = ApplicationData.nullFlight;
             }
-            foreach (int i in RemovalTracker)
-                if (i >= 0)
-                    flights.Remove(flights.ElementAt(i));
+
+            for (int i = flights.Count - 1; i > -1; i--)
+            {
+                if (flights[i].RouteId == -1) 
+                {
+                    flights.RemoveAt(i);
+                }
+            }
             return flights; 
         }
 

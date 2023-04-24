@@ -59,12 +59,16 @@ namespace GROUP9Project.UI
 
         private void EndDatePicker_ValueChanged(object sender, EventArgs e)
         {
+            PercentFullListBox.Items.Clear();
+            FlightsListBox.Items.Clear();
+            IncomeListBox.Items.Clear();
             List<Flight> flights = EmployeeManager.FlightsForAccountant(StartDatePicker.Value, EndDatePicker.Value);
             List<uint> income = EmployeeManager.IncomeOfFlights(flights);
             foreach (Flight x in flights)
             {
-                PercentFullListBox.Items.Add(x.currentCapacity / x.totalCapacity);
+                PercentFullListBox.Items.Add((x.CurrentCapacity / x.TotalCapacity) * 100 + "%");
                 FlightsListBox.Items.Add(PrintFunctions.PrintFlightInfo(x));
+
             }
 
             uint sum = 0;
@@ -74,7 +78,7 @@ namespace GROUP9Project.UI
                 sum += x;
             }
             TotalIncome.Text = Convert.ToString(sum);
-            TotalFlights.Text = Convert.ToString(flights.Count); 
+            TotalFlights.Text = Convert.ToString(flights.Count);
 
 
         }
