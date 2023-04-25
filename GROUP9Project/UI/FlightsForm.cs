@@ -445,7 +445,7 @@ public partial class FlightsForm : Form
 
             }
             //Sets the total price fo the slected flights
-            PriceBox.Text = "Toal Price: $" + (Flight1Price + Flight2Price + Flight3Price + Flight4Price);
+            PriceBox.Text = "Total Price: $" + (Flight1Price + Flight2Price + Flight3Price + Flight4Price);
         }
     }
 }

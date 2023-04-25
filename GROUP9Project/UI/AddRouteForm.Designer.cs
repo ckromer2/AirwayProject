@@ -1,4 +1,6 @@
-﻿namespace GROUP9Project.UI
+﻿using GROUP9Project.DataBase;
+
+namespace GROUP9Project.UI
 {
     partial class AddRouteForm
     {
@@ -35,20 +37,18 @@
             this.RewardsTab = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.RoutesListBox = new System.Windows.Forms.ListBox();
-            this.ConfirmButton = new System.Windows.Forms.Button();
+            this.AddRouteButton = new System.Windows.Forms.Button();
             this.RemoveRouteButton = new System.Windows.Forms.Button();
             this.ModifyRouteButton = new System.Windows.Forms.Button();
-            this.RoutID = new System.Windows.Forms.TextBox();
-            this.departPort = new System.Windows.Forms.TextBox();
-            this.arrivePort = new System.Windows.Forms.TextBox();
-            this.departDate = new System.Windows.Forms.TextBox();
-            this.departTime = new System.Windows.Forms.TextBox();
-            this.RoutIDLabel = new System.Windows.Forms.Label();
+            this.departTime = new System.Windows.Forms.DateTimePicker();
             this.departPortLabel = new System.Windows.Forms.Label();
             this.arrivePortLabel = new System.Windows.Forms.Label();
             this.departDateLabel = new System.Windows.Forms.Label();
             this.departTimeLabel = new System.Windows.Forms.Label();
             this.LogedInLable = new System.Windows.Forms.Label();
+            this.DepartComboBox = new System.Windows.Forms.ComboBox();
+            this.ArriveComboBox = new System.Windows.Forms.ComboBox();
+            this.DepartureDatePicker = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -115,7 +115,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(62, 87);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(247, 46);
+            this.label1.Size = new System.Drawing.Size(445, 46);
             this.label1.TabIndex = 19;
             this.label1.Text = "Add/Modify/Remove Routes";
             // 
@@ -129,17 +129,19 @@
             this.RoutesListBox.Name = "RoutesListBox";
             this.RoutesListBox.Size = new System.Drawing.Size(501, 124);
             this.RoutesListBox.TabIndex = 20;
+            this.RoutesListBox.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.RouteListBoxFormat);
             // 
-            // ConfirmButton
+            // AddRouteButton
             // 
-            this.ConfirmButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ConfirmButton.Location = new System.Drawing.Point(591, 153);
-            this.ConfirmButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ConfirmButton.Name = "ConfirmButton";
-            this.ConfirmButton.Size = new System.Drawing.Size(166, 49);
-            this.ConfirmButton.TabIndex = 21;
-            this.ConfirmButton.Text = "Confirm";
-            this.ConfirmButton.UseVisualStyleBackColor = true;
+            this.AddRouteButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.AddRouteButton.Location = new System.Drawing.Point(591, 153);
+            this.AddRouteButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.AddRouteButton.Name = "AddRouteButton";
+            this.AddRouteButton.Size = new System.Drawing.Size(166, 49);
+            this.AddRouteButton.TabIndex = 21;
+            this.AddRouteButton.Text = "Add Route";
+            this.AddRouteButton.UseVisualStyleBackColor = true;
+            this.AddRouteButton.Click += new System.EventHandler(this.AddRouteButton_Click);
             // 
             // RemoveRouteButton
             // 
@@ -151,102 +153,61 @@
             this.RemoveRouteButton.TabIndex = 22;
             this.RemoveRouteButton.Text = "Remove Route";
             this.RemoveRouteButton.UseVisualStyleBackColor = true;
+            this.RemoveRouteButton.Click += new System.EventHandler(this.RemoveRouteButton_Click);
             // 
             // ModifyRouteButton
             // 
             this.ModifyRouteButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ModifyRouteButton.Location = new System.Drawing.Point(591, 313);
+            this.ModifyRouteButton.Location = new System.Drawing.Point(591, 315);
             this.ModifyRouteButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ModifyRouteButton.Name = "ModifyRouteButton";
             this.ModifyRouteButton.Size = new System.Drawing.Size(166, 49);
             this.ModifyRouteButton.TabIndex = 23;
             this.ModifyRouteButton.Text = "Modify Route";
             this.ModifyRouteButton.UseVisualStyleBackColor = true;
-            // 
-            // RoutID
-            // 
-            this.RoutID.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RoutID.Location = new System.Drawing.Point(62, 313);
-            this.RoutID.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.RoutID.Name = "RoutID";
-            this.RoutID.Size = new System.Drawing.Size(166, 27);
-            this.RoutID.TabIndex = 25;
-            this.RoutID.Text = "RoutID";
-            // 
-            // departPort
-            // 
-            this.departPort.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.departPort.Location = new System.Drawing.Point(62, 360);
-            this.departPort.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.departPort.Name = "departPort";
-            this.departPort.Size = new System.Drawing.Size(166, 27);
-            this.departPort.TabIndex = 26;
-            this.departPort.Text = "departPort";
-            // 
-            // arrivePort
-            // 
-            this.arrivePort.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.arrivePort.Location = new System.Drawing.Point(62, 404);
-            this.arrivePort.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.arrivePort.Name = "arrivePort";
-            this.arrivePort.Size = new System.Drawing.Size(166, 27);
-            this.arrivePort.TabIndex = 27;
-            this.arrivePort.Text = "arrivePort";
-            // 
-            // departDate
-            // 
-            this.departDate.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.departDate.Location = new System.Drawing.Point(62, 450);
-            this.departDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.departDate.Name = "departDate";
-            this.departDate.Size = new System.Drawing.Size(166, 27);
-            this.departDate.TabIndex = 28;
-            this.departDate.Text = "departDate";
+            this.ModifyRouteButton.Click += new System.EventHandler(this.ModifyRouteButton_Click);
             // 
             // departTime
             // 
             this.departTime.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.departTime.Location = new System.Drawing.Point(62, 500);
+            this.departTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.departTime.Location = new System.Drawing.Point(218, 487);
             this.departTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.departTime.Name = "departTime";
-            this.departTime.Size = new System.Drawing.Size(166, 27);
+            this.departTime.Size = new System.Drawing.Size(165, 27);
             this.departTime.TabIndex = 29;
-            this.departTime.Text = "departTime";
-            // 
-            // RoutIDLabel
-            // 
-            this.RoutIDLabel.Location = new System.Drawing.Point(0, 0);
-            this.RoutIDLabel.Name = "RoutIDLabel";
-            this.RoutIDLabel.Size = new System.Drawing.Size(100, 23);
-            this.RoutIDLabel.TabIndex = 30;
             // 
             // departPortLabel
             // 
-            this.departPortLabel.Location = new System.Drawing.Point(0, 0);
+            this.departPortLabel.Location = new System.Drawing.Point(31, 324);
             this.departPortLabel.Name = "departPortLabel";
-            this.departPortLabel.Size = new System.Drawing.Size(100, 23);
+            this.departPortLabel.Size = new System.Drawing.Size(133, 23);
             this.departPortLabel.TabIndex = 31;
+            this.departPortLabel.Text = "Departure Airport";
             // 
             // arrivePortLabel
             // 
-            this.arrivePortLabel.Location = new System.Drawing.Point(0, 0);
+            this.arrivePortLabel.Location = new System.Drawing.Point(31, 378);
             this.arrivePortLabel.Name = "arrivePortLabel";
-            this.arrivePortLabel.Size = new System.Drawing.Size(100, 23);
+            this.arrivePortLabel.Size = new System.Drawing.Size(115, 23);
             this.arrivePortLabel.TabIndex = 32;
+            this.arrivePortLabel.Text = "Arrival Airport";
             // 
             // departDateLabel
             // 
-            this.departDateLabel.Location = new System.Drawing.Point(0, 0);
+            this.departDateLabel.Location = new System.Drawing.Point(31, 432);
             this.departDateLabel.Name = "departDateLabel";
-            this.departDateLabel.Size = new System.Drawing.Size(100, 23);
+            this.departDateLabel.Size = new System.Drawing.Size(115, 23);
             this.departDateLabel.TabIndex = 33;
+            this.departDateLabel.Text = "Depart Date";
             // 
             // departTimeLabel
             // 
-            this.departTimeLabel.Location = new System.Drawing.Point(0, 0);
+            this.departTimeLabel.Location = new System.Drawing.Point(31, 487);
             this.departTimeLabel.Name = "departTimeLabel";
-            this.departTimeLabel.Size = new System.Drawing.Size(100, 23);
+            this.departTimeLabel.Size = new System.Drawing.Size(115, 23);
             this.departTimeLabel.TabIndex = 34;
+            this.departTimeLabel.Text = "Depart Time";
             // 
             // LogedInLable
             // 
@@ -256,24 +217,53 @@
             this.LogedInLable.Size = new System.Drawing.Size(0, 20);
             this.LogedInLable.TabIndex = 24;
             // 
+            // DepartComboBox
+            // 
+            this.DepartComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.DepartComboBox.FormattingEnabled = true;
+            this.DepartComboBox.Location = new System.Drawing.Point(218, 324);
+            this.DepartComboBox.Name = "DepartComboBox";
+            this.DepartComboBox.Size = new System.Drawing.Size(165, 28);
+            this.DepartComboBox.TabIndex = 36;
+            this.DepartComboBox.SelectedIndexChanged += new System.EventHandler(this.DepartComboBox_SelectedIndexChanged);
+            // 
+            // ArriveComboBox
+            // 
+            this.ArriveComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ArriveComboBox.FormattingEnabled = true;
+            this.ArriveComboBox.Location = new System.Drawing.Point(218, 378);
+            this.ArriveComboBox.Name = "ArriveComboBox";
+            this.ArriveComboBox.Size = new System.Drawing.Size(165, 28);
+            this.ArriveComboBox.TabIndex = 37;
+            // 
+            // DepartureDatePicker
+            // 
+            this.DepartureDatePicker.CustomFormat = "MMM, dd yyyy";
+            this.DepartureDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DepartureDatePicker.Location = new System.Drawing.Point(218, 432);
+            this.DepartureDatePicker.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.DepartureDatePicker.MaxDate = new System.DateTime(2023, 10, 25, 0, 0, 0, 0);
+            this.DepartureDatePicker.MinDate = new System.DateTime(2023, 4, 25, 0, 0, 0, 0);
+            this.DepartureDatePicker.Name = "DepartureDatePicker";
+            this.DepartureDatePicker.Size = new System.Drawing.Size(165, 27);
+            this.DepartureDatePicker.TabIndex = 42;
+            // 
             // AddRouteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 600);
+            this.Controls.Add(this.DepartureDatePicker);
+            this.Controls.Add(this.ArriveComboBox);
+            this.Controls.Add(this.DepartComboBox);
             this.Controls.Add(this.LogedInLable);
             this.Controls.Add(this.ModifyRouteButton);
             this.Controls.Add(this.RemoveRouteButton);
-            this.Controls.Add(this.ConfirmButton);
+            this.Controls.Add(this.AddRouteButton);
             this.Controls.Add(this.RoutesListBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.RoutID);
-            this.Controls.Add(this.departPort);
-            this.Controls.Add(this.arrivePort);
-            this.Controls.Add(this.departDate);
             this.Controls.Add(this.departTime);
-            this.Controls.Add(this.RoutIDLabel);
             this.Controls.Add(this.departPortLabel);
             this.Controls.Add(this.arrivePortLabel);
             this.Controls.Add(this.departDateLabel);
@@ -296,23 +286,18 @@
         private Label FlightsTab;
         private Label RewardsTab;
         private Label label1;
-
-        private Label RoutIDLabel;
         private Label departPortLabel;
         private Label arrivePortLabel;
         private Label departDateLabel;
         private Label departTimeLabel;
-
-        private TextBox RoutID;
-        private TextBox departPort;
-        private TextBox arrivePort;
-        private TextBox departDate;
-        private TextBox departTime;
-
+        private DateTimePicker departTime;
         private ListBox RoutesListBox;
-        private Button ConfirmButton;
+        private Button AddRouteButton;
         private Button RemoveRouteButton;
         private Button ModifyRouteButton;
         private Label LogedInLable;
+        private ComboBox DepartComboBox;
+        private ComboBox ArriveComboBox;
+        private DateTimePicker DepartureDatePicker;
     }
 }

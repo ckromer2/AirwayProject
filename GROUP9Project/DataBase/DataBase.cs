@@ -12,6 +12,7 @@
  */
 
 using SQLite;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace GROUP9Project.DataBase;
 
@@ -89,7 +90,7 @@ public class DataBase
             var Output = db.Table<User>().Where(t => t.UserId == uId).Single();//There will only ever be 1 element in this list so this action is safe.
             return Output; //Returns the user pulled form the database with the given number.
         }
-        catch 
+        catch
         {
             return ApplicationData.nullUser;
         }
@@ -105,9 +106,9 @@ public class DataBase
                 return false;
             return true;
         }
-        catch 
-        { 
-            return false; 
+        catch
+        {
+            return false;
         }
     }
     /*
@@ -146,7 +147,7 @@ public class DataBase
      * Adds a new booking record to the database.
      */
     public int AddRecord(BookingRecord nRecord)
-    { 
+    {
         return db.Insert(nRecord);
     }
 
@@ -163,7 +164,7 @@ public class DataBase
      *      
      * This function will output a list of all bookings made by a given user. 
      */
-    public List<BookingRecord> GetRecordsByUserNotCancelledUndeparted(int uId) 
+    public List<BookingRecord> GetRecordsByUserNotCancelledUndeparted(int uId)
     {
         try
         {
@@ -199,7 +200,7 @@ public class DataBase
         }
         catch (NullReferenceException ex)
         {
-            var nOut = new List<BookingRecord>{ ApplicationData.nullRecord };
+            var nOut = new List<BookingRecord> { ApplicationData.nullRecord };
             return nOut;
         }
     }
@@ -400,7 +401,7 @@ public class DataBase
             var Output = db.Table<Flight>().Where(t => t.FlightId == fId).Single();//There will only ever be 1 element in this list so this action is safe.
             return Output; //Returns the user pulled form the database with the given number.
         }
-        catch 
+        catch
         {
             return ApplicationData.nullFlight;
         }
@@ -451,10 +452,10 @@ public class DataBase
     {
         try
         {
-        var Output = db.Table<Flight>().ToList();
-        return Output; //Returns the user pulled form the database with the given number.
+            var Output = db.Table<Flight>().ToList();
+            return Output; //Returns the user pulled form the database with the given number.
         }
-        catch 
+        catch
         {
             var nOut = new List<Flight> { ApplicationData.nullFlight };
             return nOut;
@@ -478,8 +479,8 @@ public class DataBase
     {
         try
         {
-        var Output = db.Table<Flight>().Where(t => t.RouteId == rId).ToList();
-        return Output; //Returns the user pulled form the database with the given number.
+            var Output = db.Table<Flight>().Where(t => t.RouteId == rId).ToList();
+            return Output; //Returns the user pulled form the database with the given number.
         }
         catch (NullReferenceException ex)
         {
@@ -550,7 +551,7 @@ public class DataBase
     }
 
     //All route opperations bellow
-    
+
     /*
      * By: Spencer P. Lowery
      *
@@ -594,6 +595,50 @@ public class DataBase
         catch
         {
             return ApplicationData.nullRoute;
+        }
+    }
+
+    public Route[] GetAllRoutes()
+    {
+        try
+        {
+            int i = 0;
+            List<Route> Output = db.Table<Route>().Where(t => t.RouteId != 0).ToList();
+            String[] dataArray = new String[Output.Count];
+            Route[] routeArray = new Route[Output.Count];
+            foreach (Route route in Output)
+            {
+                routeArray[i++] = route;
+
+            }
+            return routeArray;
+        }
+        catch
+        {
+            Route[] nullRoutes = new Route[0];
+            return nullRoutes;
+        }
+    }
+    public String GetRouteToString(Route route)
+    {
+        try
+        {
+            int i = 0;
+            String dataString = "";
+            dataString = dataString + route.RouteId.ToString() + " ";
+            dataString = dataString + route.Start.ToString() + " ";
+            dataString = dataString + route.End.ToString() + " ";
+            dataString = dataString + route.ScheduleDate.ToString() + " ";
+            dataString = dataString + route.SchedualTime.ToString() + " ";
+            i++;
+
+            //return Output; //Returns the user pulled form the database with the given number.
+            return dataString;
+        }
+        catch
+        {
+            String nullRoutes = "";
+            return nullRoutes;
         }
     }
 
@@ -692,6 +737,8 @@ public class DataBase
      *      Any: Failure
      *      
      * Function to update a given route in the database. 
+     * Edit 4/232023 Dawson Kirkland
+     * changed type from user to Route
      */
     public int UpdateRoute(Route uRoute)
     {
@@ -711,6 +758,8 @@ public class DataBase
      *      Any: Failure
      *      
      * Function to update a given route in the database. 
+     * Edit 4/232023 Dawson Kirkland
+     * changed type from user to int
      */
     public int DeleteRoute(Route dRoute)
     {
