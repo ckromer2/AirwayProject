@@ -74,7 +74,7 @@ namespace GROUP9Project.UI
             else if (ApplicationData.AppUser.UserType == UserDesignation.LoadEngineer)
             {
                 this.Hide();
-                UI.LoadManagerForm loadManagerForm = new UI.LoadManagerForm();
+                UI.AddRouteForm loadManagerForm = new UI.AddRouteForm();
                 loadManagerForm.Closed += (s, args) => this.Close();
                 loadManagerForm.Show();
                 loadManagerForm.SetDesktopLocation(this.Location.X, this.Location.Y);
