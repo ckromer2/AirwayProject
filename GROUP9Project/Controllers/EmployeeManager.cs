@@ -51,23 +51,6 @@ namespace GROUP9Project.Controllers
                 income.Add(sumOfRecords); 
             }
             return income; 
-
         }
-
-        public static void PrintFlightManifest()
-        {
-
-        }
-
-        public static void FlightsToOffer()
-        {
-
-        }
-
-        public static void AssignPlanes()
-        {
-
-        }
-        
     }
 }
