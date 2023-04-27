@@ -64,6 +64,11 @@ namespace GROUP9Project.UI
             DataBase.Route newRoute = new DataBase.Route();
             int start = DepartComboBox.SelectedIndex;
             int end = ArriveComboBox.SelectedIndex;
+            if (start > end)
+                end = ArriveComboBox.SelectedIndex;
+            else
+                end = ArriveComboBox.SelectedIndex + 1;
+            
             newRoute.Start = (AirportEnum)start;
             newRoute.End = (AirportEnum)end;
             newRoute.ScheduleDate = DepartureDatePicker.Value.DayOfWeek;
@@ -75,7 +80,7 @@ namespace GROUP9Project.UI
             //DepartComboBox.SelectedIndex = start;
             //ArriveComboBox.SelectedIndex = end;
         }
-        //on remove find data entry by RoutID remove from Flight.cs Route
+        //remove route
         private void RemoveRouteButton_Click(object sender, EventArgs e)
         {
             Route removeRoute = RoutesListBox.SelectedItem as Route;
@@ -86,6 +91,18 @@ namespace GROUP9Project.UI
         private void ModifyRouteButton_Click(object sender, EventArgs e)
         {
             Route updateRoute = RoutesListBox.SelectedItem as Route;
+            int start = DepartComboBox.SelectedIndex;
+            int end = ArriveComboBox.SelectedIndex;
+            if (start > end)
+                end = ArriveComboBox.SelectedIndex;
+            else
+                end = ArriveComboBox.SelectedIndex + 1;
+            updateRoute.Start = (AirportEnum)start;
+            updateRoute.End = (AirportEnum)end;
+            updateRoute.ScheduleDate = DepartureDatePicker.Value.DayOfWeek;
+            DateTime j = departTime.Value;
+            int i = int.Parse(j.ToString("HHmmss"));
+            updateRoute.SchedualTime = i;
             ApplicationData.Connection.UpdateRoute(updateRoute); 
             PopulateBoxes();
         }
