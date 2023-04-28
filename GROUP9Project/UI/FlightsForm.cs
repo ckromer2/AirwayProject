@@ -300,16 +300,29 @@ public partial class FlightsForm : Form
         {
             //Gets the actual flights that will be baught
             Flight F1 = ApplicationData.Connection.GetFlightTime(Flight1.RouteId, DepartureDatePicker.Value.Date.AddHours(Flight1.SchedualTime));
+            if (F1 == null)
+                F1 = CustomerManager.CreateFlight(Flight1.RouteId, DepartureDatePicker.Value.Date.AddHours(Flight1.SchedualTime));
             Flight? F2 = null;
             if (Flight2 != null)
+            {
                 F2 = ApplicationData.Connection.GetFlightTime(Flight2.RouteId, DepartureDatePicker.Value.Date.AddHours(Flight2.SchedualTime));
+                if (F2 == null)
+                    F2 = CustomerManager.CreateFlight(Flight2.RouteId, DepartureDatePicker.Value.Date.AddHours(Flight2.SchedualTime));
+            }
             Flight? F3 = null;
             if (Flight3 != null)
+            {
                 F3 = ApplicationData.Connection.GetFlightTime(Flight3.RouteId, ReturnDatePicker.Value.Date.AddHours(Flight3.SchedualTime));
+                if (F3 == null)
+                    F3 = CustomerManager.CreateFlight(Flight3.RouteId, ReturnDatePicker.Value.Date.AddHours(Flight3.SchedualTime));
+            }
             Flight? F4 = null;
             if (Flight4 != null)
+            {
                 F4 = ApplicationData.Connection.GetFlightTime(Flight4.RouteId, ReturnDatePicker.Value.Date.AddHours(Flight4.SchedualTime));
-
+                if (F4 == null)
+                    F4 = CustomerManager.CreateFlight(Flight4.RouteId, ReturnDatePicker.Value.Date.AddHours(Flight4.SchedualTime));
+            }
             //Checks if the points box is clicked then checks if the user has enough points
             //If not an error message is shown otherwise the propper creation function is called.
             if (PointsCheckBox.Checked)

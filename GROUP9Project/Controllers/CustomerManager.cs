@@ -124,6 +124,13 @@ namespace GROUP9Project.Controllers
 
         }
 
+        //Creates a new flight is a ticket is purchases for a flight that does not exist
+        public static Flight CreateFlight(int routeId, DateTime dateTime)
+        {
+            Flight nFlight = new Flight(PlaneEnum.UNSET, routeId, dateTime);
+            ApplicationData.Connection.AddFlight(nFlight);
+            return nFlight;
+        }
     }
 
     

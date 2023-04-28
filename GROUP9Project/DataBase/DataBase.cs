@@ -424,7 +424,7 @@ public class DataBase
     {
         try
         {
-            var Output = db.Table<Flight>().Where(t => t.RouteId == rId && t.FlightDate == fTime).Single();//There will only ever be 1 element in this list so this action is safe.
+            var Output = db.Table<Flight>().Where(t => t.RouteId == rId && t.FlightDate == fTime).SingleOrDefault();//There will only ever be 1 element in this list so this action is safe.
             return Output; //Returns the user pulled form the database with the given number.
         }
         catch (NullReferenceException ex)
