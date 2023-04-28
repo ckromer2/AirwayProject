@@ -26,10 +26,10 @@ public partial class FlightsForm : Form
     {
         //Setsup data to be used later in the program
         st = (AirportEnum)DepartComboBox.SelectedIndex;
-        if(DepartComboBox.SelectedIndex > ArriveComboBox.SelectedIndex)
+        if (DepartComboBox.SelectedIndex > ArriveComboBox.SelectedIndex)
             ed = (AirportEnum)ArriveComboBox.SelectedIndex;
         else
-            ed = (AirportEnum)ArriveComboBox.SelectedIndex+1;
+            ed = (AirportEnum)ArriveComboBox.SelectedIndex + 1;
 
         Flight1Price = 0;
         Flight2Price = 0;
@@ -57,7 +57,7 @@ public partial class FlightsForm : Form
 
         if (PossibleRoutes2 != null)
             PossibleRoutes2.Clear();
-        
+
         if (ListBoxToRoute2 != null)
             ListBoxToRoute2.Clear();
         else
@@ -122,7 +122,7 @@ public partial class FlightsForm : Form
     //Populates the boxes with startup information.
     private void PopulateBoxes()
     {
-        
+
         DepartComboBox.Items.AddRange(PlanesAirportsDistances.AirportsCode.ToArray());
         ArriveComboBox.Items.AddRange(PlanesAirportsDistances.AirportsCode.ToArray());
 
@@ -207,12 +207,12 @@ public partial class FlightsForm : Form
         {
             if (route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour)
             {
-                RemovalTracker.Add(rIndex-RemovalTracker.Count());
+                RemovalTracker.Add(rIndex - RemovalTracker.Count());
             }
             rIndex++;
         }
-        foreach(int i in RemovalTracker)
-            if(i >= 0)
+        foreach (int i in RemovalTracker)
+            if (i >= 0)
                 OutputRoutes.Remove(OutputRoutes.ElementAt(i));
 
         //Now Comes the hard part
@@ -224,27 +224,27 @@ public partial class FlightsForm : Form
         {
             if ((route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour) || route.End == End || route == ApplicationData.nullRoute)
             {
-                RemovalTracker.Add(rIndex-RemovalTracker.Count());
+                RemovalTracker.Add(rIndex - RemovalTracker.Count());
             }
             rIndex++;
         }
         foreach (int i in RemovalTracker)
             if (i >= 0)
                 IDRoutes.Remove(IDRoutes.ElementAt(i));
-   
+
 
         //Gets all the routes to the destination airport removing the direct routes
         List<Route> IARoutes = ApplicationData.Connection.GetRouteEnd(End);
         RemovalTracker = new List<int>();
         rIndex = 0;
-        
+
         foreach (Route route in IARoutes)
         {
             //removes all the fligths not schedualled for this day or the next
-            if ((route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour && route.ScheduleDate != Day+1) || route.Start == Start || route == ApplicationData.nullRoute)
+            if ((route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour && route.ScheduleDate != Day + 1) || route.Start == Start || route == ApplicationData.nullRoute)
             {
                 RemovalTracker.Add(rIndex - RemovalTracker.Count());
-            } 
+            }
             rIndex++;
         }
         foreach (int i in RemovalTracker)
@@ -342,14 +342,14 @@ public partial class FlightsForm : Form
                 CustomerManager.BookingNoPoints(F1, Flight1Price, F2, Flight2Price, F3, Flight3Price, F4, Flight4Price);
                 MessageBox.Show("Flights Schedualed.");
             }
-            
+
         }
         else
             MessageBox.Show("At least one flight must be selected.");
     }
 
     private void EmployeeTab_Click(object sender, EventArgs e)
-    {   
+    {
         if (ApplicationData.AppUser.UserType == UserDesignation.Accountant)
         {
             this.Hide();

@@ -35,11 +35,31 @@ namespace GROUP9Project.Controllers
             return false; 
         }
 
+        public static bool ChangePassword(string id, string password, string newPassword)
+        {
+            User user = ApplicationData.Connection.GetUser(int.Parse(id));
+
+            // If the user id is not found in the database user does not exist thus skip password validation
+            if (user.UserId != -1)
+            {
+                // If the password matches that stored we return true and update AppUser
+                if (user.Validate(password))
+                {
+                    user.ChangePassword(newPassword);
+                    ApplicationData.Connection.UpdateUser(user); 
+                    ApplicationData.AppUser = user;
+                    return true;
+                }
+            }
+
+            // Invalid username or password
+            return false;
+        }
+
         public static void SignUp(string fName, string lName, string pWord, string ccn, string addr, uint ag, string pn)
         {
             // Get hash of string password then create a new user and add them to the database and then set AppUser to the current user
             User user = new User(fName, lName, pWord, ccn, UserDesignation.Customer, addr, ag, pn);
-            Console.WriteLine(user.UserId); 
             ApplicationData.AppUser = user;
             ApplicationData.Connection.AddUser(user); 
         }
@@ -104,25 +124,6 @@ namespace GROUP9Project.Controllers
 
         }
 
-        public static void Cancellation()
-        {
-
-        }
-
-        public static void PrintBoardingPass()
-        {
-
-        }
-
-        public static void BrowseFlights()
-        {
-
-        }
-
-        public static void CreateAccount()
-        {
-
-        }
 
         //Creates a new flight is a ticket is purchases for a flight that does not exist
         public static Flight CreateFlight(int routeId, DateTime dateTime)
