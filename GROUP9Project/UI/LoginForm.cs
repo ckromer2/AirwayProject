@@ -24,6 +24,9 @@ namespace GROUP9Project
                     flightsForm.Show();
                     flightsForm.SetDesktopLocation(this.Location.X, this.Location.Y);
                 }
+                else
+                    MessageBox.Show("Invalid Login.");
+
             }
 
         }
@@ -39,6 +42,8 @@ namespace GROUP9Project
                 flightsForm.Closed += (s, args) => this.Close();
                 flightsForm.Show();
                 flightsForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+                MessageBox.Show("Account Created with id: " + ApplicationData.AppUser.UserId);
+
             }
 
         }
