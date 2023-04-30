@@ -15,7 +15,7 @@ public partial class BoardingPassForm : Form
 
         var tmp = ApplicationData.Connection.GetFlight(Test.FlightId);
         TimeLable.Text = "Time: " + tmp.FlightDate.ToString();
-        var tmp2 = ApplicationData.Connection.GetRoute(tmp.FlightId);
+        var tmp2 = ApplicationData.Connection.GetRoute(tmp.RouteId);
         DepartureLable.Text = "Departure: " + PlanesAirportsDistances.AirportsName.ElementAt((int)tmp2.Start);
         ArrivalLable.Text = "Arrival: " + PlanesAirportsDistances.AirportsName.ElementAt((int)tmp2.End);
     }
