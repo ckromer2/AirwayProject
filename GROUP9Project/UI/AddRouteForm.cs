@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -61,21 +62,25 @@ namespace GROUP9Project.UI
         //on add take RoutID, departPort, arrivePort, departDate, departTime create Route add to Flight.cs Route
         private void AddRouteButton_Click(object sender, EventArgs e)
         {
-            DataBase.Route newRoute = new DataBase.Route();
-            int start = DepartComboBox.SelectedIndex;
-            int end = ArriveComboBox.SelectedIndex;
-            if (start > end)
-                end = ArriveComboBox.SelectedIndex;
-            else
-                end = ArriveComboBox.SelectedIndex + 1;
-            
-            newRoute.Start = (AirportEnum)start;
-            newRoute.End = (AirportEnum)end;
-            newRoute.ScheduleDate = DepartureDatePicker.Value.DayOfWeek;
-            DateTime j = departTime.Value;
-            int i = int.Parse(j.ToString("HHmmss"));
-            newRoute.SchedualTime = i;
-            ApplicationData.Connection.AddRoute(newRoute);
+            try { 
+                DataBase.Route newRoute = new DataBase.Route();
+                int start = DepartComboBox.SelectedIndex;
+                int end = ArriveComboBox.SelectedIndex;
+                if (start > end)
+                    end = ArriveComboBox.SelectedIndex;
+                else
+                    end = ArriveComboBox.SelectedIndex + 1;
+
+                newRoute.Start = (AirportEnum)start;
+                newRoute.End = (AirportEnum)end;
+                newRoute.ScheduleDate = DepartureDatePicker.Value.DayOfWeek;
+                DateTime j = departTime.Value;
+                int i = int.Parse(j.ToString("HHmmss"));
+                newRoute.SchedualTime = i;
+                ApplicationData.Connection.AddRoute(newRoute);
+            }
+            catch { }
+
             PopulateBoxes();
             //DepartComboBox.SelectedIndex = start;
             //ArriveComboBox.SelectedIndex = end;
@@ -83,13 +88,21 @@ namespace GROUP9Project.UI
         //remove route
         private void RemoveRouteButton_Click(object sender, EventArgs e)
         {
-            Route removeRoute = RoutesListBox.SelectedItem as Route;
-            ApplicationData.Connection.DeleteRoute(removeRoute);
+            try
+            {
+                Route removeRoute = RoutesListBox.SelectedItem as Route;
+                ApplicationData.Connection.DeleteRoute(removeRoute);
+            } 
+            catch
+            {
+
+            }
             PopulateBoxes();
         }
         //onn modify find data entry by RoutID replace data with RoutID, departPort, arrivePort, departDate, departTime fields
         private void ModifyRouteButton_Click(object sender, EventArgs e)
         {
+            try { 
             Route updateRoute = RoutesListBox.SelectedItem as Route;
             int start = DepartComboBox.SelectedIndex;
             int end = ArriveComboBox.SelectedIndex;
@@ -104,6 +117,11 @@ namespace GROUP9Project.UI
             int i = int.Parse(j.ToString("HHmmss"));
             updateRoute.SchedualTime = i;
             ApplicationData.Connection.UpdateRoute(updateRoute); 
+            }
+                catch
+            {
+
+            }
             PopulateBoxes();
         }
 
