@@ -134,9 +134,9 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(115, 79);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(321, 30);
+            this.label1.Size = new System.Drawing.Size(318, 30);
             this.label1.TabIndex = 23;
-            this.label1.Text = "Routes Without Planes Assigned";
+            this.label1.Text = "Flights Without Planes Assigned";
             // 
             // label2
             // 

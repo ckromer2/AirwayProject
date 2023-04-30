@@ -44,10 +44,8 @@ namespace GROUP9Project.Controllers
                 bookingRecords = ApplicationData.Connection.GetRecordsByFlightPaidInMoney(flight.FlightId);
                 uint sumOfRecords = 0; 
                 foreach (BookingRecord record in bookingRecords)
-                {
-                    // Times 100 because look at definition in BookingRecord.cs
-                    sumOfRecords += record.Dollars * 100; 
-                }
+                    sumOfRecords += record.Dollars; 
+               
                 income.Add(sumOfRecords); 
             }
             return income; 

@@ -66,16 +66,17 @@ namespace GROUP9Project.UI
             List<uint> income = EmployeeManager.IncomeOfFlights(flights);
             foreach (Flight x in flights)
             {
-                PercentFullListBox.Items.Add((x.CurrentCapacity / x.TotalCapacity) * 100 + "%");
+                PercentFullListBox.Items.Add(Math.Round((((float)x.CurrentCapacity / (float)x.TotalCapacity) * 100), 2) + "%");
                 FlightsListBox.Items.Add(PrintFunctions.PrintFlightInfo(x));
+
 
             }
 
-            uint sum = 0;
+            float sum = 0;
             foreach (uint x in income)
             {
-                IncomeListBox.Items.Add(x);
-                sum += x;
+                IncomeListBox.Items.Add((float)x /100f);
+                sum += (float)x /100f;
             }
             TotalIncome.Text = Convert.ToString(sum);
             TotalFlights.Text = Convert.ToString(flights.Count);

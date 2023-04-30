@@ -72,8 +72,7 @@ namespace GROUP9Project.UI
             newRoute.Start = (AirportEnum)start;
             newRoute.End = (AirportEnum)end;
             newRoute.ScheduleDate = DepartureDatePicker.Value.DayOfWeek;
-            DateTime j = departTime.Value;
-            int i = int.Parse(j.ToString("HHmmss"));
+            int i = departTime.Value.Hour;
             newRoute.SchedualTime = i;
             ApplicationData.Connection.AddRoute(newRoute);
             PopulateBoxes();
@@ -100,8 +99,7 @@ namespace GROUP9Project.UI
             updateRoute.Start = (AirportEnum)start;
             updateRoute.End = (AirportEnum)end;
             updateRoute.ScheduleDate = DepartureDatePicker.Value.DayOfWeek;
-            DateTime j = departTime.Value;
-            int i = int.Parse(j.ToString("HHmmss"));
+            int i = departTime.Value.Hour;
             updateRoute.SchedualTime = i;
             ApplicationData.Connection.UpdateRoute(updateRoute); 
             PopulateBoxes();
