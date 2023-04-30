@@ -1,5 +1,4 @@
-﻿
-using GROUP9Project.DataBase;
+﻿using GROUP9Project.DataBase;
 
 namespace GROUP9Project.UI;
 
@@ -106,11 +105,19 @@ public partial class HistoryForm : Form
     {
         if (BookedFlightsListBox.SelectedIndex != -1)
         {
-            this.Hide();
-            UI.BoardingPassForm boardingPassForm = new UI.BoardingPassForm(BookedFlights.ElementAt(BookedFlightsListBox.SelectedIndex));
-            boardingPassForm.Closed += (s, args) => this.Close();
-            boardingPassForm.Show();
-            boardingPassForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+            Flight tmpFlight = ApplicationData.Connection.GetFlight(BookedFlights.ElementAt(BookedFlightsListBox.SelectedIndex).FlightId);
+            //TimeSpan tmp2 = tmpFlight.FlightDate - DateTime.Now;
+            TimeSpan tmp2 = tmpFlight.FlightDate - new DateTime(2023,4,28).AddHours(4).AddMinutes(2);
+            if (tmp2.TotalHours < 1)
+            {
+                this.Hide();
+                UI.BoardingPassForm boardingPassForm = new UI.BoardingPassForm(BookedFlights.ElementAt(BookedFlightsListBox.SelectedIndex));
+                boardingPassForm.Closed += (s, args) => this.Close();
+                boardingPassForm.Show();
+                boardingPassForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+            } 
+            else
+                MessageBox.Show("To early to print the ticket.");
         }
     }
 

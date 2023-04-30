@@ -138,20 +138,18 @@ public class User
     * Function will check the supplied current password to ensure it matches the actual current password. 
     * Then on success it will set the new password for the user.
     */
-    public int ChangePassword(string cPass, string nPass) 
+    public int ChangePassword(string pWord) 
     {
-        if (cPass.Equals(nPass)) { return 1; }//If the new password and the current password are the same the opperation fails.
-
-        //Transferes the current password into its hash
-        var cPassHash = SHA512.Create();
-        cPassHash.ComputeHash(Encoding.UTF8.GetBytes(cPass));
-        var cPassHashB = cPassHash.Hash.ToString;
-
-        if (!cPassHashB.Equals(Password)) { return 1; }//If the current password is incorect the opperation fails
-
-        SHA512 NPassword = SHA512.Create();
-        NPassword.ComputeHash(Encoding.UTF8.GetBytes(nPass));//Sets the user's password to the new password.
-        Password = NPassword.Hash.ToString();
+       
+        SHA512 sha512 = SHA512.Create();
+        byte[] inputBytes = Encoding.UTF8.GetBytes(pWord);
+        byte[] hashBytes = sha512.ComputeHash(inputBytes);
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < hashBytes.Length; i++)
+        {
+            builder.Append(hashBytes[i].ToString("x2"));
+        }
+        Password = builder.ToString();
 
         return 0;
 

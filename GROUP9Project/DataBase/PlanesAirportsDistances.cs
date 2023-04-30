@@ -20,6 +20,7 @@ public enum AirportEnum
 
 public enum PlaneEnum 
 { 
+    UNSET = -1,
     B737 = 0,
     B787 = 1,
     B777 = 2
