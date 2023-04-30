@@ -41,6 +41,13 @@
             SignUpButton = new Button();
             LoginButton = new Button();
             splitContainer1 = new SplitContainer();
+            NewPasswordTextBoxCP = new MaskedTextBox();
+            label12 = new Label();
+            PasswordTextBoxCP = new MaskedTextBox();
+            IdTextBoxForCP = new MaskedTextBox();
+            ChangePasswordButton = new Button();
+            label10 = new Label();
+            label11 = new Label();
             PasswordTextBox = new MaskedTextBox();
             IdTextBox = new MaskedTextBox();
             CreditCardTextBox = new MaskedTextBox();
@@ -71,7 +78,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(138, 166);
+            label1.Location = new Point(70, 166);
             label1.Name = "label1";
             label1.Size = new Size(18, 15);
             label1.TabIndex = 11;
@@ -143,7 +150,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(138, 213);
+            label9.Location = new Point(70, 213);
             label9.Name = "label9";
             label9.Size = new Size(57, 15);
             label9.TabIndex = 19;
@@ -161,7 +168,7 @@
             // 
             // LoginButton
             // 
-            LoginButton.Location = new Point(150, 301);
+            LoginButton.Location = new Point(82, 301);
             LoginButton.Name = "LoginButton";
             LoginButton.Size = new Size(75, 23);
             LoginButton.TabIndex = 22;
@@ -177,6 +184,13 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(NewPasswordTextBoxCP);
+            splitContainer1.Panel1.Controls.Add(label12);
+            splitContainer1.Panel1.Controls.Add(PasswordTextBoxCP);
+            splitContainer1.Panel1.Controls.Add(IdTextBoxForCP);
+            splitContainer1.Panel1.Controls.Add(ChangePasswordButton);
+            splitContainer1.Panel1.Controls.Add(label10);
+            splitContainer1.Panel1.Controls.Add(label11);
             splitContainer1.Panel1.Controls.Add(PasswordTextBox);
             splitContainer1.Panel1.Controls.Add(IdTextBox);
             splitContainer1.Panel1.Controls.Add(LoginButton);
@@ -204,16 +218,75 @@
             splitContainer1.SplitterDistance = 394;
             splitContainer1.TabIndex = 23;
             // 
+            // NewPasswordTextBoxCP
+            // 
+            NewPasswordTextBoxCP.Location = new Point(224, 231);
+            NewPasswordTextBoxCP.Name = "NewPasswordTextBoxCP";
+            NewPasswordTextBoxCP.Size = new Size(100, 23);
+            NewPasswordTextBoxCP.TabIndex = 31;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(224, 260);
+            label12.Name = "label12";
+            label12.Size = new Size(84, 15);
+            label12.TabIndex = 30;
+            label12.Text = "New Password";
+            // 
+            // PasswordTextBoxCP
+            // 
+            PasswordTextBoxCP.Location = new Point(224, 184);
+            PasswordTextBoxCP.Name = "PasswordTextBoxCP";
+            PasswordTextBoxCP.Size = new Size(100, 23);
+            PasswordTextBoxCP.TabIndex = 29;
+            // 
+            // IdTextBoxForCP
+            // 
+            IdTextBoxForCP.Location = new Point(224, 140);
+            IdTextBoxForCP.Mask = "000000";
+            IdTextBoxForCP.Name = "IdTextBoxForCP";
+            IdTextBoxForCP.Size = new Size(100, 23);
+            IdTextBoxForCP.TabIndex = 28;
+            // 
+            // ChangePasswordButton
+            // 
+            ChangePasswordButton.Location = new Point(236, 284);
+            ChangePasswordButton.Name = "ChangePasswordButton";
+            ChangePasswordButton.Size = new Size(75, 40);
+            ChangePasswordButton.TabIndex = 27;
+            ChangePasswordButton.Text = "Change Password";
+            ChangePasswordButton.UseVisualStyleBackColor = true;
+            ChangePasswordButton.Click += ChangePasswordButton_Click;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(224, 166);
+            label10.Name = "label10";
+            label10.Size = new Size(18, 15);
+            label10.TabIndex = 25;
+            label10.Text = "ID";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(224, 213);
+            label11.Name = "label11";
+            label11.Size = new Size(57, 15);
+            label11.TabIndex = 26;
+            label11.Text = "Password";
+            // 
             // PasswordTextBox
             // 
-            PasswordTextBox.Location = new Point(138, 184);
+            PasswordTextBox.Location = new Point(70, 184);
             PasswordTextBox.Name = "PasswordTextBox";
             PasswordTextBox.Size = new Size(100, 23);
             PasswordTextBox.TabIndex = 24;
             // 
             // IdTextBox
             // 
-            IdTextBox.Location = new Point(138, 140);
+            IdTextBox.Location = new Point(70, 140);
             IdTextBox.Mask = "000000";
             IdTextBox.Name = "IdTextBox";
             IdTextBox.Size = new Size(100, 23);
@@ -319,5 +392,12 @@
         private MaskedTextBox AddressTextBox;
         private MaskedTextBox LastNameTextBox;
         private MaskedTextBox FirstNameTextBox;
+        private MaskedTextBox NewPasswordTextBoxCP;
+        private Label label12;
+        private MaskedTextBox PasswordTextBoxCP;
+        private MaskedTextBox IdTextBoxForCP;
+        private Button ChangePasswordButton;
+        private Label label10;
+        private Label label11;
     }
 }

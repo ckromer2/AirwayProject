@@ -18,11 +18,18 @@ namespace GROUP9Project.Controllers
         public static List<Flight> FlightsForAccountant(DateTime date1, DateTime date2)
         {
             List<Flight> flights = ApplicationData.Connection.GetFlights();
-
-            foreach (Flight flight in flights)
+            for (int i = 0; i < flights.Count; i++)
             {
-                if(flight.FlightDate > date1 || flight.FlightDate < date2)
-                    flights.Remove(flight);
+                if (flights[i].FlightDate < date1 || flights[i].FlightDate > date2)
+                    flights[i] = ApplicationData.nullFlight;
+            }
+
+            for (int i = flights.Count - 1; i > -1; i--)
+            {
+                if (flights[i].RouteId == -1) 
+                {
+                    flights.RemoveAt(i);
+                }
             }
             return flights; 
         }
@@ -44,23 +51,6 @@ namespace GROUP9Project.Controllers
                 income.Add(sumOfRecords); 
             }
             return income; 
-
         }
-
-        public static void PrintFlightManifest()
-        {
-
-        }
-
-        public static void FlightsToOffer()
-        {
-
-        }
-
-        public static void AssignPlanes()
-        {
-
-        }
-        
     }
 }

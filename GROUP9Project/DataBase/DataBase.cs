@@ -424,7 +424,7 @@ public class DataBase
     {
         try
         {
-            var Output = db.Table<Flight>().Where(t => t.RouteId == rId && t.FlightDate == fTime).Single();//There will only ever be 1 element in this list so this action is safe.
+            var Output = db.Table<Flight>().Where(t => t.RouteId == rId && t.FlightDate == fTime).SingleOrDefault();//There will only ever be 1 element in this list so this action is safe.
             return Output; //Returns the user pulled form the database with the given number.
         }
         catch (NullReferenceException ex)
@@ -432,6 +432,20 @@ public class DataBase
             return ApplicationData.nullFlight;
         }
     }
+    public List<Flight> GetFlightAfterTime(DateTime fTime)
+    {
+        try
+        {
+            var Output = db.Table<Flight>().Where(t => t.FlightDate > fTime).ToList();//There will only ever be 1 element in this list so this action is safe.
+            return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<Flight> { ApplicationData.nullFlight };
+            return nOut;
+        }
+    }
+
 
     // Get all the flights 
     public List<Flight> GetFlights()
@@ -502,6 +516,21 @@ public class DataBase
         }
     }
 
+    public List<Flight> GetFlightNoPlane()
+    {
+        try
+        {
+            var Output = db.Table<Flight>().Where(t => t.PlaneId == PlaneEnum.UNSET).ToList();
+            return Output; //Returns the user pulled form the database with the given number.
+        }
+        catch (NullReferenceException ex)
+        {
+            var nOut = new List<Flight> { ApplicationData.nullFlight };
+            return nOut;
+        }
+    }
+
+
     /*
      * By: Spencer P. Lowery
      *
@@ -516,7 +545,7 @@ public class DataBase
      *      
      * Function to update a given flight in the database. 
      */
-    public int UpdateFlight(User uFlight)
+    public int UpdateFlight(Flight uFlight)
     {
         return db.Update(uFlight); //Returns the number of rows updated, should only every be 1.
     }

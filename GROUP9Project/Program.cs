@@ -13,9 +13,10 @@ internal static class Program
     {
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
-        //ApplicationData.Connection.AddFlight(new DataBase.Flight(PlaneEnum.B737,1, new DateTime(2023,4,28).AddHours(5)));
-        //ApplicationData.Connection.AddFlight(new DataBase.Flight(PlaneEnum.B737, 2, new DateTime(2023, 4, 28).AddHours(14)));
-        //ApplicationData.Connection.AddFlight(new DataBase.Flight(PlaneEnum.B737, 5, new DateTime(2023, 4, 28).AddHours(8)));
+        //ApplicationData.Connection.AddFlight(new DataBase.Flight(PlaneEnum.B737,1, new DateTime(2023,4,20).AddHours(5)));
+        //ApplicationData.Connection.AddFlight(new DataBase.Flight(PlaneEnum.B737, 2, new DateTime(2023, 4, 20).AddHours(14)));
+        //ApplicationData.Connection.AddFlight(new DataBase.Flight(PlaneEnum.B737, 5, new DateTime(2023, 4, 20).AddHours(8)));
+        //DatabaseCreator.CreateUserData(); 
         ApplicationConfiguration.Initialize();
         Application.Run(new LoginForm());
     }

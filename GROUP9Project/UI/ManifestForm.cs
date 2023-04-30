@@ -13,12 +13,18 @@ namespace GROUP9Project.UI
 {
     public partial class ManifestForm : Form
     {
-        public ManifestForm()
+        public ManifestForm(Flight flight)
         {
             InitializeComponent();
             ShowEmployeeTab();
             LogedInLable.Text = "Logged in as: " + ApplicationData.AppUser.FisrtName + " " + ApplicationData.AppUser.LastName + "\nUser ID: " + ApplicationData.AppUser.UserId;
 
+            List<BookingRecord> Records = ApplicationData.Connection.GetRecordsByFlight(flight.FlightId);
+            foreach (BookingRecord record in Records)
+            {
+                User user = ApplicationData.Connection.GetUser(record.UserId);
+                PassengerListBox.Items.Add(user.FisrtName + " " + user.LastName);
+            }
         }
 
         private void ShowEmployeeTab()

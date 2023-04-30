@@ -24,6 +24,9 @@ namespace GROUP9Project
                     flightsForm.Show();
                     flightsForm.SetDesktopLocation(this.Location.X, this.Location.Y);
                 }
+                else
+                    MessageBox.Show("Invalid Login.");
+
             }
 
         }
@@ -39,8 +42,30 @@ namespace GROUP9Project
                 flightsForm.Closed += (s, args) => this.Close();
                 flightsForm.Show();
                 flightsForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+                MessageBox.Show("Account Created with id: " + ApplicationData.AppUser.UserId);
+
             }
 
+        }
+
+        private void ChangePasswordButton_Click(object sender, EventArgs e)
+        {
+            // If all text boxes have stuff in them
+            if (IdTextBoxForCP.Text != "" && PasswordTextBoxCP.Text != "" && NewPasswordTextBoxCP.Text != "")
+            {
+                // If the customer manager allows a login
+                if (CustomerManager.ChangePassword(IdTextBoxForCP.Text, PasswordTextBoxCP.Text, NewPasswordTextBoxCP.Text))
+                {
+                    this.Hide();
+                    UI.FlightsForm flightsForm = new UI.FlightsForm();
+                    flightsForm.Closed += (s, args) => this.Close();
+                    flightsForm.Show();
+                    flightsForm.SetDesktopLocation(this.Location.X, this.Location.Y);
+                }
+                else
+                    MessageBox.Show("Invalid Login.");
+
+            }
         }
     }
 

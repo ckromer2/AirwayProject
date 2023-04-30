@@ -131,7 +131,7 @@
             FlightsListBox.ItemHeight = 15;
             FlightsListBox.Location = new Point(219, 116);
             FlightsListBox.Name = "FlightsListBox";
-            FlightsListBox.Size = new Size(189, 229);
+            FlightsListBox.Size = new Size(236, 229);
             FlightsListBox.TabIndex = 12;
             // 
             // PercentFullListBox

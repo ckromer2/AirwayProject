@@ -125,6 +125,7 @@
             this.PrintManifestButton.TabIndex = 26;
             this.PrintManifestButton.Text = "Print Flight Manifest";
             this.PrintManifestButton.UseVisualStyleBackColor = true;
+            this.PrintManifestButton.Click += new System.EventHandler(this.PrintManifestButton_Click);
             // 
             // LogedInLable
             // 
@@ -164,5 +165,6 @@
         private ListBox FlightsListBox;
         private Button PrintManifestButton;
         private Label LogedInLable;
+        private List<DataBase.Flight> FlightList;
     }
 }
