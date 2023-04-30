@@ -132,6 +132,20 @@ namespace GROUP9Project.Controllers
             ApplicationData.Connection.AddFlight(nFlight);
             return nFlight;
         }
+
+        public static void DepartFlight()
+        {
+            var Tickets = ApplicationData.Connection.GetRecordsByUserNotCancelledUndeparted(ApplicationData.AppUser.UserId);
+            foreach (BookingRecord Ticket in Tickets)
+            { 
+            
+            
+            }
+
+
+        }
+
+
     }
 
     
