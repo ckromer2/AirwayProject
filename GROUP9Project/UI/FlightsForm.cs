@@ -327,11 +327,11 @@ public partial class FlightsForm : Form
             //If not an error message is shown otherwise the propper creation function is called.
             if (PointsCheckBox.Checked)
             {
-                if ((Flight1Price + Flight2Price + Flight3Price + Flight4Price) * 100 < ApplicationData.AppUser.Points)
+                if ((Flight1Price + Flight2Price + Flight3Price + Flight4Price) * 100 < (float)ApplicationData.AppUser.Points)
                 {
                     CustomerManager.BookingPoints(F1, Flight1Price, F2, Flight2Price, F3, Flight3Price, F4, Flight4Price);
                     MessageBox.Show("Flights Schedualed.");
-                    ApplicationData.AppUser.SubPoints((uint)(Flight1Price + Flight2Price + Flight3Price + Flight4Price) * 100);
+                    ApplicationData.AppUser.SubPoints((uint)((Flight1Price + Flight2Price + Flight3Price + Flight4Price) * (float)100));
                     ApplicationData.Connection.UpdateUser(ApplicationData.AppUser);
                 }
                 else

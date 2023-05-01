@@ -27,7 +27,8 @@ namespace GROUP9Project.Controllers
                 if (user.Validate(password))
                 {
                     ApplicationData.AppUser = user;
-                    return true; 
+                    DepartFlight();
+                    return true;
                 }
             }
 
@@ -79,21 +80,21 @@ namespace GROUP9Project.Controllers
         //Used when points are involved
         public static void BookingPoints(Flight F1, float F1P, Flight? F2 = null, float F2P = 0, Flight? F3 = null, float F3P = 0, Flight? F4 = null, float F4P = 0)
         {
-            BookingRecord rec1 = new BookingRecord(F1.FlightId ,ApplicationData.AppUser.UserId, (uint)F1P * 100 * 100, 0, true);
+            BookingRecord rec1 = new BookingRecord(F1.FlightId ,ApplicationData.AppUser.UserId, (uint)(F1P * 100f), 0, true);
             ApplicationData.Connection.AddRecord(rec1);
             if (F2 != null)
             {
-                BookingRecord rec2 = new BookingRecord(F2.FlightId, ApplicationData.AppUser.UserId, (uint)F2P * 100 * 100, 0, true);
+                BookingRecord rec2 = new BookingRecord(F2.FlightId, ApplicationData.AppUser.UserId, (uint)(F2P * 100f), 0, true);
                 ApplicationData.Connection.AddRecord(rec2);
             }
             if (F3 != null)
             {
-                BookingRecord rec3 = new BookingRecord(F3.FlightId, ApplicationData.AppUser.UserId, (uint)F3P * 100 * 100, 0, true);
+                BookingRecord rec3 = new BookingRecord(F3.FlightId, ApplicationData.AppUser.UserId, (uint)(F3P * 100f), 0, true);
                 ApplicationData.Connection.AddRecord(rec3);
             }
             if (F4 != null)
             {
-                BookingRecord rec4 = new BookingRecord(F4.FlightId, ApplicationData.AppUser.UserId, (uint)F4P * 100 * 100, 0, true);
+                BookingRecord rec4 = new BookingRecord(F4.FlightId, ApplicationData.AppUser.UserId, (uint)(F4P * 100f), 0, true);
                 ApplicationData.Connection.AddRecord(rec4);
             }
         }
@@ -101,27 +102,24 @@ namespace GROUP9Project.Controllers
         //Used when points are not involved
         public static void BookingNoPoints(Flight F1, float F1P, Flight? F2 = null, float F2P = 0, Flight? F3 = null, float F3P = 0, Flight? F4 = null, float F4P = 0)
         {
-            BookingRecord rec1 = new BookingRecord(F1.FlightId, ApplicationData.AppUser.UserId, 0, (uint)F1P*100, false);
+            BookingRecord rec1 = new BookingRecord(F1.FlightId, ApplicationData.AppUser.UserId, 0, (uint)(F1P* 100f), false);
             ApplicationData.Connection.AddRecord(rec1);
 
             if (F2 != null)
             {
-                BookingRecord rec2 = new BookingRecord(F2.FlightId, ApplicationData.AppUser.UserId, 0, (uint)F2P * 100, false);
+                BookingRecord rec2 = new BookingRecord(F2.FlightId, ApplicationData.AppUser.UserId, 0, (uint)(F2P * 100f), false);
                 ApplicationData.Connection.AddRecord(rec2);
             }
             if(F3 != null)
             {
-                BookingRecord rec3 = new BookingRecord(F3.FlightId, ApplicationData.AppUser.UserId, 0, (uint)F3P * 100, false);
+                BookingRecord rec3 = new BookingRecord(F3.FlightId, ApplicationData.AppUser.UserId, 0, (uint)(F3P * 100f), false);
                 ApplicationData.Connection.AddRecord(rec3);
             }
             if (F4 != null)
             {
-                BookingRecord rec4 = new BookingRecord(F4.FlightId, ApplicationData.AppUser.UserId, 0, (uint)F4P * 100, false);
+                BookingRecord rec4 = new BookingRecord(F4.FlightId, ApplicationData.AppUser.UserId, 0, (uint)(F4P * 100f), false);
                 ApplicationData.Connection.AddRecord(rec4);
             }
-
-
-
         }
 
 
@@ -133,16 +131,24 @@ namespace GROUP9Project.Controllers
             return nFlight;
         }
 
+        //On login will look and see if any flights the user has purchased and adds the point to thier account if they have.
         public static void DepartFlight()
         {
             var Tickets = ApplicationData.Connection.GetRecordsByUserNotCancelledUndeparted(ApplicationData.AppUser.UserId);
             foreach (BookingRecord Ticket in Tickets)
             { 
-            
-            
+                var tmpFlight = ApplicationData.Connection.GetFlight(Ticket.FlightId);
+                if (tmpFlight.FlightDate < DateTime.Now)
+                {
+                    Ticket.Departed = true;
+                    ApplicationData.Connection.UpdateRecord(Ticket);
+                    if (!Ticket.PayedInPoints)
+                    {
+                        ApplicationData.AppUser.AddPoints((uint)Math.Floor(Ticket.Dollars / 100f) * 10);
+                        ApplicationData.Connection.UpdateUser(ApplicationData.AppUser);
+                    }
+                }
             }
-
-
         }
 
 

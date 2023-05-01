@@ -76,6 +76,12 @@ public partial class HistoryForm : Form
         if (BookedFlightsListBox.SelectedIndex != -1)
         {
             BookedFlights.ElementAt(BookedFlightsListBox.SelectedIndex).Cancel();
+            if (BookedFlights.ElementAt(BookedFlightsListBox.SelectedIndex).PayedInPoints)
+            {
+                ApplicationData.AppUser.AddPoints(BookedFlights.ElementAt(BookedFlightsListBox.SelectedIndex).Points);
+                ApplicationData.Connection.UpdateUser(ApplicationData.AppUser);
+            }
+
             ApplicationData.Connection.UpdateRecord(BookedFlights.ElementAt(BookedFlightsListBox.SelectedIndex));
             FillListBoxes();
         }
