@@ -77,7 +77,14 @@ public class Flight
             TotalCapacity = 0;
     }
 
-    public void ChangePlane(PlaneEnum pId) { PlaneId = pId; }
+    public void ChangePlane(PlaneEnum pId) 
+    { 
+        PlaneId = pId;
+        if ((int)PlaneId >= 0)
+            TotalCapacity = PlanesAirportsDistances.Planes[(int)PlaneId].Capacity;
+        else
+            TotalCapacity = 0;
+    }
 
 
 }
