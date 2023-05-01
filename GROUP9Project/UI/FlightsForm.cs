@@ -199,57 +199,42 @@ public partial class FlightsForm : Form
         List<Route> OutputRoutes = new List<Route>();
         OutputRoutes.AddRange(ApplicationData.Connection.GetRouteStartEnd(Start, End));
 
-        List<int> RemovalTracker = new List<int>();
-        int rIndex = 0;
+        var RemovalTracker = new List<Route>();
 
         //Loops through the direct routes and removes ones that dont match the day of week supplied.
         foreach (Route route in OutputRoutes)
         {
-            if (route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour)
-            {
-                RemovalTracker.Add(rIndex - RemovalTracker.Count());
-            }
-            rIndex++;
+            if (route.ScheduleDate != Day || ((DepartureDatePicker.Value.Date == DateTime.Now.Date) && (route.SchedualTime < DateTime.Now.Hour)))
+                RemovalTracker.Add(route);
         }
-        foreach (int i in RemovalTracker)
-            if (i >= 0)
-                OutputRoutes.Remove(OutputRoutes.ElementAt(i));
+        foreach (Route i in RemovalTracker)
+                OutputRoutes.Remove(i);
 
         //Now Comes the hard part
         //Gets the routes from the departure airport removeing the direct routes
         List<Route> IDRoutes = ApplicationData.Connection.GetRouteStart(Start);
-        RemovalTracker = new List<int>();
-        rIndex = 0;
+        RemovalTracker.Clear();
         foreach (Route route in IDRoutes)
         {
-            if ((route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour) || route.End == End || route == ApplicationData.nullRoute)
-            {
-                RemovalTracker.Add(rIndex - RemovalTracker.Count());
-            }
-            rIndex++;
+            if (route.ScheduleDate != Day || ((DepartureDatePicker.Value.Date == DateTime.Now.Date) && route.SchedualTime < DateTime.Now.Hour) || route.End == End || route == ApplicationData.nullRoute)
+                RemovalTracker.Add(route);
         }
-        foreach (int i in RemovalTracker)
-            if (i >= 0)
-                IDRoutes.Remove(IDRoutes.ElementAt(i));
+        foreach (Route i in RemovalTracker)
+                IDRoutes.Remove(i);
 
 
         //Gets all the routes to the destination airport removing the direct routes
         List<Route> IARoutes = ApplicationData.Connection.GetRouteEnd(End);
-        RemovalTracker = new List<int>();
-        rIndex = 0;
+        RemovalTracker.Clear();
 
         foreach (Route route in IARoutes)
         {
             //removes all the fligths not schedualled for this day or the next
-            if ((route.ScheduleDate != Day && route.SchedualTime < DateTime.Now.Hour && route.ScheduleDate != Day + 1) || route.Start == Start || route == ApplicationData.nullRoute)
-            {
-                RemovalTracker.Add(rIndex - RemovalTracker.Count());
-            }
-            rIndex++;
+            if ((route.ScheduleDate != Day /*|| route.ScheduleDate != (Day + 1)*/) || ((DepartureDatePicker.Value.Date == DateTime.Now.Date) && route.SchedualTime < DateTime.Now.Hour) || route.Start == Start || route == ApplicationData.nullRoute)
+                RemovalTracker.Add(route);
         }
-        foreach (int i in RemovalTracker)
-            if (i >= 0)
-                IARoutes.Remove(IARoutes.ElementAt(i));
+        foreach (Route i in RemovalTracker)
+                IARoutes.Remove(i);
         //Loops through all the routs from the departure airport and to the destination if any share an intermediate link
         if (IDRoutes != null && IARoutes != null)
         {
