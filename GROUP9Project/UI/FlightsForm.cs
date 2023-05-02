@@ -24,6 +24,13 @@ public partial class FlightsForm : Form
      */
     private void SearchButtonClick(object sender, EventArgs e)
     {
+        if(ReturnDatePicker.Visible && ReturnDatePicker.Value < DepartureDatePicker.Value)
+        {
+            MessageBox.Show("Return Date must be after the departure date.");
+            return;
+        }
+
+        
         //Setsup data to be used later in the program
         st = (AirportEnum)DepartComboBox.SelectedIndex;
         if (DepartComboBox.SelectedIndex > ArriveComboBox.SelectedIndex)
